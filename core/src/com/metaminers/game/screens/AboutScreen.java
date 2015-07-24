@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
- * Created by Hubert on 2015-07-24.
+ * Created by Jacques on 2015-07-24.
  */
 public class AboutScreen implements Screen {
     TextButton exitButton;
