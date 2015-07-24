@@ -1,8 +1,8 @@
 package com.metaminers.game.phases;
 
-import com.metaminers.game.objects.IBuilding;
-import com.metaminers.game.objects.IEnemy;
-import com.metaminers.game.objects.IHeroClass;
+import com.metaminers.game.objects.AbstractBuilding;
+import com.metaminers.game.objects.AbstractEnemy;
+import com.metaminers.game.objects.AbstractHeroClass;
 
 import java.util.LinkedList;
 
@@ -12,9 +12,9 @@ import java.util.LinkedList;
 public class PlayingInformation {
 
     //lista budynkow, info o graczu
-    private LinkedList<IEnemy> enemies;
-    private LinkedList<IBuilding> buildings;
-    private IHeroClass hero;
+    private LinkedList<AbstractEnemy> enemies;
+    private LinkedList<AbstractBuilding> buildings;
+    private AbstractHeroClass hero;
     //TODO: Dodac titaj klase na skille
 
     public PlayingInformation() {
@@ -22,28 +22,33 @@ public class PlayingInformation {
         buildings = new LinkedList<>();
     }
 
-    public LinkedList<IEnemy> getEnemies() {
+    public LinkedList<AbstractEnemy> getEnemies() {
         return enemies;
     }
 
-    public void setEnemies(LinkedList<IEnemy> enemies) {
+    public void setEnemies(LinkedList<AbstractEnemy> enemies) {
         this.enemies = enemies;
     }
 
-    public LinkedList<IBuilding> getBuildings() {
+    public LinkedList<AbstractBuilding> getBuildings() {
         return buildings;
     }
 
-    public void setBuildings(LinkedList<IBuilding> buildings) {
+    public void setBuildings(LinkedList<AbstractBuilding> buildings) {
         this.buildings = buildings;
     }
 
-    public IHeroClass getHero() {
+    public AbstractHeroClass getHero() {
         return hero;
     }
 
-    public void setHero(IHeroClass hero) {
+    public void setHero(AbstractHeroClass hero) {
         this.hero = hero;
     }
+
+    public void addBuilding(AbstractBuilding building) {
+        buildings.add(building);
+    }
+
 
 }

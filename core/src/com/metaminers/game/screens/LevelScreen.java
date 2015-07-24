@@ -1,5 +1,6 @@
 package com.metaminers.game.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.metaminers.game.phases.*;
 
@@ -11,18 +12,19 @@ public class LevelScreen implements Screen {
     //TODO: Change it!
     private final static int PHASES_COUNT = 3;
 
-    Phase buildingPhase, battlePhase, upgradePhase, currentPhase;
+    private Phase currentPhase;
     int counter = 0; //array counter for phases
     Phase [] phases;
     PlayingInformation info;
+    private Game game;
 
-    public LevelScreen() {
+    public LevelScreen(Game game) {
         phases = new Phase[PHASES_COUNT];
         phases[0] = new BuildingPhase();
         phases[1] = new UpgradePhase();
         phases[2] = new BattlePhase();
         currentPhase = phases[0];
-
+        this.game = game;
         info = new PlayingInformation();
 
         currentPhase.start(info);

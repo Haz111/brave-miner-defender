@@ -1,16 +1,16 @@
 package com.metaminers.game.phases;
 
-import com.metaminers.game.objects.IHeroClass;
+import com.metaminers.game.objects.AbstractHeroClass;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 /**
  * Created by Konrad on 2015-07-24.
  */
 public class BuildingPhase extends Phase {
 
-    private HashMap<IHeroClass, Integer> buildingsToBuild;
+    private HashMap<AbstractHeroClass, Integer> buildingsToBuild;
+    private final String warnString = "You cannot place building here";
 
     @Override
     public void start(PlayingInformation info) {
