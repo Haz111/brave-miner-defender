@@ -6,9 +6,9 @@ package com.metaminers.game.objects;
 public class Player extends GameObject {
     private String name;
     private int level;
-    private IHeroClass heroClass;
+    private AbstractHeroClass heroClass;
 
-    public Player(String name, IHeroClass heroClass) {
+    public Player(String name, AbstractHeroClass heroClass) {
         this.name = name;
         this.heroClass = heroClass;
         this.level = 1;
