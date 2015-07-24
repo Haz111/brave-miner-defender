@@ -16,26 +16,25 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
-
-import java.awt.*;
-
 /**
  * Created by Hubert on 2015-07-24.
  */
 public class MenuScreen implements Screen {
-    TextButton level;
-    TextButton options;
-    TextButton aboutAuthors;
-    TextButton exit;
     Stage stage;
     Game game;
 
     Texture buttonTexture;
     TextureRegion buttonTextureRegion;
-    TextButton playButton;
+
     TextButtonStyle style;
     Skin skin;
     BitmapFont font;
+
+    TextButton playButton;
+//    TextButton level;
+    TextButton optionsButton;
+    TextButton aboutAuthorsButton;
+    TextButton exitButton;
 
 
     public MenuScreen(Game game) {
@@ -53,7 +52,13 @@ public class MenuScreen implements Screen {
         style.down = new TextureRegionDrawable(buttonTextureRegion);
         style.font = font;
         playButton = new TextButton("Play", style);
-        playButton.setBounds(Gdx.graphics.getWidth()/2 - 50, Gdx.graphics.getHeight()/2, 100, 40);
+        playButton.setBounds(Gdx.graphics.getWidth()/2 - 50, Gdx.graphics.getHeight()/2 + 100, 100, 40);
+        optionsButton = new TextButton("Options", style);
+        optionsButton.setBounds(Gdx.graphics.getWidth()/2 - 50, Gdx.graphics.getHeight()/2, 100, 40);
+        aboutAuthorsButton = new TextButton("About Authors", style);
+        aboutAuthorsButton.setBounds(Gdx.graphics.getWidth()/2 - 50, Gdx.graphics.getHeight()/2 - 100, 100, 40);
+        exitButton = new TextButton("Exit", style);
+        exitButton.setBounds(Gdx.graphics.getWidth()/2 - 50, Gdx.graphics.getHeight()/2 - 200, 100, 40);
 
 //        TextButton level = new TextButton("Start game", style);
         //TextButton options = new TextButton("Options", new Skin());
@@ -64,8 +69,9 @@ public class MenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(playButton);
-
-
+        stage.addActor(optionsButton);
+        stage.addActor(aboutAuthorsButton);
+        stage.addActor(exitButton);
     }
 
     @Override
@@ -75,6 +81,32 @@ public class MenuScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
 //                super.clicked(event, x, y);
                 MenuScreen.this.game.setScreen(new BeforeGameScreen(game));
+            }
+        });
+
+//        TODO: uncomment when this will be done
+//        optionsButton.addListener(new ClickListener(){
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+////                super.clicked(event, x, y);
+//                MenuScreen.this.game.setScreen(new OptionsScreen(game));
+//            }
+//        });
+//
+        //        TODO: uncomment when this will be done
+//        aboutAuthorsButton.addListener(new ClickListener(){
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+////                super.clicked(event, x, y);
+//                MenuScreen.this.game.setScreen(new AboutScreen(game));
+//            }
+//        });
+
+        exitButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+//                super.clicked(event, x, y);
+                Gdx.app.exit();
             }
         });
 
