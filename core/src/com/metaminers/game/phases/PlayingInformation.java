@@ -18,8 +18,8 @@ public class PlayingInformation {
     //TODO: Dodac titaj klase na skille
 
     public PlayingInformation() {
-        enemies = new LinkedList<>();
-        buildings = new LinkedList<>();
+        enemies = new LinkedList<AbstractEnemy>();
+        buildings = new LinkedList<AbstractBuilding>();
     }
 
     public LinkedList<AbstractEnemy> getEnemies() {

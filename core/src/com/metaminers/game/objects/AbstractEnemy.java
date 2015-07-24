@@ -5,6 +5,7 @@ package com.metaminers.game.objects;
  */
 public abstract class AbstractEnemy extends GameObject {
     int hp = 0;
-    void attack(AbstractBuilding building) {}
+    int damage = 0;
+    void attack(AbstractBuilding building) { building.takeHp(damage); }
     void takehp(int hp) {}
 }
