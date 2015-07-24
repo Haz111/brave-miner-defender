@@ -1,17 +1,35 @@
 package com.metaminers.game.phases;
 
+import com.metaminers.game.objects.IHeroClass;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+
 /**
  * Created by Konrad on 2015-07-24.
  */
 public class BuildingPhase extends Phase {
 
+    private HashMap<IHeroClass, Integer> buildingsToBuild;
+
     @Override
     public void start(PlayingInformation info) {
-        
+        markEnded(false);
+        renderGUI();
     }
 
     @Override
     public void show() {
+        /*
+        1. Draw interface
+        2. Draw buildings, its status and others
+        3. Allow player to build sth
+        4. Just save and mark ended
+         */
+        //TODO: Jakis renderer do GUI, cobysmy nie kopiowali kodu
+    }
+
+    public void renderGUI() {
 
     }
 

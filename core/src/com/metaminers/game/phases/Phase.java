@@ -9,8 +9,8 @@ public abstract class Phase implements Screen{
     protected PlayingInformation results;
     private boolean ended = false;
 
-    private void markEnded() {
-        ended = true;
+    protected void markEnded(boolean status) {
+        ended = status;
     }
 
     public boolean isEnded() {

@@ -39,6 +39,7 @@ public class LevelScreen implements Screen {
             counter = (counter + 1) % PHASES_COUNT;
             currentPhase = phases[counter];
         }
+        //currentPhase.render / draw
     }
 
     @Override
