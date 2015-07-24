@@ -84,14 +84,13 @@ public class MenuScreen implements Screen {
             }
         });
 
-//        TODO: uncomment when this will be done
-//        optionsButton.addListener(new ClickListener(){
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-////                super.clicked(event, x, y);
-//                MenuScreen.this.game.setScreen(new OptionsScreen(game));
-//            }
-//        });
+        optionsButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+//                super.clicked(event, x, y);
+                MenuScreen.this.game.setScreen(new OptionsScreen(game));
+            }
+        });
 
         aboutAuthorsButton.addListener(new ClickListener(){
             @Override
