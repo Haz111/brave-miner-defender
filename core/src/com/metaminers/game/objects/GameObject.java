@@ -5,4 +5,9 @@ package com.metaminers.game.objects;
  */
 
 public abstract class GameObject {
+
+    public void draw() {
+
+    }
 }
+

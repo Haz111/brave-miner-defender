@@ -23,4 +23,5 @@ public abstract class AbstractBuilding extends GameObject {
     public void attack(AbstractEnemy enemy) {
         enemy.takeHp(damage);
     }
+
 }
