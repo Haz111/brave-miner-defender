@@ -131,7 +131,7 @@ public abstract class Phase implements Screen{
 
     protected void drawBuildings() {
         for(AbstractBuilding ab : info.getBuildings()) {
-            ab.drawInGui(ab.getPosX(), ab.getPosY(), 3);
+            ab.drawInGui(ab.getPosX(), ab.getPosY(), 1);
         }
     }
 
