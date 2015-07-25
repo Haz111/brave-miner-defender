@@ -33,11 +33,11 @@ public abstract class AbstractEnemy extends GameObject {
     protected Animation currAnim;
     protected Animation[] anims;
     protected TextureRegion currFrame;
-    protected static final int animLen = 2;
-    protected static final int animLen2 = 8;
+    protected int animLenHorizontal;
+    protected int animLenVertical;
     protected Texture animTex;
     protected TextureRegion[] frames;
-    protected static final int framesNum = 9;
+    protected int framesNum;
     protected static final int DIRECTIONS = 8;
     protected static final float ANIM_FACTOR = 1/15f;
     protected Sprite sprite;
@@ -148,7 +148,7 @@ public abstract class AbstractEnemy extends GameObject {
     protected void setUpAnim(String imgDir) {
         animTex = new Texture(Gdx.files.internal(imgDir));
         frames = new TextureRegion[framesNum];
-        TextureRegion[][] tmp = TextureRegion.split(animTex, animTex.getWidth() / animLen, animTex.getHeight() / animLen2);
+        TextureRegion[][] tmp = TextureRegion.split(animTex, animTex.getWidth() / animLenHorizontal, animTex.getHeight() / animLenVertical);
         anims = new Animation[DIRECTIONS];
         for(int i = 0; i < DIRECTIONS; i++)
             anims[i] = new Animation(ANIM_FACTOR, tmp[i]);
