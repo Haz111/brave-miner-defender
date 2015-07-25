@@ -26,7 +26,7 @@ public abstract class AbstractEnemy extends GameObject {
     int direction = widthHeightAndDir[2];
 
     //    it returns array - first element: width, second: heigh, third: direction
-    private int[] randomStartingPlace(){
+    protected int[] randomStartingPlace(){
         Random rand = new Random();
         int width;
         int height;
@@ -34,8 +34,8 @@ public abstract class AbstractEnemy extends GameObject {
 //        losuje sciane - 0 - polnoc, dalej zgodnie ze wskazowkami zegara
         switch(rand.nextInt(4)){
         case (0):
-            width = rand.nextInt(GameConstants.WIDTH);
-            height = GameConstants.HEIGHT;
+            width = (rand.nextInt(GameConstants.WIDTH - 2*GameConstants.INTERFACE_PANEL_WIDTH)) + GameConstants.INTERFACE_PANEL_WIDTH;
+            height = GameConstants.HEIGHT - GameConstants.INTERFACE_PANEL_WIDTH;
             if (width < (GameConstants.WIDTH/3)){
                 direction = 7;
             } else if (width < (2*GameConstants.WIDTH/3)){
@@ -45,8 +45,8 @@ public abstract class AbstractEnemy extends GameObject {
             }
             break;
         case (1):
-            width = rand.nextInt(GameConstants.WIDTH);
-            height = GameConstants.HEIGHT;
+            width = GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH;
+            height = rand.nextInt(GameConstants.HEIGHT);
             if (width > (2*GameConstants.HEIGHT/3)){
                 direction = 1;
             } else if (width > (GameConstants.HEIGHT/3)){
@@ -56,7 +56,7 @@ public abstract class AbstractEnemy extends GameObject {
             }
             break;
         case (2):
-            width = rand.nextInt(GameConstants.WIDTH);
+            width = (rand.nextInt(GameConstants.WIDTH - 2*GameConstants.INTERFACE_PANEL_WIDTH)) + GameConstants.INTERFACE_PANEL_WIDTH;
             height = 0;
             if (width < (GameConstants.WIDTH/3)){
                 direction = 5;
@@ -67,8 +67,8 @@ public abstract class AbstractEnemy extends GameObject {
             }
             break;
         case (3):
-            width = rand.nextInt(GameConstants.WIDTH);
-            height = 0;
+            width = GameConstants.INTERFACE_PANEL_WIDTH;
+            height = rand.nextInt(GameConstants.HEIGHT);;
             if (width > (2*GameConstants.HEIGHT/3)){
                 direction = 7;
             } else if (width > (GameConstants.HEIGHT/3)){

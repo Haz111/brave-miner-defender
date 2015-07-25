@@ -34,13 +34,9 @@ public class RiverSnake extends AbstractEnemy {
     //    konstruktor dla standardowego enemy
     public RiverSnake() {
         //this(this.width, this.height);
-        this(0, 0);
-    }
-
-//    konstruktor dla enemy ktory wychodzi w jakims innym miejscu
-    public RiverSnake(float posX, float posY) {
-        this.posX = posX;
-        this.posY = posY;
+        int[] startingPlace = super.randomStartingPlace();
+        this.posX = startingPlace[0];
+        this.posY = startingPlace[1];
         this.hp = 300;
         this.damage = 50;
         //TODO: Da sie to zrobic lepiej?
@@ -52,10 +48,27 @@ public class RiverSnake extends AbstractEnemy {
         setUpDirection();
     }
 
+//    konstruktor dla enemy ktory wychodzi w jakims innym miejscu
+    public RiverSnake(float posX, float posY) {
+        this.posX = posX;
+        this.posY = posY;
+        this.hp = 300;
+        this.damage = 50;
+        //TODO: Da sie to zrobic lepiej?
+        this.destX = (Gdx.graphics.getWidth() / 2) +1000;
+        this.destY = (Gdx.graphics.getHeight() / 2) +1000;
+        this.batch = new SpriteBatch();
+        directionVec = new Vector2();
+        setUpAnim();
+        setUpDirection();
+    }
+
     private void setUpDirection() {
-        directionVec.x = destX - this.posX;
-        directionVec.y = destX - this.posY;
+        directionVec.x = this.destX - this.posX;
+        directionVec.y = this.destX - this.posY;
+        System.out.println("destX = " + this.destX + " posX " + this.posX + " destY = " + this.destY + " posY " + this.posY);
         directionVec.nor(); //Normalizacja
+        System.out.println("x = " + directionVec.x + " y = " + directionVec.y);
 
 //        int [][] directions = new int[][]{{8, 1, 2},
 //                                            {7, 0, 3},

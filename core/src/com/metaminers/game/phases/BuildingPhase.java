@@ -29,7 +29,11 @@ public class BuildingPhase extends Phase {
     private Village village;
 
     //!!!!
-    RiverSnake p = new RiverSnake(400,600);
+    RiverSnake p = new RiverSnake();
+    RiverSnake p2 = new RiverSnake();
+    RiverSnake p3 = new RiverSnake();
+    RiverSnake p4 = new RiverSnake();
+    RiverSnake p5 = new RiverSnake();
     //!!!!
 
     TextButton saveButton;
@@ -69,6 +73,10 @@ public class BuildingPhase extends Phase {
         village.drawAll();
         batch.begin();
         p.draw(batch, delta);
+        p2.draw(batch, delta);
+        p3.draw(batch, delta);
+        p4.draw(batch, delta);
+        p5.draw(batch, delta);
         drawGUI();
         drawEnemiesOnPane();
         setUpBuildings();
@@ -95,6 +103,18 @@ public class BuildingPhase extends Phase {
         Pair p = Grid.mapToGrid(x, y);
         x = p.x;
         y = p.y;
+        Pair p2 = Grid.mapToGrid(x, y);
+        x = p2.x;
+        y = p2.y;
+        Pair p3 = Grid.mapToGrid(x, y);
+        x = p3.x;
+        y = p3.y;
+        Pair p4 = Grid.mapToGrid(x, y);
+        x = p4.x;
+        y = p4.y;
+        Pair p5 = Grid.mapToGrid(x, y);
+        x = p5.x;
+        y = p5.y;
         GameObject buildingOnMap = null;
 
         //TODO: Zrobic to lepiej!

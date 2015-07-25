@@ -2,6 +2,7 @@ package com.metaminers.game.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.metaminers.game.phases.PlayingInformation;
 
 /**
  * Created by Hubert on 2015-07-24.
@@ -146,6 +148,24 @@ public class MenuScreen implements Screen {
 
     @Override
     public void show() {
+        quickButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Preferences prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
+                String plazerName = prefs.getString("playerName", "");
+                int selectedCharacter = prefs.getInteger("selectedCharacter", 0);
+                int selectedVillage = prefs.getInteger("selectedVillage", 0);
+                int selectedDifficulty = prefs.getInteger("selectedDifficulty", 1);
+
+                PlayingInformation info = new PlayingInformation();
+                //TODO: ODKOMENTOWAC PONIZSZE I UZUPELNIC GAMECONSTANTS ORAZ ABSTRACTHERO (IMPLEMENTACJA) - todo skopiowane z beforeGameScreena
+                info.setHero(selectedCharacter);
+//                pierwszy jest do Villages, drugi jest do T³a Village
+                info.setVillage(selectedVillage, selectedVillage);
+                MenuScreen.this.game.setScreen(new LevelScreen(game, info));
+            }
+        });
+
         playButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
