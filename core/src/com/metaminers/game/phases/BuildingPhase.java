@@ -1,9 +1,16 @@
 package com.metaminers.game.phases;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.metaminers.game.GameConstants;
+import com.metaminers.game.objects.GameObject;
+import com.metaminers.game.objects.buildings.AbstractBuilding;
+import com.metaminers.game.objects.enemies.AbstractEnemy;
 import com.metaminers.game.objects.hero_classes.AbstractHeroClass;
 
 import java.util.HashMap;
@@ -14,10 +21,16 @@ import java.util.HashMap;
 public class BuildingPhase extends Phase {
 
     //TODO: ZROBIC JAKIEGOS RENDERERA KTORY BY NP. RYSOWAL GUI, OBECNA WERSJA JEST MANROTRAWSTWEM PAMIECI!
-    private HashMap<AbstractHeroClass, Integer> buildingsToBuild;
+    private HashMap<AbstractBuilding, Integer> buildingsToBuild;
+    private PlayingInformation info;
     private final String warnString = "You cannot place building here";
     private Texture pane, background;
     private SpriteBatch batch;
+    private Vector3 touchPoint;
+    private OrthographicCamera c;
+    private boolean isPickingBuildingFromInventory = false;
+    private boolean isPickingBuildingFromMap = false; //Co ja pisze...
+    private GameObject pickedBuilding;
 
     @Override
     public void start(PlayingInformation info) {
@@ -25,6 +38,9 @@ public class BuildingPhase extends Phase {
         pane = new Texture(Gdx.files.internal("gui/pane.png"));
         background = new Texture(Gdx.files.internal("gui/background.png"));
         batch = new SpriteBatch();
+        this.info = info;
+        c = new OrthographicCamera(GameConstants.WIDTH, GameConstants.HEIGHT);
+        touchPoint = new Vector3();
         //renderGUI();
     }
 
@@ -47,6 +63,47 @@ public class BuildingPhase extends Phase {
         drawEnemies();
         setUpBuildings();
         batch.end();
+        handleInput();
+    }
+
+    private void handleInput() {
+        if(Gdx.input.justTouched()) {
+            touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            c.unproject(touchPoint);
+            //We could peek a tower
+            if(touchPoint.x <= GameConstants.INTERFACE_PANEL_WIDTH || touchPoint.x >= GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH)
+                handleMovementInventory(touchPoint.x, touchPoint.y);
+            else
+                handleMovementMap(touchPoint.x, touchPoint.y);
+        }
+    }
+
+    private void handleMovementMap(float x, float y) {
+        //Jak klikniemy na pole puste siatki - jest ok
+        //Jak nie - no to sorry
+    }
+
+    private void handleMovementInventory(float x, float y) {
+        //TODO: Obsluga pieniedzy
+        //Cale zyccie da sie rozwiazac na ifach
+
+        //Wzielismy budynek z mapy (albo sie rozmyslilismy), wiec trzeba go oddac, przykro mi
+        if(isPickingBuildingFromMap || isPickingBuildingFromInventory) {
+            buildingsToBuild.replace((AbstractBuilding)pickedBuilding, buildingsToBuild.get(pickedBuilding), buildingsToBuild.get(pickedBuilding) + 1);
+            pickedBuilding = null;
+            return;
+        }
+
+        //No, mozna go brac!
+        GameObject [] o = (GameObject [])buildingsToBuild.keySet().toArray();
+
+        for(int i = 0; i < o.length; i++) {
+            if(o[i].getSprite().getBoundingRectangle().contains(x, y))
+            buildingsToBuild.replace((AbstractBuilding)o[i], buildingsToBuild.get(o[i]), buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
+            pickedBuilding = o[i];
+            isPickingBuildingFromInventory = true;
+            break;
+        }
     }
 
     private void drawGUI() {
@@ -56,11 +113,44 @@ public class BuildingPhase extends Phase {
     }
 
     private void drawEnemies() {
+        float xpos = GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH; //xpos - X position to draw
+        float ypos = GameConstants.HEIGHT;
+        Sprite s;
+        AbstractEnemy e;
 
+        for (int i = 0; i < GameConstants.ENEMIES_COUNT; i++) {
+            e = info.getEnemies().get(i);
+            s = new Sprite(e.getTexture());
+            s.setX(xpos);
+            s.setY(ypos - i * e.getHeight());
+            s.draw(batch);
+            e.setSprite(s);
+            //e.draw(xpos, ypos - i * e.getHeight());
+        }
     }
 
     private void setUpBuildings() {
+        float xpos = 0; //xpos - X position to draw
+        float ypos = GameConstants.INTERFACE_PANEL_WIDTH;
+        GameObject e;
+        Sprite s;
+        GameObject [] o = (GameObject[])buildingsToBuild.keySet().toArray();
+        for (int i = 0; i < o.length; i++) {
+            /*
+            e = info.getBuildings().get(i);
+            s = new Sprite(e.getTexture());
+            s.setX(xpos);
+            s.setY(ypos - i * e.getHeight());
+            s.draw(batch);
+            e.setSprite(s);
+            */
+            e = o[i];
+            s = new Sprite(e.getTexture());
+            s.setX(xpos);
+            s.setY(ypos - i * e.getHeight());
+            s.draw(batch);
 
+        }
     }
 
     @Override

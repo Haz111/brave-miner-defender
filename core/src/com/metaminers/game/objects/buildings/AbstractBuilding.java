@@ -8,13 +8,11 @@ import com.metaminers.game.objects.enemies.AbstractEnemy;
  * Created by Tymoteusz on 2015-07-25.
  */
 public abstract class AbstractBuilding extends GameObject {
-    Texture texture;
+
     int hp = 0;
     int damage = 0;
     int price = 0;
-    float posX, posY;
-    public float getPosX() { return posX; }
-    public float getPosY() { return posY; }
+
     public int getPrice() {
         return price;
     }

@@ -1,9 +1,9 @@
 package com.metaminers.game.phases;
 
 import com.metaminers.game.elements.Village;
-import com.metaminers.game.objects.AbstractBuilding;
-import com.metaminers.game.objects.AbstractEnemy;
-import com.metaminers.game.objects.AbstractHeroClass;
+import com.metaminers.game.objects.buildings.AbstractBuilding;
+import com.metaminers.game.objects.enemies.AbstractEnemy;
+import com.metaminers.game.objects.hero_classes.AbstractHeroClass;
 
 import java.util.LinkedList;
 

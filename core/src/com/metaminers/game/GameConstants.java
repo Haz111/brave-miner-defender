@@ -12,5 +12,7 @@ public class GameConstants {
     public static int WIDTH = 1024;
     public static int HEIGHT = 768;
     public static int PADDING = 10;
+    public static int ENEMIES_COUNT = 8;
+    public static int TOWERS_COUNT = 8;
 
 }
