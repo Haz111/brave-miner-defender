@@ -1,5 +1,6 @@
 package com.metaminers.game.phases;
 
+import com.metaminers.game.EnemyFactory;
 import com.metaminers.game.GameConstants;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
 
@@ -16,6 +17,7 @@ public class BattlePhase extends Phase {
     @Override
     public void start(PlayingInformation info) {
         super.start(info);
+        this.info.setEnemies(EnemyFactory.generateEnemies(this.info.getLvl()));
     }
 
     @Override

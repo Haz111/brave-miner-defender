@@ -21,7 +21,7 @@ public class UpgradePhase extends Phase {
 
     @Override
     protected void handleMovementMap(float x, float y) {
-        
+
     }
 
     @Override

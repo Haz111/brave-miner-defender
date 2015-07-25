@@ -5,18 +5,19 @@ package com.metaminers.game;
  */
 public class GameConstants {
 
-    public static int DIFFICULTY_LEVELS = 3;
-    public static int PHASES = 3;
-    public static int HEROES = 3;
-    public static int VILLAGES = 3;
-    public static int INTERFACE_PANEL_WIDTH = 50;
-    public static int WIDTH = 1024;
-    public static int HEIGHT = 768;
-    public static int PADDING = 10;
-    public static int ENEMIES_COUNT = 8;
-    public static int TOWERS_COUNT = 8;
-    public static int CELL_WIDTH = 8;
-    public static int CELL_HEIGHT = 8;
+    public static final int DIFFICULTY_LEVELS = 3;
+    public static final int PHASES = 3;
+    public static final int HEROES = 3;
+    public static final int VILLAGES = 3;
+    public static final int INTERFACE_PANEL_WIDTH = 50;
+    public static final int WIDTH = 1024;
+    public static final int HEIGHT = 768;
+    public static final int PADDING = 10;
+    public static final int ENEMIES_COUNT = 8;
+    public static final int TOWERS_COUNT = 8;
+    public static final int CELL_WIDTH = 8;
+    public static final int CELL_HEIGHT = 8;
+    public static final int LEVELS = 10;
 
     public static String[] DIFFICULTY = {"easy", "medium", "hard"};
     public static String [] VILLAGES_HOUSENAMES = {}; //TODO: ZROBIC

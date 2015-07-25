@@ -12,6 +12,8 @@ import com.metaminers.game.Pair;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Konrad on 2015-07-24.
@@ -19,8 +21,6 @@ import java.util.HashMap;
 public class BuildingPhase extends Phase {
     //TODO: Esc jako wyjscie z ekranu
     //TODO: ZROBIC JAKIEGOS RENDERERA KTORY BY NP. RYSOWAL GUI, OBECNA WERSJA JEST MANROTRAWSTWEM PAMIECI!
-    private HashMap<AbstractBuilding, Integer> buildingsToBuild;
-    private PlayingInformation info;
     private final String warnString = "You cannot place building here";
     private Texture pane, background;
     private boolean isPickingBuildingFromInventory = false;
@@ -116,17 +116,17 @@ public class BuildingPhase extends Phase {
 
         //Wzielismy budynek z mapy (albo sie rozmyslilismy), wiec trzeba go oddac, przykro mi
         if(isPickingBuildingFromMap || isPickingBuildingFromInventory) {
-            buildingsToBuild.replace((AbstractBuilding)pickedBuilding, buildingsToBuild.get(pickedBuilding), buildingsToBuild.get(pickedBuilding) + 1);
+            this.info.buildingsToBuild.replace((AbstractBuilding)pickedBuilding, this.info.buildingsToBuild.get(pickedBuilding), this.info.buildingsToBuild.get(pickedBuilding) + 1);
             pickedBuilding = null;
             return;
         }
 
         //No, mozna go brac!
-        GameObject [] o = (GameObject [])buildingsToBuild.keySet().toArray();
+        GameObject [] o = ((HashSet<GameObject>)info.buildingsToBuild.keySet()).toArray();
 
         for(int i = 0; i < o.length; i++) {
             if(o[i].getSprite().getBoundingRectangle().contains(x, y))
-            buildingsToBuild.replace((AbstractBuilding)o[i], buildingsToBuild.get(o[i]), buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
+            info.buildingsToBuild.replace((AbstractBuilding)o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
             pickedBuilding = o[i];
             isPickingBuildingFromInventory = true;
             break;
@@ -139,7 +139,9 @@ public class BuildingPhase extends Phase {
         float ypos = GameConstants.INTERFACE_PANEL_WIDTH;
         GameObject e;
         Sprite s;
-        GameObject [] o = (GameObject[])buildingsToBuild.keySet().toArray();
+        //TODO: NullPointerException
+        /*
+        GameObject [] o = (GameObject[])info.buildingsToBuild.keySet().toArray();
         for (int i = 0; i < o.length; i++) {
             e = o[i];
             s = new Sprite(e.getTexture());
@@ -147,6 +149,7 @@ public class BuildingPhase extends Phase {
             s.setY(ypos - i * e.getHeight());
             s.draw(batch);
         }
+        */
     }
 
     @Override

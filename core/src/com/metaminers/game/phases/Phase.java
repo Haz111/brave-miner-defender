@@ -123,7 +123,7 @@ public abstract class Phase implements Screen{
         Sprite s;
         AbstractEnemy e;
 
-        for (int i = 0; i < GameConstants.ENEMIES_COUNT; i++) {
+        for (int i = 0; i < this.info.getEnemies().size(); i++) {
             e = info.getEnemies().get(i);
             s = new Sprite(e.getTexture());
             s.setX(xpos);
