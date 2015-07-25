@@ -93,7 +93,7 @@ public class BuildingPhase extends Phase {
         //TODO: Zrobic to lepiej!
         //Algos: jedziemy teraz po liscie z budynkow i sprawdzamy czy tam mozemy postawic budynek
         for(GameObject e : info.getBuildings()) {
-            if(e.getPosX() == x && e.getPosY() == y) {
+            if(e != null && e.getPosX() == x && e.getPosY() == y) {
                 buildingOnMap = e;
                 break;
             }
@@ -121,7 +121,8 @@ public class BuildingPhase extends Phase {
 
         //Wzielismy budynek z mapy (albo sie rozmyslilismy), wiec trzeba go oddac, przykro mi
         if(isPickingBuildingFromMap || isPickingBuildingFromInventory) {
-            this.info.buildingsToBuild.replace((AbstractBuilding)pickedBuilding, this.info.buildingsToBuild.get(pickedBuilding), this.info.buildingsToBuild.get(pickedBuilding) + 1);
+            if(this.info.buildingsToBuild.get(pickedBuilding) != null)
+                this.info.buildingsToBuild.put((AbstractBuilding)pickedBuilding, this.info.buildingsToBuild.get(pickedBuilding) + 1);
             pickedBuilding = null;
             return;
         }
@@ -137,7 +138,7 @@ public class BuildingPhase extends Phase {
         //No, mozna go brac!
 
         for(int i = 0; i < o.length; i++) {
-            if(o[i].getSprite().getBoundingRectangle().contains(x, y))
+            if(o[i].getSprite() != null && o[i].getSprite().getBoundingRectangle().contains(x, y))
             info.buildingsToBuild.replace((AbstractBuilding)o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
             pickedBuilding = o[i];
             isPickingBuildingFromInventory = true;
