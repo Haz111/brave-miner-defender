@@ -14,6 +14,7 @@ public class PlayingInformation {
     //lista budynkow, info o graczu
     private LinkedList<AbstractEnemy> enemies;
     private LinkedList<AbstractBuilding> buildings;
+
     private AbstractHeroClass hero;
     //TODO: Dodac titaj klase na skille
 

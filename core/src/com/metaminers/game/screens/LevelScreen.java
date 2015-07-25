@@ -18,14 +18,14 @@ public class LevelScreen implements Screen {
     PlayingInformation info;
     private Game game;
 
-    public LevelScreen(Game game) {
+    public LevelScreen(Game game, PlayingInformation info) {
         phases = new Phase[PHASES_COUNT];
         phases[0] = new BuildingPhase();
         phases[1] = new UpgradePhase();
         phases[2] = new BattlePhase();
         currentPhase = phases[0];
         this.game = game;
-        info = new PlayingInformation();
+        this.info = info;
 
         currentPhase.start(info);
     }
