@@ -180,10 +180,17 @@ public abstract class AbstractEnemy extends GameObject {
 
     public boolean canGo(PlayingInformation info) {
         Grid grid = info.getGrid();
-        if(grid.isFreeForMove((int)(sprite.getX() + directionVec.x)/GameConstants.CELL_WIDTH,
-                (int)(sprite.getY() + directionVec.x)/GameConstants.CELL_HEIGHT))
+        int x = (int)(sprite.getX() + directionVec.x)/GameConstants.CELL_WIDTH;
+        int y = (int)(sprite.getY() + directionVec.x)/GameConstants.CELL_HEIGHT;
+
+        System.out.println("info x= "+x+" y= "+y);
+        if(grid.isFreeForMove(x,y)){
+            System.out.println("info ture");
             return true;
-        return false;
+        } else{
+            System.out.println("info false");
+            return false;
+        }
     }
 
     @Override
