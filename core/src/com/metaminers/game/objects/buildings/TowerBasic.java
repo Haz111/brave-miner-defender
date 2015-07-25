@@ -13,6 +13,7 @@ public class TowerBasic extends AbstractBuilding {
     public TowerBasic(float posX, float posY) {
         this.hp = 50;
         this.texture = new Texture(Gdx.files.internal("buildings/tower2.png"));
+        this.setSprite(this.texture);
         this.posX = posX;
         this.posY = posY;
     }
