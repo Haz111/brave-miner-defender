@@ -1,6 +1,7 @@
 package com.metaminers.game.phases;
 
 import com.metaminers.game.GameConstants;
+import com.metaminers.game.objects.buildings.AbstractBuilding;
 
 /**
  * Created by Konrad on 2015-07-24.
@@ -27,6 +28,16 @@ public class BattlePhase extends Phase {
         super.render(delta);
         drawBuildings();
         drawEnemies();
+    }
+
+    private void drawEnemies() {
+
+    }
+
+    private void drawBuildings() {
+        for(AbstractBuilding e: info.getBuildings()) {
+            e.draw();
+        }
     }
 
     @Override

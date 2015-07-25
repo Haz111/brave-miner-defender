@@ -64,8 +64,10 @@ public class BuildingPhase extends Phase {
         handleInput();
         if(pickedBuilding != null) {
             //pickedBuilding.getSprite().setPosition(Gdx.input.getX(), Gdx.input.getY()); //TODO: SPRAWDZIC CZY TO JEST OK!
-            pickedBuilding.getSprite().setPosition(Gdx.input.getX() - pickedBuilding.getSprite().getWidth()/2,
-                    Gdx.graphics.getHeight() - Gdx.input.getY() - pickedBuilding.getSprite().getHeight()/2); //TODO: SPRAWDZIC CZY TO JEST OK!
+            int x = (int)(Gdx.input.getX() - pickedBuilding.getSprite().getWidth()/2);
+            int y = (int)(Gdx.graphics.getHeight() - Gdx.input.getY() - pickedBuilding.getSprite().getHeight()/2);
+            Pair p = Grid.mapToGrid(x, y);
+            pickedBuilding.getSprite().setPosition(p.x, p.y); //TODO: SPRAWDZIC CZY TO JEST OK!
             //Wyjasnienie do powyzszego: http://www.gamefromscratch.com/post/2013/10/15/LibGDX-Tutorial-4-Handling-the-mouse-and-keyboard.aspx
             pickedBuilding.getSprite().draw(batch);
         }
@@ -78,7 +80,7 @@ public class BuildingPhase extends Phase {
         //Jak klikniemy na pole puste siatki - jest ok
         //Jak nie - no to sorry
         //TODO: Dorobic do budynkow getGridWidth, getGridHeight - abysmy mogli spokojnie przerabiac to na siatke
-        Pair p = Grid.mapToGrid(x, y, GameConstants.CELL_WIDTH, GameConstants.CELL_HEIGHT);
+        Pair p = Grid.mapToGrid(x, y);
         x = p.x;
         y = p.y;
         GameObject buildingOnMap = null;
