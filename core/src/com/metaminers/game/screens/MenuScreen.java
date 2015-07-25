@@ -21,7 +21,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.metaminers.game.phases.PlayingInformation;
 
 /**
- * Created by Hubert on 2015-07-24.
+ * Created by Hubert but picked up by Jacques on 2015-07-24.
  */
 public class MenuScreen implements Screen {
     Stage stage;
@@ -202,7 +202,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 //                super.clicked(event, x, y);
-                //TODO: szybka gra
+
             }
         });
 

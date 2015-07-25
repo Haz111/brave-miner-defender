@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -42,6 +44,7 @@ public class BeforeGameScreen implements Screen {
     ButtonStyle rightArrowStyle;
     LabelStyle labelStyle;
     TextFieldStyle nameTextFieldStyle;
+    TextureRegionDrawable textfieldStyle;
 
     Label labelName;
     Label labelCharacter;
@@ -49,7 +52,8 @@ public class BeforeGameScreen implements Screen {
     Label labelDifficulty;
 
     TextField nameTextField;
-
+    Texture textFieldTexture;
+    TextureRegion textFieldTextureRegion;
     BitmapFont font;
 
     Button[] arrowButtons;
@@ -66,13 +70,24 @@ public class BeforeGameScreen implements Screen {
 
     Image[] characterImages;
     Image[] villagesImages;
-    Label[] difficultyLabels;
+    Image[] difficultyLabels;
 
     Preferences prefs;
+
+    SpriteBatch batch;
+    Sprite sprite;
+    Texture background;
+    TextureRegion backgroundRegion;
 
     public BeforeGameScreen(Game game) {
         this.game = game;
         font = new BitmapFont();
+
+        batch = new SpriteBatch();
+        background = new Texture(Gdx.files.internal("homescreen/drugiebg1.png"));
+        background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sprite = new Sprite(background);
+        backgroundRegion = new TextureRegion(background);
 
         prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
 
@@ -81,7 +96,7 @@ public class BeforeGameScreen implements Screen {
             selectedVillage = prefs.getInteger("selectedVillage", 0);
             selectedDifficulty = prefs.getInteger("selectedDifficulty", 1);
 
-        playButtonTexture = new Texture(Gdx.files.internal("buttons/exampleButton.png"));
+        playButtonTexture = new Texture(Gdx.files.internal("buttons/play.png"));
         playButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         leftButtonTexture = new Texture(Gdx.files.internal("buttons/leftButton.png"));
@@ -90,15 +105,20 @@ public class BeforeGameScreen implements Screen {
         rightButtonTexture = new Texture(Gdx.files.internal("buttons/rightButton.png"));
         rightButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        textFieldTexture = new Texture(Gdx.files.internal("buttons/textField.png"));
+        textFieldTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         playButtonTextureRegion = new TextureRegion(playButtonTexture);
         leftButtonTextureRegion = new TextureRegion(leftButtonTexture);
         rightButtonTextureRegion = new TextureRegion(rightButtonTexture);
+        textFieldTextureRegion = new TextureRegion(textFieldTexture);
 
         style = new TextButton.TextButtonStyle();
         style.up = new TextureRegionDrawable(playButtonTextureRegion);
         style.down = new TextureRegionDrawable(playButtonTextureRegion);
         style.font = font;
-        playButton = new TextButton("Play", style);
+        textfieldStyle = new TextureRegionDrawable(textFieldTextureRegion);
+        playButton = new TextButton("", style);
         playButton.setBounds(Gdx.graphics.getWidth() / 2 - 50, 80, 100, 40);
 
         leftArrowStyle = new ButtonStyle();
@@ -130,10 +150,6 @@ public class BeforeGameScreen implements Screen {
         arrowButtons[5].setBounds(Gdx.graphics.getWidth() / 2 + 400, 150, 20, 20);
 
         labelStyle = new LabelStyle(font, Color.WHITE);
-        labelName = new Label("Choose your name", labelStyle);
-        labelCharacter = new Label("Choose your character", labelStyle);
-        labelVillage = new Label("Choose your village", labelStyle);
-        labelDifficulty = new Label("Choose difficulty", labelStyle);
 
         cursorTexture = new Texture(Gdx.files.internal("cursors/editCursor.png"));
         cursorTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -143,39 +159,31 @@ public class BeforeGameScreen implements Screen {
         cursorStyle.up = new TextureRegionDrawable(cursorTextureRegion);
 
 //        TODO: zrobic ladny kursor
-        nameTextFieldStyle = new TextFieldStyle(font, Color.WHITE, cursorStyle.up, style.up, style.up);
+        nameTextFieldStyle = new TextFieldStyle(font, Color.WHITE, cursorStyle.up, textfieldStyle, textfieldStyle);
         nameTextField = new TextField(playerName, nameTextFieldStyle);
 
-        labelName.setBounds(200, 700, 100, 20);
-        labelCharacter.setBounds(200, 600, 100, 20);
-        labelVillage.setBounds(200, 400, 100, 20);
-        labelDifficulty.setBounds(200, 200, 100, 20);
-        nameTextField.setBounds(400, 700, 300, 30);
+        nameTextField.setBounds(400, 700, 440, 30);
 
         stage.addActor(playButton);
-        stage.addActor(labelName);
-        stage.addActor(labelCharacter);
-        stage.addActor(labelVillage);
-        stage.addActor(labelDifficulty);
         stage.addActor(nameTextField);
 
         characterImages = new Image[GameConstants.HEROES];
         // Create new sprites using the just created texture
         for (i = 0; i < GameConstants.HEROES; i++) {
-            Texture texture = new Texture("characters/character" + (i + 1) + ".png");
+            Texture texture = new Texture("buttons/g" + (i + 1) + "icon.png");
             Image img = new Image(texture);
             characterImages[i] = img;
             stage.addActor(characterImages[i]);
         }
 
-        characterImages[getPreviousHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 530, 64, 64);
-        characterImages[selectedCharacter].setBounds(Gdx.graphics.getWidth() / 2 - 32, 530, 64, 64);
-        characterImages[getNextHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 530, 64, 64);
+        characterImages[getPreviousHeroesNumber(selectedCharacter)].setBounds(10, 60, 64, 64);
+        characterImages[selectedCharacter].setBounds(700, 10, 64, 64);
+        characterImages[getNextHeroesNumber(selectedCharacter)].setBounds(1, 10, 64, 64);
 
         villagesImages = new Image[GameConstants.VILLAGES];
         // Create new sprites using the just created texture
         for (i = 0; i < GameConstants.VILLAGES; i++) {
-            Texture texture = new Texture("villages/villageMinature" + (i + 1) + ".png");
+            Texture texture = new Texture("buttons/plicon" + (i + 1) + ".png");
             Image img = new Image(texture);
             villagesImages[i] = img;
             stage.addActor(villagesImages[i]);
@@ -186,10 +194,12 @@ public class BeforeGameScreen implements Screen {
         villagesImages[getNextVillageNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 330, 64, 64);
 
 
-        difficultyLabels = new Label[GameConstants.DIFFICULTY_LEVELS];
+        difficultyLabels = new Image[GameConstants.DIFFICULTY_LEVELS];
         // Create new sprites using the just created texture
         for (i = 0; i < GameConstants.DIFFICULTY_LEVELS; i++) {
-            difficultyLabels[i] = new Label(GameConstants.DIFFICULTY[i], labelStyle);
+            Texture texture = new Texture("buttons/level" + (i + 1) + ".png");
+            Image img = new Image(texture);
+            difficultyLabels[i] = img;
             stage.addActor(difficultyLabels[i]);
         }
 
@@ -277,6 +287,9 @@ public class BeforeGameScreen implements Screen {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        sprite.draw(batch);
+        batch.end();
         stage.act();
         stage.draw();
     }
