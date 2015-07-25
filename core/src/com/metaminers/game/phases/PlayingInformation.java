@@ -2,6 +2,7 @@ package com.metaminers.game.phases;
 
 import com.metaminers.game.GameConstants;
 import com.metaminers.game.elements.Village;
+import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
 import com.metaminers.game.objects.buildings.TowerBasic;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
@@ -102,5 +103,9 @@ public class PlayingInformation {
 
     public void nextLvl() {
         lvl++;
+    }
+
+    public void removeBuilding(GameObject pickedBuilding) {
+        buildings.remove(pickedBuilding);
     }
 }

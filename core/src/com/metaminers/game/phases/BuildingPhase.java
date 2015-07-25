@@ -101,8 +101,8 @@ public class BuildingPhase extends Phase {
             }
         }
 
-
-        if(isPickingBuildingFromInventory) {
+        /*
+        if(isPickingBuildingFromInventory ) {
             //Ok, jednak mozna, koles kliknal to niech ma
             info.addBuilding((AbstractBuilding) pickedBuilding);//A FUJ!
             pickedBuilding = null; //Chyba ok?
@@ -113,7 +113,18 @@ public class BuildingPhase extends Phase {
             info.getBuildings().remove(buildingOnMap); //ok?
             isPickingBuildingFromMap = true;
         }
+        */
 
+        //TODO: SIATKA
+        if(isPickingBuildingFromInventory && buildingOnMap == null) {
+            //Mozna
+            info.addBuilding((AbstractBuilding) pickedBuilding);
+            isPickingBuildingFromInventory = isPickingBuildingFromMap = false;
+        }
+        else if(buildingOnMap != null && !isPickingBuildingFromInventory && !isPickingBuildingFromMap) {
+            pickedBuilding = buildingOnMap;
+            info.removeBuilding(pickedBuilding);
+        }
     }
 
     @Override
@@ -139,11 +150,12 @@ public class BuildingPhase extends Phase {
         //No, mozna go brac!
 
         for(int i = 0; i < o.length; i++) {
-            if(o[i].getSprite().getBoundingRectangle().contains(x, y))
-            info.buildingsToBuild.replace((AbstractBuilding)o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
-            pickedBuilding = o[i];
-            isPickingBuildingFromInventory = true;
-            break;
+            if(o[i].getSprite().getBoundingRectangle().contains(x, y)) {
+                info.buildingsToBuild.replace((AbstractBuilding) o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
+                pickedBuilding = o[i];
+                isPickingBuildingFromInventory = true;
+                break;
+            }
         }
     }
 
