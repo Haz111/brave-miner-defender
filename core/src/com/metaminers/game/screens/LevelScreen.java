@@ -2,7 +2,7 @@ package com.metaminers.game.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.metaminers.game.elements.GameConstants;
+import com.metaminers.game.GameConstants;
 import com.metaminers.game.phases.*;
 
 /**

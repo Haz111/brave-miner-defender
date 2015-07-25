@@ -3,7 +3,7 @@ package com.metaminers.game.phases;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.metaminers.game.elements.GameConstants;
+import com.metaminers.game.GameConstants;
 import com.metaminers.game.objects.AbstractHeroClass;
 
 import java.util.HashMap;
