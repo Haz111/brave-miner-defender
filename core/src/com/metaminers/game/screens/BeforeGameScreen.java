@@ -2,23 +2,19 @@ package com.metaminers.game.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -62,17 +58,44 @@ public class BeforeGameScreen implements Screen {
     TextureRegion cursorTextureRegion;
     TextButtonStyle cursorStyle;
 
+    String playerName;
     int selectedCharacter;
-    int selectVillage;
-    int selectDifficulty;
+    int selectedVillage;
+    int selectedDifficulty;
 
+    Image[] characterImages;
+    Image[] villagesImages;
+    Label[] difficultyLabels;
+
+    Preferences prefs;
 
     public BeforeGameScreen(Game game) {
         this.game = game;
         font = new BitmapFont();
-//        skin = new Skin();
-//        leftArrowSkin = new Skin();
-//        rightArrowSkin = new Skin();
+
+        prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
+
+//        if (prefs.contains("playerName")){
+            playerName = prefs.getString("playerName", "");
+//        } else {
+//            playerName = "";
+//        }
+//        if (prefs.contains("selectedCharacter")){
+            selectedCharacter = prefs.getInteger("selectedCharacter", 0);
+//        } else {
+//            selectedCharacter = 0;
+//        }
+//        if (prefs.contains("selectedVillage")){
+            selectedVillage = prefs.getInteger("selectedVillage", 0);
+//        } else {
+//            selectedVillage = 0;
+//        }
+//        if (prefs.contains("selectedDifficulty")){
+            selectedDifficulty = prefs.getInteger("selectedDifficulty", 1);
+//        } else {
+//            selectedDifficulty = 1;
+//        }
+
 
         playButtonTexture = new Texture(Gdx.files.internal("buttons/exampleButton.png"));
         playButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -107,11 +130,11 @@ public class BeforeGameScreen implements Screen {
 
         arrowButtons = new Button[6];
         int i = 0;
-        for (; i < 3; i++){
+        for (; i < 3; i++) {
             arrowButtons[i] = new Button(leftArrowStyle);
             stage.addActor(arrowButtons[i]);
         }
-        for (; i<6; i++) {
+        for (; i < 6; i++) {
             arrowButtons[i] = new Button(rightArrowStyle);
             stage.addActor(arrowButtons[i]);
         }
@@ -137,10 +160,10 @@ public class BeforeGameScreen implements Screen {
 
 //        TODO: zrobic ladny kursor
         nameTextFieldStyle = new TextFieldStyle(font, Color.WHITE, cursorStyle.up, style.up, style.up);
-        nameTextField = new TextField("", nameTextFieldStyle);
+        nameTextField = new TextField(playerName, nameTextFieldStyle);
 
         labelName.setBounds(200, 700, 100, 20);
-        labelCharacter.setBounds(200, 600,100,20);
+        labelCharacter.setBounds(200, 600, 100, 20);
         labelVillage.setBounds(200, 400, 100, 20);
         labelDifficulty.setBounds(200, 200, 100, 20);
         nameTextField.setBounds(400, 700, 300, 30);
@@ -152,35 +175,98 @@ public class BeforeGameScreen implements Screen {
         stage.addActor(labelDifficulty);
         stage.addActor(nameTextField);
 
-//        characterSprites = new Sprite[GameConstants.HEROES];
-// Create empty POT-sized Pixmap with 8 bit RGBA pixel data
+        characterImages = new Image[GameConstants.HEROES];
+        // Create new sprites using the just created texture
+        for (i = 0; i < GameConstants.HEROES; i++) {
+            Texture texture = new Texture("characters/character" + (i + 1) + ".png");
+            Image img = new Image(texture);
+            characterImages[i] = img;
+            stage.addActor(characterImages[i]);
+        }
 
-//        Texture texture = new Texture("assets/characters/character1.png");
-//// Create new sprites using the just created texture
-//        for (int i = 0; i < testSprites.length; i++) {
-//            Sprite spr = new Sprite(texture);
-//// Define sprite size to be 1m x 1m in game world
-//            spr.setSize(1, 1);
-//// Set origin to sprite's center
-//            spr.setOrigin(spr.getWidth() / 2.0f, spr.getHeight() / 2.0f);
-//// Calculate random position for sprite
-//            float randomX = MathUtils.random(-2.0f, 2.0f);
-//            float randomY = MathUtils.random(-2.0f, 2.0f);
-//            spr.setPosition(randomX, randomY);
-//// Put new sprite into array
-//            testSprites[i] = spr;
-//        }
-// Set first sprite as selected one
-//        selectedSprite = 0;
+        characterImages[getPreviousHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 530, 64, 64);
+        characterImages[selectedCharacter].setBounds(Gdx.graphics.getWidth() / 2 - 32, 530, 64, 64);
+        characterImages[getNextHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 530, 64, 64);
+
+        villagesImages = new Image[GameConstants.VILLAGES];
+        // Create new sprites using the just created texture
+        for (i = 0; i < GameConstants.VILLAGES; i++) {
+            Texture texture = new Texture("villages/villageMinature" + (i + 1) + ".png");
+            Image img = new Image(texture);
+            villagesImages[i] = img;
+            stage.addActor(villagesImages[i]);
+        }
+
+        villagesImages[getPreviousVillageNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 330, 64, 64);
+        villagesImages[selectedCharacter].setBounds(Gdx.graphics.getWidth() / 2 - 32, 330, 64, 64);
+        villagesImages[getNextVillageNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 330, 64, 64);
+
+
+        difficultyLabels = new Label[GameConstants.DIFFICULTY_LEVELS];
+        // Create new sprites using the just created texture
+        for (i = 0; i < GameConstants.DIFFICULTY_LEVELS; i++) {
+            difficultyLabels[i] = new Label(GameConstants.DIFFICULTY[i], labelStyle);
+            stage.addActor(difficultyLabels[i]);
+        }
+
+        difficultyLabels[getPreviousDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 150, 64, 64);
+        difficultyLabels[selectedDifficulty].setBounds(Gdx.graphics.getWidth() / 2 - 32, 150, 64, 64);
+        difficultyLabels[getNextDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 150, 64, 64);
     }
 
     @Override
     public void show() {
-        playButton.addListener(new ClickListener(){
+        playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                super.clicked(event, x, y);
+                BeforeGameScreen.this.prefs.putString("playerName", BeforeGameScreen.this.nameTextField.getText());
+                BeforeGameScreen.this.prefs.putInteger("selectedCharacter", BeforeGameScreen.this.selectedCharacter);
+                BeforeGameScreen.this.prefs.putInteger("selectedVillage", BeforeGameScreen.this.selectedVillage);
+                BeforeGameScreen.this.prefs.putInteger("selectedDifficulty", BeforeGameScreen.this.selectedDifficulty);
+                BeforeGameScreen.this.prefs.flush();
                 BeforeGameScreen.this.game.setScreen(new BeforeGameScreen(game));
+            }
+        });
+
+        arrowButtons[0].addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                BeforeGameScreen.this.decrementHeroesNumber();
+            }
+        });
+
+        arrowButtons[1].addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                BeforeGameScreen.this.decrementVillageNumber();
+            }
+        });
+
+        arrowButtons[2].addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                BeforeGameScreen.this.decrementDifficultyLevel();
+            }
+        });
+
+        arrowButtons[3].addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                BeforeGameScreen.this.incrementHeroesNumber();
+            }
+        });
+
+        arrowButtons[4].addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                BeforeGameScreen.this.incrementVillageNumber();
+            }
+        });
+
+                arrowButtons[5].addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                BeforeGameScreen.this.incrementDifficultyLevel();
             }
         });
 
@@ -189,7 +275,17 @@ public class BeforeGameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0,0,0,1);
+        characterImages[getPreviousHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 530, 64, 64);
+        characterImages[selectedCharacter].setBounds(Gdx.graphics.getWidth() / 2 - 32, 530, 64, 64);
+        characterImages[getNextHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 530, 64, 64);
+        villagesImages[getPreviousVillageNumber(selectedVillage)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 330, 64, 64);
+        villagesImages[selectedVillage].setBounds(Gdx.graphics.getWidth() / 2 - 32, 330, 64, 64);
+        villagesImages[getNextVillageNumber(selectedVillage)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 330, 64, 64);
+        difficultyLabels[getPreviousDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 150, 64, 64);
+        difficultyLabels[selectedDifficulty].setBounds(Gdx.graphics.getWidth() / 2 - 32, 150, 64, 64);
+        difficultyLabels[getNextDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 150, 64, 64);
+
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
@@ -218,5 +314,77 @@ public class BeforeGameScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    private void incrementHeroesNumber(){
+        selectedCharacter = getNextHeroesNumber(selectedCharacter);
+    }
+
+    private void decrementHeroesNumber(){
+        selectedCharacter = getPreviousHeroesNumber(selectedCharacter);
+    }
+
+    private void incrementVillageNumber(){
+        selectedVillage = getNextVillageNumber(selectedVillage);
+    }
+
+    private void decrementVillageNumber(){
+        selectedVillage = getPreviousVillageNumber(selectedVillage);
+    }
+
+    private void incrementDifficultyLevel(){
+        selectedDifficulty = getNextDifficultyLevel(selectedDifficulty);
+    }
+
+    private void decrementDifficultyLevel(){
+        selectedDifficulty = getPreviousDifficultyLevel(selectedDifficulty);
+    }
+
+    private int getPreviousHeroesNumber(int current){
+        if (current == 0) {
+            return (GameConstants.HEROES - 1);
+        } else {
+            return (current - 1);
+        }
+    }
+
+    private int getNextHeroesNumber(int current){
+        if (current == (GameConstants.HEROES - 1)) {
+            return (0);
+        } else {
+            return (current + 1);
+        }
+    }
+
+    private int getPreviousVillageNumber(int current){
+        if (current == 0) {
+            return (GameConstants.VILLAGES - 1);
+        } else {
+            return (current - 1);
+        }
+    }
+
+    private int getNextVillageNumber(int current){
+        if (current == (GameConstants.VILLAGES - 1)) {
+            return (0);
+        } else {
+            return (current + 1);
+        }
+    }
+
+    private int getPreviousDifficultyLevel(int current){
+        if (current == 0) {
+            return (GameConstants.DIFFICULTY_LEVELS - 1);
+        } else {
+            return (current - 1);
+        }
+    }
+
+    private int getNextDifficultyLevel(int current){
+        if (current == (GameConstants.DIFFICULTY_LEVELS - 1)) {
+            return (0);
+        } else {
+            return (current + 1);
+        }
     }
 }
