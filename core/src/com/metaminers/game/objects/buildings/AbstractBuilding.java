@@ -21,5 +21,11 @@ public abstract class AbstractBuilding extends GameObject {
     public void attack(AbstractEnemy enemy) {
         enemy.takeHp(damage);
     }
+    public void drawInGui(float posX, float posY, float scale) {
+        batch.begin();
+        batch.draw(this.extractIcon(), posX, posY, this.extractIcon().getRegionWidth()*scale,
+                this.extractIcon().getRegionHeight()*scale);
+        batch.end();
+    }
     public TextureRegion extractIcon() { return null; }
 }

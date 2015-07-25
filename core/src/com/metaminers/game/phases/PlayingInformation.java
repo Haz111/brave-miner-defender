@@ -5,6 +5,7 @@ import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
 import com.metaminers.game.objects.buildings.TowerBasic;
+import com.metaminers.game.objects.buildings.TowerTank;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 import com.metaminers.game.objects.hero_classes.AbstractHeroClass;
 import com.metaminers.game.objects.hero_classes.Marksman;
@@ -12,8 +13,6 @@ import com.metaminers.game.objects.hero_classes.Marksman;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
-
-import static java.util.Random.*;
 
 /**
  * Created by Konrad on 2015-07-25.
@@ -37,6 +36,7 @@ public class PlayingInformation {
         buildings.add(new TowerBasic(100f,100f));
         buildingsToBuild = new HashMap<>();
         buildingsToBuild.put(new TowerBasic(150f,150f), 2);
+        buildingsToBuild.put(new TowerTank(150f,150f), 1);
     }
 
     public LinkedList<AbstractEnemy> getEnemiesObjects() {
