@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
  * Created by Tymoteusz on 2015-07-25.
  */
 public class RiverSnake extends AbstractEnemy {
+    int direction;
+
     public RiverSnake(float posX, float posY) {
         this.posX = posX;
         this.posY = posY;

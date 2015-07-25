@@ -29,4 +29,7 @@ public class GameConstants {
 
 //    spis herosow
     public static final String[] HEROES_LIST = {};
+
+//    spis kierunkow
+    public static final String[] DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
 }
