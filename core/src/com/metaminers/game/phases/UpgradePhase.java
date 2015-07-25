@@ -20,6 +20,16 @@ public class UpgradePhase extends Phase {
     }
 
     @Override
+    protected void handleMovementMap(float x, float y) {
+        
+    }
+
+    @Override
+    protected void handleMovementInventory(float x, float y) {
+
+    }
+
+    @Override
     public void resize(int width, int height) {
 
     }
