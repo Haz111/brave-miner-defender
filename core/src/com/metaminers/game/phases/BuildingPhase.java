@@ -16,13 +16,14 @@ public class BuildingPhase extends Phase {
     //TODO: ZROBIC JAKIEGOS RENDERERA KTORY BY NP. RYSOWAL GUI, OBECNA WERSJA JEST MANROTRAWSTWEM PAMIECI!
     private HashMap<AbstractHeroClass, Integer> buildingsToBuild;
     private final String warnString = "You cannot place building here";
-    private Texture pane;
+    private Texture pane, background;
     private SpriteBatch batch;
 
     @Override
     public void start(PlayingInformation info) {
         markEnded(false);
         pane = new Texture(Gdx.files.internal("gui/pane.png"));
+        background = new Texture(Gdx.files.internal("gui/background.png"));
         batch = new SpriteBatch();
         //renderGUI();
     }
@@ -42,9 +43,24 @@ public class BuildingPhase extends Phase {
     @Override
     public void render(float delta) {
         batch.begin();
+        drawGUI();
+        drawEnemies();
+        setUpBuildings();
+        batch.end();
+    }
+
+    private void drawGUI() {
         batch.draw(pane, 0, 0);
         batch.draw(pane, GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH, 0);
-        batch.end();
+        batch.draw(background, GameConstants.INTERFACE_PANEL_WIDTH, 0);
+    }
+
+    private void drawEnemies() {
+
+    }
+
+    private void setUpBuildings() {
+
     }
 
     @Override
@@ -70,5 +86,6 @@ public class BuildingPhase extends Phase {
     @Override
     public void dispose() {
         pane.dispose();
+        background.dispose();
     }
 }
