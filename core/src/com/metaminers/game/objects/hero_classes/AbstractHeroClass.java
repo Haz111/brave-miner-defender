@@ -7,4 +7,6 @@ import com.metaminers.game.objects.enemies.AbstractEnemy;
  */
 public abstract class AbstractHeroClass {
     void attack(AbstractEnemy enemy) {}
+
+
 }
