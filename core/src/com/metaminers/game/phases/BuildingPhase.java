@@ -11,9 +11,9 @@ import com.metaminers.game.Grid;
 import com.metaminers.game.Pair;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Konrad on 2015-07-24.
@@ -122,16 +122,23 @@ public class BuildingPhase extends Phase {
             return;
         }
 
-//        //No, mozna go brac!
-//        GameObject [] o = ((HashSet<GameObject>)info.buildingsToBuild.keySet()).toArray();
-//
-//        for(int i = 0; i < o.length; i++) {
-//            if(o[i].getSprite().getBoundingRectangle().contains(x, y))
-//            info.buildingsToBuild.replace((AbstractBuilding)o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
-//            pickedBuilding = o[i];
-//            isPickingBuildingFromInventory = true;
-//            break;
-//        }
+        List<GameObject> lg = new LinkedList<>();
+        for(GameObject o : info.buildingsToBuild.keySet()) {
+            lg.add(o);
+        }
+        GameObject [] o = new GameObject[lg.size()];
+        for(int i=0; i<lg.size(); i++)
+            o[i] = lg.get(i);
+
+        //No, mozna go brac!
+
+        for(int i = 0; i < o.length; i++) {
+            if(o[i].getSprite().getBoundingRectangle().contains(x, y))
+            info.buildingsToBuild.replace((AbstractBuilding)o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
+            pickedBuilding = o[i];
+            isPickingBuildingFromInventory = true;
+            break;
+        }
     }
 
 
