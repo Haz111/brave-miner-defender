@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -20,6 +22,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.metaminers.game.GameConstants;
+
 
 /**
  * Created by Hubert on 2015-07-24.
@@ -57,6 +61,10 @@ public class BeforeGameScreen implements Screen {
     Texture cursorTexture;
     TextureRegion cursorTextureRegion;
     TextButtonStyle cursorStyle;
+
+    int selectedCharacter;
+    int selectVillage;
+    int selectDifficulty;
 
 
     public BeforeGameScreen(Game game) {
@@ -143,6 +151,27 @@ public class BeforeGameScreen implements Screen {
         stage.addActor(labelVillage);
         stage.addActor(labelDifficulty);
         stage.addActor(nameTextField);
+
+//        characterSprites = new Sprite[GameConstants.HEROES];
+// Create empty POT-sized Pixmap with 8 bit RGBA pixel data
+
+//        Texture texture = new Texture("assets/characters/character1.png");
+//// Create new sprites using the just created texture
+//        for (int i = 0; i < testSprites.length; i++) {
+//            Sprite spr = new Sprite(texture);
+//// Define sprite size to be 1m x 1m in game world
+//            spr.setSize(1, 1);
+//// Set origin to sprite's center
+//            spr.setOrigin(spr.getWidth() / 2.0f, spr.getHeight() / 2.0f);
+//// Calculate random position for sprite
+//            float randomX = MathUtils.random(-2.0f, 2.0f);
+//            float randomY = MathUtils.random(-2.0f, 2.0f);
+//            spr.setPosition(randomX, randomY);
+//// Put new sprite into array
+//            testSprites[i] = spr;
+//        }
+// Set first sprite as selected one
+//        selectedSprite = 0;
     }
 
     @Override
