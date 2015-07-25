@@ -228,8 +228,9 @@ public class BeforeGameScreen implements Screen {
 
                 PlayingInformation info = new PlayingInformation();
                 //TODO: ODKOMENTOWAC PONIZSZE I UZUPELNIC GAMECONSTANTS ORAZ ABSTRACTHERO (IMPLEMENTACJA)
-//                info.setHero();
-//                info.setVillage(GameConstants.VILLAGES_HOUSENAMES[BeforeGameScreen.this.selectedVillage], GameConstants.VILLAGES_BACKGROUNDAMES[BeforeGameScreen.this.selectedVillage]);
+                info.setHero(BeforeGameScreen.this.selectedCharacter);
+//                pierwszy jest do Villages, drugi jest do T³a Village
+                info.setVillage(BeforeGameScreen.this.selectedVillage, BeforeGameScreen.this.selectedVillage);
                 BeforeGameScreen.this.game.setScreen(new LevelScreen(game, info));
             }
         });

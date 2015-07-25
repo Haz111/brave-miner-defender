@@ -20,9 +20,13 @@ public class GameConstants {
     public static final int LEVELS = 10;
 
     public static final String[] DIFFICULTY = {"easy", "medium", "hard"};
-    public static final String [] VILLAGES_HOUSENAMES = {}; //TODO: ZROBIC
-    public static final String [] VILLAGES_BACKGROUNDNAMES = {}; //TODO: ZROBIC
+    public static final String [] VILLAGES_HOUSENAMES = {"villages/villageMinature1.png", "villages/villageMinature1.png", "villages/villageMinature1.png"}; //TODO: ZROBIC
+    public static final String [] VILLAGES_BACKGROUNDNAMES = {"villages/villageMinature1.png", "villages/villageMinature1.png", "villages/villageMinature1.png"}; //TODO: ZROBIC
 
+//    spis wrogow
+    public static final int ENEMIES_AMOUNT = 1;
+    public static final String[] ENEMIES_LIST = {"RiverSnake"};
 
-
+//    spis herosow
+    public static final String[] HEROES_LIST = {};
 }

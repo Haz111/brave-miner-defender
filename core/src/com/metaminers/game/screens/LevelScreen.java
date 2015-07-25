@@ -12,7 +12,6 @@ public class LevelScreen implements Screen {
 
     //TODO: Change it!
 
-
     private Phase currentPhase;
     int counter = 0; //array counter for phases
     Phase [] phases;

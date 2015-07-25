@@ -32,6 +32,7 @@ public class BuildingPhase extends Phase {
     @Override
     public void start(PlayingInformation info) {
         super.start(info);
+        info.setRandomEnemiesForNextRound();
         saveButton = super.makeTextButton("Save", Gdx.graphics.getWidth()/2 - 50, 50, 100, 40);
     }
 
@@ -45,7 +46,7 @@ public class BuildingPhase extends Phase {
          */
         //TODO: Jakis renderer do GUI, cobysmy nie kopiowali kodu
         //TODO: Implementacja siatki!
-        saveButton.addListener(new ClickListener(){
+        saveButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 BuildingPhase.this.markEnded(true);
