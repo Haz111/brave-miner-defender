@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.metaminers.game.GameConstants;
 import com.metaminers.game.Grid;
 import com.metaminers.game.Pair;
 import com.metaminers.game.elements.Village;
@@ -149,6 +148,19 @@ public class BuildingPhase extends Phase {
 
 
     private void setUpBuildings() {
+        //// rysowanie budynkow do budowy:
+        for(AbstractBuilding b : info.buildingsToBuild.keySet()) {
+            if(b.getPrice() == 10) {
+                Sprite s = new Sprite(b.extractIcon());
+                s.setX(10);
+                s.setY(600);
+                s.draw(batch);
+            }
+        }
+
+
+
+        /*
         float xpos = 0; //xpos - X position to draw
         float ypos = GameConstants.INTERFACE_PANEL_WIDTH;
         GameObject e;
