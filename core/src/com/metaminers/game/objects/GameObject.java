@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class GameObject {
     protected Texture texture; //TODO: PRZEROBIC NA SIATKE
     protected float posX, posY; //TODO: TUTAJ NIE JEST TO POTRZEBNE, SZCZEGOLNIE DLA ENEMY
-    SpriteBatch batch; //TODO: Jest to dobrze?
+    protected SpriteBatch batch = new SpriteBatch(); //TODO: Jest to dobrze?
     protected Sprite sprite;
 
     public void draw() {
