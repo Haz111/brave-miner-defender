@@ -19,8 +19,10 @@ public class GameConstants {
     public static final int CELL_HEIGHT = 8;
     public static final int LEVELS = 10;
 
-    public static String[] DIFFICULTY = {"easy", "medium", "hard"};
-    public static String [] VILLAGES_HOUSENAMES = {}; //TODO: ZROBIC
-    public static String [] VILLAGES_BACKGROUNDNAMES = {}; //TODO: ZROBIC
+    public static final String[] DIFFICULTY = {"easy", "medium", "hard"};
+    public static final String [] VILLAGES_HOUSENAMES = {}; //TODO: ZROBIC
+    public static final String [] VILLAGES_BACKGROUNDNAMES = {}; //TODO: ZROBIC
+
+
 
 }
