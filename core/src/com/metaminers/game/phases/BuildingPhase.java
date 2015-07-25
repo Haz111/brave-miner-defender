@@ -5,11 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.metaminers.game.Grid;
-import com.metaminers.game.Pair;
 import com.metaminers.game.elements.Village;
-import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
+import com.metaminers.game.objects.buildings.TowerBasic;
+import com.metaminers.game.objects.buildings.TowerTank;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,8 +23,9 @@ public class BuildingPhase extends Phase {
     private Texture pane, background;
     private boolean isPickingBuildingFromInventory = false;
     private boolean isPickingBuildingFromMap = false; //Co ja pisze...
-    private GameObject pickedBuilding;
+    private AbstractBuilding pickedBuilding;
     private Village village;
+    long start, stop;
 
     TextButton saveButton;
 
@@ -34,7 +34,11 @@ public class BuildingPhase extends Phase {
         super.start(info);
         info.setRandomEnemiesForNextRound();
         saveButton = super.makeTextButton("Save", Gdx.graphics.getWidth()/2 - 50, 50, 100, 40);
+        batch.begin();
+        saveButton.draw(batch, 1.0f);
+        batch.end();
         this.village = info.getVillage();
+        start = System.currentTimeMillis();
     }
 
     @Override
@@ -65,8 +69,15 @@ public class BuildingPhase extends Phase {
         drawGUI();
         drawEnemiesOnPane();
         setUpBuildings();
+        drawBuildings();
         batch.end();
         handleInput();
+        stop = System.currentTimeMillis();
+        if(stop - start > 5000) {
+            BuildingPhase.this.markEnded(true);
+            System.out.println("Next Phase Starts");
+        }
+
 //        if(pickedBuilding != null) {
 //            //pickedBuilding.getSprite().setPosition(Gdx.input.getX(), Gdx.input.getY()); //TODO: SPRAWDZIC CZY TO JEST OK!
 //            int x = (int)(Gdx.input.getX() - pickedBuilding.getSprite().getWidth()/2);
@@ -85,14 +96,16 @@ public class BuildingPhase extends Phase {
         //Jak klikniemy na pole puste siatki - jest ok
         //Jak nie - no to sorry
         //TODO: Dorobic do budynkow getGridWidth, getGridHeight - abysmy mogli spokojnie przerabiac to na siatke
-        Pair p = Grid.mapToGrid(x, y);
+        if(pickedBuilding == null)
+            return;
+       /* Pair p = Grid.mapToGrid(x, y);
         x = p.x;
-        y = p.y;
-        GameObject buildingOnMap = null;
+        y = p.y;*/
+        AbstractBuilding buildingOnMap = null;
 
         //TODO: Zrobic to lepiej!
         //Algos: jedziemy teraz po liscie z budynkow i sprawdzamy czy tam mozemy postawic budynek
-        for(GameObject e : info.getBuildings()) {
+        for(AbstractBuilding e : info.getBuildings()) {
             if(e != null && e.getPosX() == x && e.getPosY() == y) {
                 buildingOnMap = e;
                 break;
@@ -102,7 +115,9 @@ public class BuildingPhase extends Phase {
 
         if(isPickingBuildingFromInventory) {
             //Ok, jednak mozna, koles kliknal to niech ma
-            info.addBuilding((AbstractBuilding) pickedBuilding);//A FUJ!
+            pickedBuilding.setPosX(x);
+            pickedBuilding.setPosY(728-y);
+            info.addBuilding(pickedBuilding);//A FUJ!
             pickedBuilding = null; //Chyba ok?
             isPickingBuildingFromInventory = isPickingBuildingFromMap = false;
         }
@@ -122,27 +137,34 @@ public class BuildingPhase extends Phase {
         //Wzielismy budynek z mapy (albo sie rozmyslilismy), wiec trzeba go oddac, przykro mi
         if(isPickingBuildingFromMap || isPickingBuildingFromInventory) {
             if(this.info.buildingsToBuild.get(pickedBuilding) != null)
-                this.info.buildingsToBuild.put((AbstractBuilding)pickedBuilding, this.info.buildingsToBuild.get(pickedBuilding) + 1);
+                this.info.buildingsToBuild.put(pickedBuilding, this.info.buildingsToBuild.get(pickedBuilding) + 1);
             pickedBuilding = null;
             return;
         }
 
-        List<GameObject> lg = new LinkedList<>();
-        for(GameObject o : info.buildingsToBuild.keySet()) {
+        List<AbstractBuilding> lg = new LinkedList<>();
+        for(AbstractBuilding o : info.buildingsToBuild.keySet()) {
             lg.add(o);
         }
-        GameObject [] o = new GameObject[lg.size()];
+        AbstractBuilding [] o = new AbstractBuilding[lg.size()];
         for(int i=0; i<lg.size(); i++)
             o[i] = lg.get(i);
 
         //No, mozna go brac!
 
         for(int i = 0; i < o.length; i++) {
-            if(o[i].getSprite() != null && o[i].getSprite().getBoundingRectangle().contains(x, y))
-            info.buildingsToBuild.replace((AbstractBuilding)o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
-            pickedBuilding = o[i];
-            isPickingBuildingFromInventory = true;
-            break;
+            if(o[i].getSprite() != null && o[i].getSprite().getBoundingRectangle().contains(x, 728-y)) {
+                if(info.buildingsToBuild.get(o[i]) < 1)
+                    continue;
+                info.buildingsToBuild.replace(o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
+                if(o[i].getPrice() == 10)
+                    pickedBuilding = new TowerBasic(x, y);
+                else if(o[i].getPrice() == 20)
+                    pickedBuilding = new TowerTank(x, y);
+                System.out.println(pickedBuilding.getPrice());
+                isPickingBuildingFromInventory = true;
+                break;
+            }
         }
     }
 
@@ -173,6 +195,12 @@ public class BuildingPhase extends Phase {
             s.draw(batch);
         }
         */
+    }
+
+    private void drawBuildings() {
+        for(AbstractBuilding ab : info.getBuildings()) {
+            ab.drawInGui(ab.getPosX(), ab.getPosY(), 3);
+        }
     }
 
     @Override

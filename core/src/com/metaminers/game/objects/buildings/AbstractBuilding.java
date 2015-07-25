@@ -26,6 +26,9 @@ public abstract class AbstractBuilding extends GameObject {
         batch.draw(this.extractIcon(), posX, posY, this.extractIcon().getRegionWidth()*scale,
                 this.extractIcon().getRegionHeight()*scale);
         batch.end();
+        this.setSprite(this.extractIcon());
+        this.sprite.setBounds(posX, posY, this.extractIcon().getRegionWidth()*scale,
+                    this.extractIcon().getRegionHeight()*scale);
     }
     public TextureRegion extractIcon() { return null; }
 }

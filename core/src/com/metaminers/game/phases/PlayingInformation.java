@@ -34,8 +34,8 @@ public class PlayingInformation {
         buildings = new LinkedList<>();
         buildings.add(new TowerBasic(100f,100f));
         buildingsToBuild = new HashMap<>();
-        buildingsToBuild.put(new TowerBasic(150f,150f), 2);
-        buildingsToBuild.put(new TowerTank(150f,150f), 1);
+        buildingsToBuild.put(new TowerBasic(0f, 610f), 2);
+        buildingsToBuild.put(new TowerTank(8f,500f), 1);
     }
 
     public LinkedList<AbstractEnemy> getEnemiesObjects() {
