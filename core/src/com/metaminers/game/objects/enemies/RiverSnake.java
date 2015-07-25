@@ -57,9 +57,13 @@ public class RiverSnake extends AbstractEnemy {
         directionVec.y = destX - this.posY;
         directionVec.nor(); //Normalizacja
 
-        int [][] directions = new int[][]{{8, 1, 2},
-                                            {7, 0, 3},
-                                            {6, 5, 4}};
+//        int [][] directions = new int[][]{{8, 1, 2},
+//                                            {7, 0, 3},
+//                                            {6, 5, 4}};
+
+        int [][] directions = new int[][]{{7, 0, 6},
+                                          {3, 0, 2},
+                                          {5, 1, 4}};
 
         int px, py;
         if(directionVec.x < -0.5)

@@ -29,7 +29,7 @@ public class BuildingPhase extends Phase {
     private Village village;
 
     //!!!!
-    RiverSnake p = new RiverSnake(100,500);
+    RiverSnake p = new RiverSnake(400,600);
     //!!!!
 
     TextButton saveButton;
