@@ -124,9 +124,9 @@ public abstract class AbstractEnemy extends GameObject {
         directionVec.nor(); //Normalizacja
         System.out.println("x = " + directionVec.x + " y = " + directionVec.y);
 
-        int [][] directions = new int[][]{{7, 0, 6},
+        int [][] directions = new int[][]{{5, 1, 4},
                                           {3, 0, 2},
-                                          {5, 1, 4}};
+                                          {7, 0, 6}};
 
         int px, py;
         if(directionVec.x < -0.5)
