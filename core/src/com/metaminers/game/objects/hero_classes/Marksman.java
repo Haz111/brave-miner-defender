@@ -1,8 +1,15 @@
 package com.metaminers.game.objects.hero_classes;
 
-import com.metaminers.game.objects.skills.EngineerIntervention;
-import com.metaminers.game.objects.skills.Headshot;
-import com.metaminers.game.objects.skills.WoodenWall;
+import com.metaminers.game.objects.skills.damagingSkills.FragGrenade;
+import com.metaminers.game.objects.skills.damagingSkills.MolotovCocktail;
+import com.metaminers.game.objects.skills.damagingSkills.SprayNPray;
+import com.metaminers.game.objects.skills.repairSkills.CanWeFixIt;
+import com.metaminers.game.objects.skills.repairSkills.EngineerIntervention;
+import com.metaminers.game.objects.skills.damagingSkills.Headshot;
+import com.metaminers.game.objects.skills.repairSkills.HardlyWorkin;
+import com.metaminers.game.objects.skills.wallSkills.BarbedWire;
+import com.metaminers.game.objects.skills.wallSkills.MineField;
+import com.metaminers.game.objects.skills.wallSkills.WoodenWall;
 
 /**
  * Created by Kuba on 2015-07-25.
@@ -10,9 +17,15 @@ import com.metaminers.game.objects.skills.WoodenWall;
 public class Marksman extends AbstractHeroClass {
     public Marksman(){
         this.energy = 100;
-        this.damagingSkill = new Headshot();
-        this.repairSkill = new EngineerIntervention();
-        this.wallSkill = new WoodenWall();
+        this.basicSkill = new Headshot();
+        this.damagingSkillList.add(new FragGrenade());
+        this.damagingSkillList.add(new MolotovCocktail());
+        this.damagingSkillList.add(new SprayNPray());
+        this.repairSkillList.add( new EngineerIntervention());
+        this.repairSkillList.add( new HardlyWorkin());
+        this.repairSkillList.add( new CanWeFixIt());
+        this.wallSkillList.add( new WoodenWall());
+        this.wallSkillList.add( new BarbedWire());
+        this.wallSkillList.add( new MineField());
     }
 }
-

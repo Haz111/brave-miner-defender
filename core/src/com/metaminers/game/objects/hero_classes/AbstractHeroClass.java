@@ -1,30 +1,36 @@
 package com.metaminers.game.objects.hero_classes;
 
-import com.metaminers.game.objects.enemies.AbstractEnemy;
-import com.metaminers.game.objects.skills.AbstractDamagingSkill;
-import com.metaminers.game.objects.skills.AbstractRepairSkill;
-import com.metaminers.game.objects.skills.AbstractWallSkill;
+import com.metaminers.game.objects.skills.damagingSkills.AbstractDamagingSkill;
+import com.metaminers.game.objects.skills.repairSkills.AbstractRepairSkill;
+import com.metaminers.game.objects.skills.wallSkills.AbstractWallSkill;
+
+import java.util.LinkedList;
 
 /**
  * Created by Tymoteusz but picked up by Jacques on 2015-07-25.
  */
 public abstract class AbstractHeroClass {
+    protected AbstractDamagingSkill basicSkill;
 
-    protected AbstractDamagingSkill damagingSkill;
-
-    public AbstractDamagingSkill getDamagingSkill(){
-        return this.damagingSkill;
+    public AbstractDamagingSkill getBasicSkill() {
+        return basicSkill;
     }
 
-    protected AbstractRepairSkill repairSkill;
+    protected LinkedList <AbstractDamagingSkill> damagingSkillList;
 
-    public AbstractRepairSkill getRepairSkill() {
-        return repairSkill;
+    public LinkedList getDamagingSkill(){
+        return this.damagingSkillList;
     }
-    protected AbstractWallSkill wallSkill;
 
-    public AbstractWallSkill getWallSkill() {
-        return wallSkill;
+    protected LinkedList <AbstractRepairSkill> repairSkillList;
+
+    public LinkedList getRepairSkill() {
+        return repairSkillList;
+    }
+    protected LinkedList <AbstractWallSkill> wallSkillList;
+
+    public LinkedList getWallSkill() {
+        return wallSkillList;
     }
 
     protected int energy = 0;

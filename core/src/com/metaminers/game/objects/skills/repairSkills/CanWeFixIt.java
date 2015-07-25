@@ -1,4 +1,4 @@
-package com.metaminers.game.objects.skills;
+package com.metaminers.game.objects.skills.repairSkills;
 
 /**
  * Created by Kuba on 2015-07-25.
