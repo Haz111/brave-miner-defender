@@ -9,6 +9,7 @@ import com.metaminers.game.objects.enemies.AbstractEnemy;
  */
 public abstract class AbstractBuilding extends GameObject {
 
+    int initialHp = 0;
     int hp = 0;
     int damage = 0;
     int price = 0;
@@ -42,5 +43,14 @@ public abstract class AbstractBuilding extends GameObject {
         batch.begin();
         sprite.draw(batch);
         batch.end();
+    }
+
+//    !!! SKILLE !!!
+    public void repairBuilding (int repairedHp){
+        if (hp+repairedHp > initialHp) {
+            hp = initialHp;
+        } else {
+            hp += repairedHp;
+        }
     }
 }

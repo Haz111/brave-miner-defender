@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TowerBasic extends AbstractBuilding {
     private final int damage = 10;
     public TowerBasic(int posX, int posY) {
-        this.hp = 50;
+        this.hp = this.initialHp = 50;
         this.price = 10;
         this.texture = new Texture(Gdx.files.internal("buildings/tower2.png"));
         this.setSprite(this.extractIcon());
