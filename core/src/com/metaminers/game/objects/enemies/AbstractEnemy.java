@@ -9,8 +9,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.metaminers.game.GameConstants;
+import com.metaminers.game.Grid;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
+import com.metaminers.game.phases.PlayingInformation;
 
 import java.util.Iterator;
 import java.util.Random;
@@ -174,6 +176,14 @@ public abstract class AbstractEnemy extends GameObject {
         sprite.setRegion(currFrame);
         sprite.setPosition(sprite.getX() + directionVec.x, sprite.getY() + directionVec.y);
         sprite.draw(batch);
+    }
+
+    public boolean canGo(PlayingInformation info) {
+        Grid grid = info.getGrid();
+        if(grid.isFreeForMove((int)(sprite.getX() + directionVec.x)/GameConstants.CELL_WIDTH,
+                (int)(sprite.getY() + directionVec.x)/GameConstants.CELL_HEIGHT))
+            return true;
+        return false;
     }
 
     @Override

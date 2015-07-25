@@ -3,7 +3,10 @@ package com.metaminers.game.phases;
 import com.metaminers.game.EnemyFactory;
 import com.metaminers.game.GameConstants;
 import com.metaminers.game.elements.Village;
+import com.metaminers.game.objects.buildings.AbstractBuilding;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
+
+import static java.lang.Math.abs;
 
 /**
  * Created by Konrad on 2015-07-24.
@@ -33,9 +36,9 @@ public class BattlePhase extends Phase {
         //super.render(delta);
         village.drawAll();
         batch.begin();
+        drawEnemies(delta);
         drawGUI();
         drawBuildings();
-        drawEnemies(delta);
         batch.end();
         handleInput();
         if(info.getEnemiesObjects().isEmpty()) {
@@ -46,7 +49,15 @@ public class BattlePhase extends Phase {
 
     private void drawEnemies(float delta) {
         for(AbstractEnemy enemy : info.getEnemiesObjects()) {
-            enemy.draw(batch, delta);
+           if(enemy.canGo(info))
+               enemy.draw(batch, delta);
+            else {
+               for(AbstractBuilding b : info.getBuildings()) {
+                   if(abs(b.getPosX() - enemy.getPosX()) < 2 && abs(b.getPosY() - enemy.getPosY()) < 2) {
+                       enemy.attack(b);
+                   }
+               }
+           }
         }
     }
 

@@ -24,8 +24,8 @@ public class Grid {
         try {
             for (int i = x; i < x + width; i++) {
                 for (int j = y; j < y + height; j++) {
-                    if (grid[i][j] == FieldStatus.TOWER || grid[i][j] == FieldStatus.HOUSE ||
-                            grid[i][j] == FieldStatus.FREE_OUT)
+                    if (grid[j][i] == FieldStatus.TOWER || grid[j][i] == FieldStatus.HOUSE ||
+                            grid[j][i] == FieldStatus.FREE_OUT)
                         return false;
                 }
             }
@@ -34,6 +34,15 @@ public class Grid {
         }
 
         return true;
+    }
+    public boolean isFreeForMove(int x, int y) {
+        try {
+            if (grid[y][x] == FieldStatus.FREE_OUT || grid[y][x] == FieldStatus.FREE_IN)
+                return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return false;
     }
 
     public void mark(int x, int y, int width, int height, FieldStatus fieldStatus) {
