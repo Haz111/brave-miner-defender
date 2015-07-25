@@ -84,7 +84,7 @@ public class BuildingPhase extends Phase {
 //        p4.draw(batch, delta);
 //        p5.draw(batch, delta);
         drawGUI();
-        drawEnemiesOnPane();
+        //drawEnemiesOnPane();
         setUpBuildings();
         drawBuildings();
         batch.end();

@@ -2,7 +2,6 @@ package com.metaminers.game.phases;
 
 import com.metaminers.game.EnemyFactory;
 import com.metaminers.game.GameConstants;
-import com.metaminers.game.objects.buildings.AbstractBuilding;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 
 /**
@@ -48,11 +47,11 @@ public class BattlePhase extends Phase {
         }
     }
 
-    protected void drawBuildings() {
-        for(AbstractBuilding e: info.getBuildings()) {
-            e.draw();
-        }
-    }
+//    protected void drawBuildings() {
+//        for(AbstractBuilding e: info.getBuildings()) {
+//            e.draw();
+//        }
+//    }
 
     @Override
     protected void handleMovementMap(float x, float y) {

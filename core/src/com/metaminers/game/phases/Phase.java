@@ -88,7 +88,7 @@ public abstract class Phase implements Screen{
     public void render(float delta) {
         batch.begin();
         drawGUI();
-        drawEnemiesOnPane();
+        // drawEnemiesOnPane();
         batch.end();
         handleInput();
     }
