@@ -6,6 +6,7 @@ package com.metaminers.game.phases;
 public class UpgradePhase extends Phase {
     @Override
     public void start(PlayingInformation info) {
+        this.info = info;
 
     }
 
