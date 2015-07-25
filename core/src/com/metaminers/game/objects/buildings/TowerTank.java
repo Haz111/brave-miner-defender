@@ -18,6 +18,6 @@ public class TowerTank extends AbstractBuilding {
         this.posY = posY;
     }
     public TextureRegion extractIcon() {
-        return new TextureRegion(this.texture, 0, 17, 16, 16);
+        return new TextureRegion(this.texture, 0, 34, 32, 32);
     }
 }
