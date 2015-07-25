@@ -2,7 +2,6 @@ package com.metaminers.game.phases;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -65,7 +64,6 @@ public class BuildingPhase extends Phase {
         village.drawAll();
         drawGUI();
         drawEnemiesOnPane();
-        System.out.println(1);
         setUpBuildings();
         batch.end();
         handleInput();
@@ -151,15 +149,11 @@ public class BuildingPhase extends Phase {
     private void setUpBuildings() {
         //// rysowanie budynkow do budowy:
         for(AbstractBuilding b : info.buildingsToBuild.keySet()) {
-            System.out.println(2);
-            if(b.getPrice() == 10) {
-                Sprite s = new Sprite(b.extractIcon());
-                s.setX(200);
-                s.setY(200);
-                s.draw(batch);
-            }
+            if(b.getPrice() == 10)
+                b.drawInGui(0, 610, 6);
+            else if(b.getPrice() == 20)
+                b.drawInGui(8, 500, 3);
         }
-
 
 
         /*
