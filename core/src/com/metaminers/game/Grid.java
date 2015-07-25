@@ -36,6 +36,11 @@ public class Grid {
         return true;
     }
     public boolean isFreeForMove(int x, int y) {
+        for(int i=0; i<grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++)
+                System.out.print(grid[i][j]);
+            System.out.println();
+        }
         try {
             if (grid[y][x] == FieldStatus.FREE_OUT || grid[y][x] == FieldStatus.FREE_IN)
                 return true;
