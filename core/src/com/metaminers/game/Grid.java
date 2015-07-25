@@ -37,27 +37,30 @@ public class Grid {
         try {
             for (int i = x; i < x + width; i++) {
                 for (int j = y; j < y + height; j++) {
-                    if (grid[j][i] == FieldStatus.TOWER || grid[j][i] == FieldStatus.HOUSE ||
-                            grid[j][i] == FieldStatus.FREE_OUT)
+                    if (grid[i][j] == FieldStatus.TOWER || grid[i][j] == FieldStatus.HOUSE ||
+                            grid[i][j] == FieldStatus.FREE_OUT)
                         return false;
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
+
+            e.printStackTrace();
             return false;
         }
 
         return true;
     }
     public boolean isFreeForMove(int x, int y) {
-        for(int i=0; i<grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++)
-                System.out.print(grid[i][j]);
-            System.out.println();
-        }
+//        for(int i=0; i<grid.length; i++) {
+//            for (int j = 0; j < grid[i].length; j++)
+//                System.out.print(grid[i][j]);
+//            System.out.println();
+//        }
         try {
-            if (grid[y][x] == FieldStatus.FREE_OUT || grid[y][x] == FieldStatus.FREE_IN)
+            if (grid[x][y] == FieldStatus.FREE_OUT || grid[x][y] == FieldStatus.FREE_IN)
                 return true;
         } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
             return false;
         }
         return false;
