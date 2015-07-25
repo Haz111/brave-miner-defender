@@ -62,8 +62,8 @@ public class BuildingPhase extends Phase {
     public void render(float delta) {
 
 //        TODO: w renderze - najpierw odswiezenie, potem render
-        batch.begin();
         village.drawAll();
+        batch.begin();
         drawGUI();
         drawEnemiesOnPane();
         setUpBuildings();
