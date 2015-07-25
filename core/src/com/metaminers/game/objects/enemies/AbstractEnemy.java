@@ -47,9 +47,9 @@ public abstract class AbstractEnemy extends GameObject {
         case (1):
             width = GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH;
             height = rand.nextInt(GameConstants.HEIGHT);
-            if (width > (2*GameConstants.HEIGHT/3)){
+            if (height > (2*GameConstants.HEIGHT/3)){
                 direction = 1;
-            } else if (width > (GameConstants.HEIGHT/3)){
+            } else if (height> (GameConstants.HEIGHT/3)){
                 direction = 2;
             } else {
                 direction = 3;
@@ -69,9 +69,9 @@ public abstract class AbstractEnemy extends GameObject {
         case (3):
             width = GameConstants.INTERFACE_PANEL_WIDTH;
             height = rand.nextInt(GameConstants.HEIGHT);;
-            if (width > (2*GameConstants.HEIGHT/3)){
+            if (height > (2*GameConstants.HEIGHT/3)){
                 direction = 7;
-            } else if (width > (GameConstants.HEIGHT/3)){
+            } else if (height > (GameConstants.HEIGHT/3)){
                 direction = 6;
             } else {
                 direction = 5;
