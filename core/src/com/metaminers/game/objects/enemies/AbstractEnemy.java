@@ -1,5 +1,9 @@
 package com.metaminers.game.objects.enemies;
 
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.metaminers.game.GameConstants;
 import com.metaminers.game.Pair;
 import com.metaminers.game.objects.GameObject;
@@ -15,8 +19,18 @@ public abstract class AbstractEnemy extends GameObject {
     int damage = 0;
     public void attack(AbstractBuilding building) { building.takeHp(damage); }
     public void takeHp(int hp) { this.hp -= hp; }
+    int[] widthHeightAndDir = randomStartingPlace();
+    int width = widthHeightAndDir[0];
+    int height = widthHeightAndDir[1];
+    int direction = widthHeightAndDir[2];
 
-//    it returns array - first element: width, second: heigh, third: direction
+// do animacji
+    private SpriteBatch batch;
+    private TextureAtlas textureAtlas;
+    private Animation animation;
+    private float elapsedTime = 0;
+
+    //    it returns array - first element: width, second: heigh, third: direction
     private int[] randomStartingPlace(){
         Random rand = new Random();
         int width;
