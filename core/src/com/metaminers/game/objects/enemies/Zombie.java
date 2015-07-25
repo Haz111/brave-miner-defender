@@ -33,7 +33,7 @@ public class Zombie extends AbstractEnemy {
 
     //  konstruktor dla enemy ktory wychodzi w jakims innym miejscu
     public Zombie(int posX,  int posY) {
-        this.hp = 300;
+        this.hp = initialHp = 300;
         this.damage = 50;
 
         this.posX = posX;

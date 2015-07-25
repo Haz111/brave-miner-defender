@@ -20,9 +20,12 @@ import java.util.Random;
  */
 public abstract class AbstractEnemy extends GameObject {
 
+    int initialHp = 0;
     int hp = 0;
     int damage = 0;
+
     public void attack(AbstractBuilding building) { building.takeHp(damage); }
+
     public void takeHp(int hp) { this.hp -= hp; }
     int[] widthHeightAndDir = randomStartingPlace();
 //    int width = widthHeightAndDir[0];
@@ -185,4 +188,7 @@ public abstract class AbstractEnemy extends GameObject {
         draw(batch, delta);
         batch.end();
     }
+
+
+
 }

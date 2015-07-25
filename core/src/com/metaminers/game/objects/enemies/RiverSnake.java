@@ -15,7 +15,7 @@ public class RiverSnake extends AbstractEnemy {
 
     //konstruktor dla standardowego enemy
     public RiverSnake() {
-        this.hp = 300;
+        this.hp = initialHp = 300;
         this.damage = 50;
 
         int[] startingPlace = super.randomStartingPlace();
