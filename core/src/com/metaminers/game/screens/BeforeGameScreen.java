@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -32,14 +34,17 @@ public class BeforeGameScreen implements Screen {
     Game game;
 
     TextureRegion playButtonTextureRegion;
+    TextureRegion backButtonTextureRegion;
     TextureRegion leftButtonTextureRegion;
     TextureRegion rightButtonTextureRegion;
 
     Texture playButtonTexture;
+    Texture backButtonTexture;
     Texture leftButtonTexture;
     Texture rightButtonTexture;
 
     TextButtonStyle style;
+    TextButtonStyle style2;
     ButtonStyle leftArrowStyle;
     ButtonStyle rightArrowStyle;
     LabelStyle labelStyle;
@@ -54,11 +59,13 @@ public class BeforeGameScreen implements Screen {
     TextField nameTextField;
     Texture textFieldTexture;
     TextureRegion textFieldTextureRegion;
-    BitmapFont font;
+
+
+
 
     Button[] arrowButtons;
     TextButton playButton;
-
+    TextButton backButton;
     Texture cursorTexture;
     TextureRegion cursorTextureRegion;
     TextButtonStyle cursorStyle;
@@ -78,10 +85,19 @@ public class BeforeGameScreen implements Screen {
     Sprite sprite;
     Texture background;
     TextureRegion backgroundRegion;
+    BitmapFont font;
 
     public BeforeGameScreen(Game game) {
         this.game = game;
-        font = new BitmapFont();
+
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/myfont.ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = 30;
+        font = generator.generateFont(parameter); // font size 12 pixels
+        generator.dispose(); // don't forget to dispose to avoid memory leaks!
+
+
 
         batch = new SpriteBatch();
         background = new Texture(Gdx.files.internal("homescreen/drugiebg1.png"));
@@ -99,16 +115,20 @@ public class BeforeGameScreen implements Screen {
         playButtonTexture = new Texture(Gdx.files.internal("buttons/play.png"));
         playButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        leftButtonTexture = new Texture(Gdx.files.internal("buttons/leftButton.png"));
+        backButtonTexture = new Texture(Gdx.files.internal("buttons/back.png"));
+        backButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        leftButtonTexture = new Texture(Gdx.files.internal("cursors/strzalkalw.png"));
         leftButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        rightButtonTexture = new Texture(Gdx.files.internal("buttons/rightButton.png"));
+        rightButtonTexture = new Texture(Gdx.files.internal("cursors/strzalkapr.png"));
         rightButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         textFieldTexture = new Texture(Gdx.files.internal("buttons/textField.png"));
         textFieldTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         playButtonTextureRegion = new TextureRegion(playButtonTexture);
+        backButtonTextureRegion = new TextureRegion(backButtonTexture);
         leftButtonTextureRegion = new TextureRegion(leftButtonTexture);
         rightButtonTextureRegion = new TextureRegion(rightButtonTexture);
         textFieldTextureRegion = new TextureRegion(textFieldTexture);
@@ -117,9 +137,15 @@ public class BeforeGameScreen implements Screen {
         style.up = new TextureRegionDrawable(playButtonTextureRegion);
         style.down = new TextureRegionDrawable(playButtonTextureRegion);
         style.font = font;
+        style2 = new TextButton.TextButtonStyle();
+        style2.up = new TextureRegionDrawable(backButtonTextureRegion);
+        style2.down = new TextureRegionDrawable(backButtonTextureRegion);
+        style2.font = font;
         textfieldStyle = new TextureRegionDrawable(textFieldTextureRegion);
         playButton = new TextButton("", style);
-        playButton.setBounds(Gdx.graphics.getWidth() / 2 - 50, 80, 100, 40);
+        playButton.setBounds(Gdx.graphics.getWidth() / 2 - 154, 30, 144, 96);
+        backButton = new TextButton("", style2);
+        backButton.setBounds(Gdx.graphics.getWidth() / 2 + 10, 30, 144, 96);
 
         leftArrowStyle = new ButtonStyle();
         leftArrowStyle.up = new TextureRegionDrawable(leftButtonTextureRegion);
@@ -142,12 +168,12 @@ public class BeforeGameScreen implements Screen {
             arrowButtons[i] = new Button(rightArrowStyle);
             stage.addActor(arrowButtons[i]);
         }
-        arrowButtons[0].setBounds(Gdx.graphics.getWidth() / 2 - 400, 550, 20, 20);
-        arrowButtons[1].setBounds(Gdx.graphics.getWidth() / 2 - 400, 350, 20, 20);
-        arrowButtons[2].setBounds(Gdx.graphics.getWidth() / 2 - 400, 150, 20, 20);
-        arrowButtons[3].setBounds(Gdx.graphics.getWidth() / 2 + 400, 550, 20, 20);
-        arrowButtons[4].setBounds(Gdx.graphics.getWidth() / 2 + 400, 350, 20, 20);
-        arrowButtons[5].setBounds(Gdx.graphics.getWidth() / 2 + 400, 150, 20, 20);
+        arrowButtons[0].setBounds(Gdx.graphics.getWidth() / 2 - 400, 480, 86, 40);
+        arrowButtons[1].setBounds(Gdx.graphics.getWidth() / 2 - 400, 290, 86, 40);
+        arrowButtons[2].setBounds(Gdx.graphics.getWidth() / 2 - 400, 150, 86, 40);
+        arrowButtons[3].setBounds(Gdx.graphics.getWidth() / 2 + 300, 480, 86, 40);
+        arrowButtons[4].setBounds(Gdx.graphics.getWidth() / 2 + 300, 290, 86, 40);
+        arrowButtons[5].setBounds(Gdx.graphics.getWidth() / 2 + 300, 150, 86, 40);
 
         labelStyle = new LabelStyle(font, Color.WHITE);
 
@@ -162,9 +188,10 @@ public class BeforeGameScreen implements Screen {
         nameTextFieldStyle = new TextFieldStyle(font, Color.WHITE, cursorStyle.up, textfieldStyle, textfieldStyle);
         nameTextField = new TextField(playerName, nameTextFieldStyle);
 
-        nameTextField.setBounds(400, 700, 440, 30);
+        nameTextField.setBounds(450, 710, 470, 30);
 
         stage.addActor(playButton);
+        stage.addActor(backButton);
         stage.addActor(nameTextField);
 
         characterImages = new Image[GameConstants.HEROES];
@@ -176,9 +203,9 @@ public class BeforeGameScreen implements Screen {
             stage.addActor(characterImages[i]);
         }
 
-        characterImages[getPreviousHeroesNumber(selectedCharacter)].setBounds(10, 60, 64, 64);
-        characterImages[selectedCharacter].setBounds(700, 10, 64, 64);
-        characterImages[getNextHeroesNumber(selectedCharacter)].setBounds(1, 10, 64, 64);
+        characterImages[getPreviousHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 480, 64, 64);
+        characterImages[selectedCharacter].setBounds(Gdx.graphics.getWidth() / 2 - 32, 480, 64, 64);
+        characterImages[getNextHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 480, 64, 64);
 
         villagesImages = new Image[GameConstants.VILLAGES];
         // Create new sprites using the just created texture
@@ -189,9 +216,9 @@ public class BeforeGameScreen implements Screen {
             stage.addActor(villagesImages[i]);
         }
 
-        villagesImages[getPreviousVillageNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 330, 64, 64);
-        villagesImages[selectedCharacter].setBounds(Gdx.graphics.getWidth() / 2 - 32, 330, 64, 64);
-        villagesImages[getNextVillageNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 330, 64, 64);
+        villagesImages[getPreviousVillageNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 290, 64, 64);
+        villagesImages[selectedCharacter].setBounds(Gdx.graphics.getWidth() / 2 - 32, 290, 64, 64);
+        villagesImages[getNextVillageNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 290, 64, 64);
 
 
         difficultyLabels = new Image[GameConstants.DIFFICULTY_LEVELS];
@@ -203,13 +230,23 @@ public class BeforeGameScreen implements Screen {
             stage.addActor(difficultyLabels[i]);
         }
 
-        difficultyLabels[getPreviousDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 150, 64, 64);
-        difficultyLabels[selectedDifficulty].setBounds(Gdx.graphics.getWidth() / 2 - 32, 150, 64, 64);
-        difficultyLabels[getNextDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 150, 64, 64);
+        difficultyLabels[getPreviousDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 - 230, 150, 135, 18);
+        difficultyLabels[selectedDifficulty].setBounds(Gdx.graphics.getWidth() / 2 - 67, 150, 135, 18);
+        difficultyLabels[getNextDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 + 106, 150, 135, 18);
     }
 
     @Override
     public void show() {
+        backButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                BeforeGameScreen.this.game.setScreen(new MenuScreen(game));
+            }
+        });
+
+        //Gdx.input.setInputProcessor(stage);
+
+
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -275,15 +312,15 @@ public class BeforeGameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        characterImages[getPreviousHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 530, 64, 64);
-        characterImages[selectedCharacter].setBounds(Gdx.graphics.getWidth() / 2 - 32, 530, 64, 64);
-        characterImages[getNextHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 530, 64, 64);
-        villagesImages[getPreviousVillageNumber(selectedVillage)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 330, 64, 64);
-        villagesImages[selectedVillage].setBounds(Gdx.graphics.getWidth() / 2 - 32, 330, 64, 64);
-        villagesImages[getNextVillageNumber(selectedVillage)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 330, 64, 64);
-        difficultyLabels[getPreviousDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 150, 64, 64);
-        difficultyLabels[selectedDifficulty].setBounds(Gdx.graphics.getWidth() / 2 - 32, 150, 64, 64);
-        difficultyLabels[getNextDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 150, 64, 64);
+        characterImages[getPreviousHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 - 155, 480, 64, 64);
+        characterImages[selectedCharacter].setBounds(Gdx.graphics.getWidth() / 2 - 27, 480, 64, 64);
+        characterImages[getNextHeroesNumber(selectedCharacter)].setBounds(Gdx.graphics.getWidth() / 2 + 111, 480, 64, 64);
+        villagesImages[getPreviousVillageNumber(selectedVillage)].setBounds(Gdx.graphics.getWidth() / 2 - 160, 290, 64, 64);
+        villagesImages[selectedVillage].setBounds(Gdx.graphics.getWidth() / 2 - 32, 290, 64, 64);
+        villagesImages[getNextVillageNumber(selectedVillage)].setBounds(Gdx.graphics.getWidth() / 2 + 96, 290, 64, 64);
+        difficultyLabels[getPreviousDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 - 230, 150, 135, 18);
+        difficultyLabels[selectedDifficulty].setBounds(Gdx.graphics.getWidth() / 2 - 67, 150, 135, 18);
+        difficultyLabels[getNextDifficultyLevel(selectedDifficulty)].setBounds(Gdx.graphics.getWidth() / 2 + 106, 150, 135, 18);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
