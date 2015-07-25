@@ -12,7 +12,6 @@ import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
 import com.metaminers.game.objects.buildings.TowerBasic;
 import com.metaminers.game.objects.buildings.TowerTank;
-import com.metaminers.game.objects.enemies.RiverSnake;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,11 +31,11 @@ public class BuildingPhase extends Phase {
     long start, stop;
 
     //!!!!
-    RiverSnake p = new RiverSnake();
-    RiverSnake p2 = new RiverSnake();
-    RiverSnake p3 = new RiverSnake();
-    RiverSnake p4 = new RiverSnake();
-    RiverSnake p5 = new RiverSnake();
+//    RiverSnake p = new RiverSnake();
+//    RiverSnake p2 = new RiverSnake();
+//    RiverSnake p3 = new RiverSnake();
+//    RiverSnake p4 = new RiverSnake();
+//    RiverSnake p5 = new RiverSnake();
     //!!!!
 
     TextButton saveButton;
@@ -79,11 +78,11 @@ public class BuildingPhase extends Phase {
 
         village.drawAll();
         batch.begin();
-        p.draw(batch, delta);
-        p2.draw(batch, delta);
-        p3.draw(batch, delta);
-        p4.draw(batch, delta);
-        p5.draw(batch, delta);
+//        p.draw(batch, delta);
+//        p2.draw(batch, delta);
+//        p3.draw(batch, delta);
+//        p4.draw(batch, delta);
+//        p5.draw(batch, delta);
         drawGUI();
         drawEnemiesOnPane();
         setUpBuildings();
@@ -93,7 +92,7 @@ public class BuildingPhase extends Phase {
         stop = System.currentTimeMillis();
         if(stop - start > 5000) {
             BuildingPhase.this.markEnded(true);
-            System.out.println("Next Phase Starts");
+            System.out.println("Buidling Phase Ends");
         }
 
 //        if(pickedBuilding != null) {
@@ -218,12 +217,6 @@ public class BuildingPhase extends Phase {
             s.draw(batch);
         }
         */
-    }
-
-    private void drawBuildings() {
-        for(AbstractBuilding ab : info.getBuildings()) {
-            ab.drawInGui(ab.getPosX(), ab.getPosY(), 3);
-        }
     }
 
     @Override

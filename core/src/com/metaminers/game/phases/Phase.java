@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.metaminers.game.GameConstants;
+import com.metaminers.game.objects.buildings.AbstractBuilding;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 
 /**
@@ -125,6 +126,12 @@ public abstract class Phase implements Screen{
             s.draw(batch);
             e.setSprite(s);
             //e.draw(xpos, ypos - i * e.getHeight());
+        }
+    }
+
+    protected void drawBuildings() {
+        for(AbstractBuilding ab : info.getBuildings()) {
+            ab.drawInGui(ab.getPosX(), ab.getPosY(), 3);
         }
     }
 

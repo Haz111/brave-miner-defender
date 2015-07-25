@@ -3,6 +3,7 @@ package com.metaminers.game.phases;
 import com.metaminers.game.EnemyFactory;
 import com.metaminers.game.GameConstants;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
+import com.metaminers.game.objects.enemies.AbstractEnemy;
 
 /**
  * Created by Konrad on 2015-07-24.
@@ -18,6 +19,7 @@ public class BattlePhase extends Phase {
     public void start(PlayingInformation info) {
         super.start(info);
         this.info.setEnemiesObjects(EnemyFactory.generateEnemies(this.info.getLvl()));
+        System.out.println("Battle phase starts");
     }
 
     @Override
@@ -28,15 +30,21 @@ public class BattlePhase extends Phase {
     @Override
     public void render(float delta) {
         super.render(delta);
+        batch.begin();
+        drawGUI();
         drawBuildings();
-        drawEnemies();
+        drawEnemies(delta);
+        batch.end();
+        handleInput();
     }
 
-    private void drawEnemies() {
-
+    private void drawEnemies(float delta) {
+        for(AbstractEnemy enemy : info.getEnemiesObjects()) {
+            enemy.draw(batch, delta);
+        }
     }
 
-    private void drawBuildings() {
+    protected void drawBuildings() {
         for(AbstractBuilding e: info.getBuildings()) {
             e.draw();
         }
