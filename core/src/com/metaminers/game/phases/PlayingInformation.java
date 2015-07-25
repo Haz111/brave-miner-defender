@@ -1,5 +1,6 @@
 package com.metaminers.game.phases;
 
+
 import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
@@ -15,9 +16,7 @@ public class PlayingInformation {
     //lista budynkow, info o graczu
     private LinkedList<AbstractEnemy> enemies;
     private LinkedList<AbstractBuilding> buildings;
-    private int difficulty;
     private AbstractHeroClass hero;
-    private Village village;
     //TODO: Dodac titaj klase na skille
 
     public PlayingInformation() {
@@ -53,19 +52,5 @@ public class PlayingInformation {
         buildings.add(building);
     }
 
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
 
-    public void setVillage(Village v) {
-        this.village = v;
-    }
-
-    public Village getVillage() {
-        return this.village;
-    }
-
-    public int getDifficulty() {
-        return this.difficulty;
-    }
 }
