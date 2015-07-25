@@ -10,6 +10,7 @@ import com.metaminers.game.Pair;
 import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
+import com.metaminers.game.objects.enemies.RiverSnake;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +27,10 @@ public class BuildingPhase extends Phase {
     private boolean isPickingBuildingFromMap = false; //Co ja pisze...
     private GameObject pickedBuilding;
     private Village village;
+
+    //!!!!
+    RiverSnake p = new RiverSnake(100,500);
+    //!!!!
 
     TextButton saveButton;
 
@@ -60,8 +65,10 @@ public class BuildingPhase extends Phase {
     public void render(float delta) {
 
 //        TODO: w renderze - najpierw odswiezenie, potem render
+
         village.drawAll();
         batch.begin();
+        p.draw(batch, delta);
         drawGUI();
         drawEnemiesOnPane();
         setUpBuildings();
