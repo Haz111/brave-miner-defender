@@ -2,6 +2,7 @@ package com.metaminers.game.phases;
 
 import com.metaminers.game.EnemyFactory;
 import com.metaminers.game.GameConstants;
+import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 
 /**
@@ -11,13 +12,14 @@ public class BattlePhase extends Phase {
 
     //TODO: Wrogowie!
     //TODO: Wyjscie z gry przez escape
-
+    private Village village;
 
     private String escString = "Press ESC to exit from this game.";
     @Override
     public void start(PlayingInformation info) {
         super.start(info);
         info.setEnemiesObjects(EnemyFactory.generateEnemies(info.getLvl()));
+        this.village = info.getVillage();
         System.out.println("Battle phase starts");
     }
 
@@ -28,7 +30,8 @@ public class BattlePhase extends Phase {
 
     @Override
     public void render(float delta) {
-        super.render(delta);
+        //super.render(delta);
+        village.drawAll();
         batch.begin();
         drawGUI();
         drawBuildings();
