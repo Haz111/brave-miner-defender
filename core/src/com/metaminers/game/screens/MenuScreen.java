@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -57,6 +58,7 @@ public class MenuScreen implements Screen {
     TextButton quickButton;
     SpriteBatch batch;
     Sprite sprite;
+    Music music;
 
 
     public MenuScreen(Game game) {
@@ -68,6 +70,8 @@ public class MenuScreen implements Screen {
         background = new Texture(Gdx.files.internal("homescreen/bg3.png"));
         background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
         sprite = new Sprite(background);
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
+        music.play();
 
 
 
@@ -244,5 +248,6 @@ public class MenuScreen implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
+        music.dispose();
     }
 }
