@@ -37,6 +37,7 @@ public class PlayingInformation {
         buildings = new LinkedList<>();
         buildings.add(new TowerBasic(100,100));
         buildingsToBuild = new HashMap<>();
+
         buildingsToBuild.put(new TowerBasic(10,10), 2);
         buildingsToBuild.put(new TowerTank(20,20), 1);
         grid = new Grid();
