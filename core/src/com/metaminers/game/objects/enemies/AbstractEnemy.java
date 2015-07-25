@@ -15,6 +15,7 @@ import java.util.Random;
  * Created by Tymoteusz on 2015-07-25.
  */
 public abstract class AbstractEnemy extends GameObject {
+
     int hp = 0;
     int damage = 0;
     public void attack(AbstractBuilding building) { building.takeHp(damage); }
@@ -23,12 +24,6 @@ public abstract class AbstractEnemy extends GameObject {
     int width = widthHeightAndDir[0];
     int height = widthHeightAndDir[1];
     int direction = widthHeightAndDir[2];
-
-// do animacji
-    private SpriteBatch batch;
-    private TextureAtlas textureAtlas;
-    private Animation animation;
-    private float elapsedTime = 0;
 
     //    it returns array - first element: width, second: heigh, third: direction
     private int[] randomStartingPlace(){

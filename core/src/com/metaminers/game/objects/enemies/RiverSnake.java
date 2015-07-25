@@ -3,58 +3,79 @@ package com.metaminers.game.objects.enemies;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.scenes.scene2d.Action;
+
+import java.util.Iterator;
 
 /**
  * Created by Tymoteusz on 2015-07-25.
  */
 public class RiverSnake extends AbstractEnemy {
-    private SpriteBatch batch;
-    private TextureAtlas textureAtlas;
     private Animation animation;
-    private float elapsedTime = 0;
+    private Texture animTex;
+    private TextureRegion[] frames;
+    private static final int framesNum = 9;
+    private TextureRegion currFrame;
+    private float elapsedTime = 0f;
+    private Sprite sprite;
+    private SpriteBatch batch;
+
 
     //    konstruktor dla standardowego enemy
     public RiverSnake() {
         this.posX = this.width;
         this.posY = this.height;
-        this.texture = new Texture(Gdx.files.internal("enemies/wonzrzeczny.png"));
         this.hp = 300;
         this.damage = 50;
 
         this.batch = new SpriteBatch();
-        this.textureAtlas = new TextureAtlas(Gdx.files.internal("enemies/wanzrzeczny.png"));
-        this.animation = new Animation(1/15f, textureAtlas.getRegions());
+
+        animTex = new Texture(Gdx.files.internal("enemies/wonzrzeczny.png"));
+        frames = new TextureRegion[framesNum];
+        TextureRegion[][] tmp = TextureRegion.split(animTex, animTex.getWidth() / framesNum, animTex.getHeight());
+
+        animation = new Animation(1 / 15f, frames);
+        currFrame = animation.getKeyFrame(0f);
+        sprite = new Sprite(currFrame);
+        setBounds(posX, posY, currFrame.getRegionWidth(), currFrame.getRegionHeight());
+
     }
 
 //    konstruktor dla enemy ktory wychodzi w jakims innym miejscu
     public RiverSnake(float posX, float posY) {
         this.posX = posX;
         this.posY = posY;
-        this.texture = new Texture(Gdx.files.internal("enemies/wonzrzeczny.png"));
         this.hp = 300;
         this.damage = 50;
 
         this.batch = new SpriteBatch();
-        this.textureAtlas = new TextureAtlas(Gdx.files.internal("enemies/wanzrzeczny.png"));
+
+        animTex = new Texture(Gdx.files.internal("enemies/wonzrzeczny.png"));
+        frames = new TextureRegion[framesNum];
+        TextureRegion[][] tmp = TextureRegion.split(animTex, animTex.getWidth() / framesNum, animTex.getHeight());
+
+        animation = new Animation(1 / 15f, frames);
+        currFrame = animation.getKeyFrame(0f);
+        sprite = new Sprite(currFrame);
+        setBounds(posX, posY, currFrame.getRegionWidth(), currFrame.getRegionHeight());
     }
 
-    public void dispose() {
-        this.batch.dispose();
-        this.textureAtlas.dispose();
+    @Override
+    public void draw(Batch batch, float delta) {
+        sprite.draw(batch);
     }
 
-    public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    @Override
+    public void act(float delta) {
+        for(Iterator<Action> iter = this.getActions().iterator(); iter.hasNext();){
+            iter.next().act(delta);
+        }
+    }
 
+    public void render(float delta) {
         batch.begin();
-        //sprite.draw(batch);
-        elapsedTime += Gdx.graphics.getDeltaTime();
-        batch.draw(animation.getKeyFrame(elapsedTime, true), 0, 0);
+        draw(batch, delta);
         batch.end();
     }
 }
