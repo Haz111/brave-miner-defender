@@ -21,8 +21,8 @@ public class LevelScreen implements Screen {
     public LevelScreen(Game game, PlayingInformation info) {
         phases = new Phase[GameConstants.PHASES];
         phases[0] = new BuildingPhase();
-        phases[1] = new UpgradePhase();
-        phases[2] = new BattlePhase();
+        phases[1] = new BattlePhase();
+        phases[2] = new UpgradePhase();
         currentPhase = phases[0];
         this.game = game;
         this.info = info;
@@ -40,6 +40,7 @@ public class LevelScreen implements Screen {
             info = currentPhase.getResults();
             counter = (counter + 1) % GameConstants.PHASES;
             currentPhase = phases[counter];
+            currentPhase.start(info);
         }
         currentPhase.render(delta);
     }

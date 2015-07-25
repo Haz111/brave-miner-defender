@@ -1,12 +1,8 @@
 package com.metaminers.game.objects.enemies;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Action;
-
-import java.util.Iterator;
 
 /**
  * Created by Tymoteusz on 2015-07-25.
@@ -43,6 +39,7 @@ public class RiverSnake extends AbstractEnemy {
 
         this.posX = posX;
         this.posY = posY;
+        this.imgDir = "enemies/wonzrzeczny.png";
         //TODO: Da sie to zrobic lepiej?
         this.destX = (Gdx.graphics.getWidth() / 2)-100;
         this.destY = (Gdx.graphics.getHeight() / 2);

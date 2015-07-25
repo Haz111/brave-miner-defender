@@ -30,6 +30,7 @@ public abstract class Phase implements Screen{
     protected OrthographicCamera c;
 
     protected void markEnded(boolean status) {
+        results = info;
         ended = status;
     }
 

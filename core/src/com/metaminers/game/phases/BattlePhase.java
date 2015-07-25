@@ -18,7 +18,7 @@ public class BattlePhase extends Phase {
     @Override
     public void start(PlayingInformation info) {
         super.start(info);
-        this.info.setEnemiesObjects(EnemyFactory.generateEnemies(this.info.getLvl()));
+        info.setEnemiesObjects(EnemyFactory.generateEnemies(info.getLvl()));
         System.out.println("Battle phase starts");
     }
 
