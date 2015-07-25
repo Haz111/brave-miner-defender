@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TowerTank extends AbstractBuilding {
     private static final int damage = 20;
-    public TowerTank(float posX, float posY) {
+    public TowerTank(int posX, int posY) {
         this.hp = 100;
         this.price = 20;
         this.texture = new Texture(Gdx.files.internal("buildings/tower1.png"));

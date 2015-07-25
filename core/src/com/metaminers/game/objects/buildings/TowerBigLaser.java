@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class TowerBigLaser extends AbstractBuilding {
     private static final int price = 80;
     private static final int damage = 80;
-    public TowerBigLaser(float posX, float posY) {
+    public TowerBigLaser(int posX, int posY) {
         this.hp = 120;
         this.texture = new Texture(Gdx.files.internal("buildings/tower8.png"));
         this.posX = posX;

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
  * Created by Tymoteusz on 2015-07-25.
  */
 public class RiverSnake extends AbstractEnemy {
-    public RiverSnake(float posX, float posY) {
+    public RiverSnake(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.texture = new Texture(Gdx.files.internal("enemies/wonzrzeczny.png"));

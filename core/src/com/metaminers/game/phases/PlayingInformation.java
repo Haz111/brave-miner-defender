@@ -1,6 +1,7 @@
 package com.metaminers.game.phases;
 
 import com.metaminers.game.GameConstants;
+import com.metaminers.game.Grid;
 import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
@@ -27,16 +28,18 @@ public class PlayingInformation {
     private AbstractHeroClass hero;
     private Village village;
     private int lvl = 0;
+    private Grid grid;
     //TODO: Dodac titaj klase na skille (LinkedList czy cos)
 
     public PlayingInformation() {
         enemies = new int[3];
         enemiesObjects = new LinkedList<>();
         buildings = new LinkedList<>();
-        buildings.add(new TowerBasic(100f,100f));
+        buildings.add(new TowerBasic(100,100));
         buildingsToBuild = new HashMap<>();
-        buildingsToBuild.put(new TowerBasic(150f,150f), 2);
-        buildingsToBuild.put(new TowerTank(150f,150f), 1);
+        buildingsToBuild.put(new TowerBasic(10,10), 2);
+        buildingsToBuild.put(new TowerTank(20,20), 1);
+        grid = new Grid();
     }
 
     public LinkedList<AbstractEnemy> getEnemiesObjects() {
@@ -107,5 +110,13 @@ public class PlayingInformation {
 
     public void removeBuilding(GameObject pickedBuilding) {
         buildings.remove(pickedBuilding);
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Grid g) {
+        grid = g;
     }
 }
