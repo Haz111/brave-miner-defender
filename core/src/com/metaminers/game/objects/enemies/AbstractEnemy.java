@@ -36,8 +36,8 @@ public abstract class AbstractEnemy extends GameObject {
             }
             break;
         case (1):
-            width = GameConstants.WIDTH;
-            height = rand.nextInt(GameConstants.HEIGHT);
+            width = rand.nextInt(GameConstants.WIDTH);
+            height = GameConstants.HEIGHT;
             if (width > (2*GameConstants.HEIGHT/3)){
                 direction = 1;
             } else if (width > (GameConstants.HEIGHT/3)){
@@ -58,8 +58,8 @@ public abstract class AbstractEnemy extends GameObject {
             }
             break;
         case (3):
-            width = 0;
-            height = rand.nextInt(GameConstants.HEIGHT);
+            width = rand.nextInt(GameConstants.WIDTH);
+            height = 0;
             if (width > (2*GameConstants.HEIGHT/3)){
                 direction = 7;
             } else if (width > (GameConstants.HEIGHT/3)){
