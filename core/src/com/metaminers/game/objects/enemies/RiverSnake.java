@@ -13,6 +13,7 @@ import java.util.Iterator;
  * Created by Tymoteusz on 2015-07-25.
  */
 public class RiverSnake extends AbstractEnemy {
+
     private Animation animation;
     private Texture animTex;
     private TextureRegion[] frames;
@@ -49,7 +50,7 @@ public class RiverSnake extends AbstractEnemy {
     }
 
 //    konstruktor dla enemy ktory wychodzi w jakims innym miejscu
-    public RiverSnake(float posX, float posY) {
+    public RiverSnake(int posX,  int posY) {
         this.posX = posX;
         this.posY = posY;
         this.hp = 300;

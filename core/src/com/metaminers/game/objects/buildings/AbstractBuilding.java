@@ -28,4 +28,16 @@ public abstract class AbstractBuilding extends GameObject {
         batch.end();
     }
     public TextureRegion extractIcon() { return null; }
+    public void drawSprite() {
+        batch.begin();
+        sprite.draw(batch);
+        batch.end();
+    }
+
+    public void drawSprite(int x, int y) {
+        sprite.setPosition(x, y);
+        batch.begin();
+        sprite.draw(batch);
+        batch.end();
+    }
 }
