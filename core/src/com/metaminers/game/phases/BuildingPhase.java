@@ -99,20 +99,6 @@ public class BuildingPhase extends Phase {
             }
         }
 
-        /*
-        if(isPickingBuildingFromInventory ) {
-            //Ok, jednak mozna, koles kliknal to niech ma
-            info.addBuilding((AbstractBuilding) pickedBuilding);//A FUJ!
-            pickedBuilding = null; //Chyba ok?
-            isPickingBuildingFromInventory = isPickingBuildingFromMap = false;
-        }
-        else if(buildingOnMap != null) {
-            pickedBuilding = buildingOnMap;
-            info.getBuildings().remove(buildingOnMap); //ok?
-            isPickingBuildingFromMap = true;
-        }
-        */
-
         //TODO: SIATKA
         if(isPickingBuildingFromInventory && buildingOnMap == null) {
             //Mozna
