@@ -36,6 +36,10 @@ public class BattlePhase extends Phase {
         drawEnemies(delta);
         batch.end();
         handleInput();
+        if(info.getEnemiesObjects().isEmpty()) {
+            BattlePhase.this.markEnded(true);
+            System.out.println("Battle Phase Ends");
+        }
     }
 
     private void drawEnemies(float delta) {

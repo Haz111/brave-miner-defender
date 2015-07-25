@@ -195,9 +195,9 @@ public class BuildingPhase extends Phase {
         //// rysowanie budynkow do budowy:
         for(AbstractBuilding b : info.buildingsToBuild.keySet()) {
             if(b.getPrice() == 10)
-                b.drawInGui(0, 610, 6);
+                b.drawInGui(0, 610, 3);
             else if(b.getPrice() == 20)
-                b.drawInGui(8, 500, 3);
+                b.drawInGui(8, 500, 1.5f);
         }
 
 
