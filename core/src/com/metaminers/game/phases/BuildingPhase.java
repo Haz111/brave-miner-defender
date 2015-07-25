@@ -3,6 +3,7 @@ package com.metaminers.game.phases;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.metaminers.game.FieldStatus;
@@ -30,26 +31,24 @@ public class BuildingPhase extends Phase {
     private Village village;
     long start, stop;
 
-    //!!!!
-//    RiverSnake p = new RiverSnake();
-//    RiverSnake p2 = new RiverSnake();
-//    RiverSnake p3 = new RiverSnake();
-//    RiverSnake p4 = new RiverSnake();
-//    RiverSnake p5 = new RiverSnake();
-    //!!!!
-
     TextButton saveButton;
+    private Stage s;
+
 
     @Override
     public void start(PlayingInformation info) {
         super.start(info);
         info.setRandomEnemiesForNextRound();
         saveButton = super.makeTextButton("Save", Gdx.graphics.getWidth()/2 - 50, 50, 100, 40);
-        batch.begin();
-        saveButton.draw(batch, 1.0f);
-        batch.end();
+        //batch.begin();
+        //saveButton.draw(batch, 1.0f);
+        //batch.end();
         this.village = info.getVillage();
         start = System.currentTimeMillis();
+
+        s = new Stage();
+        Gdx.input.setInputProcessor(s);
+        s.addActor(saveButton);
     }
 
     @Override
@@ -78,19 +77,15 @@ public class BuildingPhase extends Phase {
 
         village.drawAll();
         batch.begin();
-//        p.draw(batch, delta);
-//        p2.draw(batch, delta);
-//        p3.draw(batch, delta);
-//        p4.draw(batch, delta);
-//        p5.draw(batch, delta);
         drawGUI();
         //drawEnemiesOnPane();
         setUpBuildings();
         drawBuildings();
+        s.draw();
         batch.end();
         handleInput();
         stop = System.currentTimeMillis();
-        if(stop - start > 5000) {
+        if(stop - start > GameConstants.BUILDING_TIME) {
             BuildingPhase.this.markEnded(true);
             System.out.println("Buidling Phase Ends");
         }
@@ -243,5 +238,7 @@ public class BuildingPhase extends Phase {
     public void dispose() {
         pane.dispose();
         background.dispose();
+
+        s.dispose();
     }
 }

@@ -1,6 +1,7 @@
 package com.metaminers.game.phases;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -94,6 +95,13 @@ public abstract class Phase implements Screen{
     }
 
     protected void handleInput() {
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+            Gdx.app.exit();
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+            markEnded(true);
+
+
         if(Gdx.input.justTouched()) {
             touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             //We could peek a tower

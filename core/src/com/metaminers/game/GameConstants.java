@@ -32,4 +32,5 @@ public class GameConstants {
 
 //    spis kierunkow
     public static final String[] DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
+    public static final int BUILDING_TIME = 10000;
 }
