@@ -18,6 +18,6 @@ public class TowerBasic extends AbstractBuilding {
         this.posY = posY;
     }
     public TextureRegion extractIcon() {
-        return new TextureRegion(this.texture, 0, 18, 16, 16);
+        return new TextureRegion(this.texture, 0, 9, 8, 8);
     }
 }
