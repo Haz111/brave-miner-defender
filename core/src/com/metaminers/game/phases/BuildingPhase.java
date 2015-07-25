@@ -65,6 +65,7 @@ public class BuildingPhase extends Phase {
         batch.begin();
         drawGUI();
         drawEnemiesOnPane();
+        System.out.println(1);
         setUpBuildings();
         batch.end();
         handleInput();
@@ -150,10 +151,11 @@ public class BuildingPhase extends Phase {
     private void setUpBuildings() {
         //// rysowanie budynkow do budowy:
         for(AbstractBuilding b : info.buildingsToBuild.keySet()) {
+            System.out.println(2);
             if(b.getPrice() == 10) {
                 Sprite s = new Sprite(b.extractIcon());
-                s.setX(10);
-                s.setY(600);
+                s.setX(200);
+                s.setY(200);
                 s.draw(batch);
             }
         }

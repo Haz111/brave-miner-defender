@@ -16,18 +16,18 @@ public abstract class AbstractHeroClass {
         return basicSkill;
     }
 
-    protected LinkedList <AbstractDamagingSkill> damagingSkillList;
+    protected LinkedList <AbstractDamagingSkill> damagingSkillList = new LinkedList<>();
 
     public LinkedList getDamagingSkill(){
         return this.damagingSkillList;
     }
 
-    protected LinkedList <AbstractRepairSkill> repairSkillList;
+    protected LinkedList <AbstractRepairSkill> repairSkillList = new LinkedList<>();
 
     public LinkedList getRepairSkill() {
         return repairSkillList;
     }
-    protected LinkedList <AbstractWallSkill> wallSkillList;
+    protected LinkedList <AbstractWallSkill> wallSkillList = new LinkedList<>();
 
     public LinkedList getWallSkill() {
         return wallSkillList;
