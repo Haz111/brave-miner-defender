@@ -9,22 +9,23 @@ import java.util.Iterator;
 public class Grid {
 
     private int cellWidth, cellHeight, width, height;
-    private boolean [][] grid; //false - wolny
+    private FieldStatus [][] grid; //false - wolny
     private ArrayList<HandleInfo> handlers;
     public Grid() {
         cellWidth = GameConstants.CELL_WIDTH;
         cellHeight = GameConstants.CELL_HEIGHT;
         width = GameConstants.WIDTH;
         height = GameConstants.HEIGHT;
-        grid = new boolean[width / cellWidth][height / cellHeight];
+        grid = new FieldStatus[width / cellWidth][height / cellHeight];
         handlers = new ArrayList<>();
     }
 
-    public boolean isFree(int x, int y, int width, int height) {
+    public boolean isFreeForBuild(int x, int y, int width, int height) {
         try {
             for (int i = x; i < x + width; i++) {
                 for (int j = y; j < y + height; j++) {
-                    if (grid[i][j])
+                    if (grid[i][j] == FieldStatus.TOWER || grid[i][j] == FieldStatus.HOUSE ||
+                            grid[i][j] == FieldStatus.FREE_OUT)
                         return false;
                 }
             }
@@ -35,20 +36,20 @@ public class Grid {
         return true;
     }
 
-    public void mark(int x, int y, int width, int height) {
+    public void mark(int x, int y, int width, int height, FieldStatus fieldStatus) {
         //TODO: Sprawdzic czy wszystkie parametry sa ok
         for (int i = x; i < x + width; i++) {
             for (int j = y; j < y + height; j++) {
-                grid[i][j] = true;
+                grid[i][j] = fieldStatus;
             }
         }
         handlers.add(new HandleInfo(x, y, width, height));
     }
 
-    public void unmark(int x, int y, int width, int height) {
+    public void unmark(int x, int y, int width, int height, FieldStatus fieldStatus) {
         for (int i = x; i < x + width; i++) {
             for (int j = y; j < y + height; j++) {
-                grid[i][j] = false;
+                grid[i][j] = fieldStatus;
             }
         }
         //Jeszcze handleInfo
@@ -78,7 +79,8 @@ public class Grid {
         return null;
     }
 
-    public void markPixel(int x, int y, int width, int height) {
-        
+    public void markPixel(int x, int y, int width, int height, FieldStatus fs) {
+        mark(x / GameConstants.CELL_WIDTH, y / GameConstants.CELL_HEIGHT, width / GameConstants.CELL_WIDTH,
+                height / GameConstants.CELL_HEIGHT, fs);
     }
 }

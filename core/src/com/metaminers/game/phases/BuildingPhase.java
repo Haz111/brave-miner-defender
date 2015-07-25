@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.metaminers.game.FieldStatus;
+import com.metaminers.game.GameConstants;
 import com.metaminers.game.Grid;
 import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
@@ -131,10 +133,14 @@ public class BuildingPhase extends Phase {
             //Ok, jednak mozna, koles kliknal to niech ma
             pickedBuilding.setPosX((int) x);
             pickedBuilding.setPosY((int) (728 - y));
-            info.addBuilding(pickedBuilding);//A FUJ!
             Grid grid = info.getGrid();
-            grid.markPixel((int)x, (int)(y), (int)pickedBuilding.getWidth(), (int)pickedBuilding.getHeight());
+            if(!grid.isFreeForBuild((int)x / GameConstants.CELL_WIDTH, (int)y / GameConstants.CELL_HEIGHT,
+                    (int) pickedBuilding.getWidth()/ GameConstants.CELL_WIDTH,
+                    (int) pickedBuilding.getHeight()/GameConstants.CELL_HEIGHT))
+                return;
+            grid.markPixel((int) x, (int) (y), (int) pickedBuilding.getWidth(), (int) pickedBuilding.getHeight(), FieldStatus.TOWER);
             info.setGrid(grid);
+            info.addBuilding(pickedBuilding);//A FUJ!
             pickedBuilding = null; //Chyba ok?
             isPickingBuildingFromInventory = isPickingBuildingFromMap = false;
         }
