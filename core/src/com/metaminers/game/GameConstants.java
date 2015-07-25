@@ -21,7 +21,7 @@ public class GameConstants {
 
     public static final String[] DIFFICULTY = {"easy", "medium", "hard"};
     public static final String [] VILLAGES_HOUSENAMES = {"villages/villageMinature1.png", "villages/villageMinature1.png", "villages/villageMinature1.png"}; //TODO: ZROBIC
-    public static final String [] VILLAGES_BACKGROUNDNAMES = {"villages/villageMinature1.png", "villages/villageMinature1.png", "villages/villageMinature1.png"}; //TODO: ZROBIC
+    public static final String [] VILLAGES_BACKGROUNDNAMES = {"villages/village1.png", "villages/village2.png", "villages/village3.png"}; //TODO: ZROBIC
 
 //    spis wrogow
     public static final int ENEMIES_AMOUNT = 1;

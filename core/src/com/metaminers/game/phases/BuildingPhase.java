@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.metaminers.game.GameConstants;
 import com.metaminers.game.Grid;
 import com.metaminers.game.Pair;
+import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
 
@@ -26,6 +27,7 @@ public class BuildingPhase extends Phase {
     private boolean isPickingBuildingFromInventory = false;
     private boolean isPickingBuildingFromMap = false; //Co ja pisze...
     private GameObject pickedBuilding;
+    private Village village;
 
     TextButton saveButton;
 
@@ -34,6 +36,7 @@ public class BuildingPhase extends Phase {
         super.start(info);
         info.setRandomEnemiesForNextRound();
         saveButton = super.makeTextButton("Save", Gdx.graphics.getWidth()/2 - 50, 50, 100, 40);
+        this.village = info.getVillage();
     }
 
     @Override
@@ -57,8 +60,10 @@ public class BuildingPhase extends Phase {
 
     @Override
     public void render(float delta) {
+
 //        TODO: w renderze - najpierw odswiezenie, potem render
         batch.begin();
+        village.drawAll();
         drawGUI();
         drawEnemiesOnPane();
         setUpBuildings();

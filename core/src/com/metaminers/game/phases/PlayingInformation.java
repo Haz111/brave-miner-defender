@@ -87,6 +87,10 @@ public class PlayingInformation {
         this.village = new Village(GameConstants.VILLAGES_HOUSENAMES[villageHouseNumber], GameConstants.VILLAGES_BACKGROUNDNAMES[villageBackgroundNumber]);
     }
 
+    public Village getVillage (){
+        return(village);
+    }
+
     public void addBuilding(AbstractBuilding building) {
         buildings.add(building);
     }
