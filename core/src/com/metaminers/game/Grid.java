@@ -18,6 +18,19 @@ public class Grid {
         height = GameConstants.HEIGHT;
         grid = new FieldStatus[width / cellWidth][height / cellHeight];
         handlers = new ArrayList<>();
+        initGrid();
+    }
+
+    private void initGrid() {
+        for(int i = 0; i < GameConstants.GRID_WIDTH; i++)
+            for(int j = 0; j < GameConstants.GRID_HEIGHT; j++)
+                grid[i][j] = FieldStatus.FREE_OUT;
+
+        for(int i = GameConstants.GRID_WIDTH/2 - GameConstants.BASE_RADIUS; i < GameConstants.GRID_WIDTH/2 + GameConstants.BASE_RADIUS; i++) {
+            for (int j = GameConstants.GRID_HEIGHT/2 - GameConstants.BASE_RADIUS; j < GameConstants.GRID_HEIGHT/2 + GameConstants.BASE_RADIUS; j++) {
+                grid[i][j] = FieldStatus.FREE_IN;
+            }
+        }
     }
 
     public boolean isFreeForBuild(int x, int y, int width, int height) {

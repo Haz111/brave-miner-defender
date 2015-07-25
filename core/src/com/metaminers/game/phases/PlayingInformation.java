@@ -29,19 +29,21 @@ public class PlayingInformation {
     private Village village;
     private int lvl = 0;
     private Grid grid;
+    private int money = 0;
     //TODO: Dodac titaj klase na skille (LinkedList czy cos)
 
     public PlayingInformation() {
         enemies = new int[3];
         enemiesObjects = new LinkedList<>();
         buildings = new LinkedList<>();
-        buildings.add(new TowerBasic(100,100));
+        //buildings.add(new TowerBasic(100,100));
         buildingsToBuild = new HashMap<>();
 
         buildingsToBuild.put(new TowerBasic(10,10), 2);
         buildingsToBuild.put(new TowerTank(20,20), 1);
         grid = new Grid();
         lvl = 1;
+        money = 1000;
     }
 
     public LinkedList<AbstractEnemy> getEnemiesObjects() {

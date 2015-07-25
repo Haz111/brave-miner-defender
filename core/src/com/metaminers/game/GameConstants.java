@@ -18,6 +18,10 @@ public class GameConstants {
     public static final int CELL_WIDTH = 8;
     public static final int CELL_HEIGHT = 8;
     public static final int LEVELS = 10;
+    public static final int BUILDING_TIME = 10000; //ms
+    public static final int GRID_WIDTH = WIDTH / CELL_WIDTH;
+    public static final int GRID_HEIGHT = HEIGHT / CELL_HEIGHT;
+    public static final int BASE_RADIUS = 64 / CELL_WIDTH;
 
     public static final String[] DIFFICULTY = {"easy", "medium", "hard"};
     public static final String [] VILLAGES_HOUSENAMES = {"villages/villageMinature1.png", "villages/villageMinature1.png", "villages/villageMinature1.png"}; //TODO: ZROBIC
@@ -32,5 +36,5 @@ public class GameConstants {
 
 //    spis kierunkow
     public static final String[] DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
-    public static final int BUILDING_TIME = 10000;
+
 }
