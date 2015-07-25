@@ -2,6 +2,7 @@ package com.metaminers.game.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.metaminers.game.elements.GameConstants;
 import com.metaminers.game.phases.*;
 
 /**
@@ -10,7 +11,7 @@ import com.metaminers.game.phases.*;
 public class LevelScreen implements Screen {
 
     //TODO: Change it!
-    private final static int PHASES_COUNT = 3;
+
 
     private Phase currentPhase;
     int counter = 0; //array counter for phases
@@ -19,7 +20,7 @@ public class LevelScreen implements Screen {
     private Game game;
 
     public LevelScreen(Game game, PlayingInformation info) {
-        phases = new Phase[PHASES_COUNT];
+        phases = new Phase[GameConstants.PHASES];
         phases[0] = new BuildingPhase();
         phases[1] = new UpgradePhase();
         phases[2] = new BattlePhase();
@@ -38,10 +39,10 @@ public class LevelScreen implements Screen {
     public void render(float delta) {
         if(currentPhase.isEnded()) {
             info = currentPhase.getResults();
-            counter = (counter + 1) % PHASES_COUNT;
+            counter = (counter + 1) % GameConstants.PHASES;
             currentPhase = phases[counter];
         }
-        //currentPhase.render / draw
+        currentPhase.render(delta);
     }
 
     @Override

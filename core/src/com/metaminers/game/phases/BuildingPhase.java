@@ -1,5 +1,9 @@
 package com.metaminers.game.phases;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.metaminers.game.elements.GameConstants;
 import com.metaminers.game.objects.AbstractHeroClass;
 
 import java.util.HashMap;
@@ -9,13 +13,18 @@ import java.util.HashMap;
  */
 public class BuildingPhase extends Phase {
 
+    //TODO: ZROBIC JAKIEGOS RENDERERA KTORY BY NP. RYSOWAL GUI, OBECNA WERSJA JEST MANROTRAWSTWEM PAMIECI!
     private HashMap<AbstractHeroClass, Integer> buildingsToBuild;
     private final String warnString = "You cannot place building here";
+    private Texture pane;
+    private SpriteBatch batch;
 
     @Override
     public void start(PlayingInformation info) {
         markEnded(false);
-        renderGUI();
+        pane = new Texture(Gdx.files.internal("gui/pane.png"));
+        batch = new SpriteBatch();
+        //renderGUI();
     }
 
     @Override
@@ -29,13 +38,13 @@ public class BuildingPhase extends Phase {
         //TODO: Jakis renderer do GUI, cobysmy nie kopiowali kodu
     }
 
-    public void renderGUI() {
-
-    }
 
     @Override
     public void render(float delta) {
-
+        batch.begin();
+        batch.draw(pane, 0, 0);
+        batch.draw(pane, GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH, 0);
+        batch.end();
     }
 
     @Override
@@ -60,6 +69,6 @@ public class BuildingPhase extends Phase {
 
     @Override
     public void dispose() {
-
+        pane.dispose();
     }
 }

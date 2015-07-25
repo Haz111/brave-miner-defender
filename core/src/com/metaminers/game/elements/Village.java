@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Disposable;
 public class Village implements Disposable{
     private Texture house, background;
     private float x, y; //Position of house
+    SpriteBatch batch;
 
     public Village(String houseName, String backgroundName, float x, float y) {
         this.x = x;
@@ -19,9 +20,11 @@ public class Village implements Disposable{
         //TODO: Tekstury house i background!
         house = new Texture(Gdx.files.internal(houseName));
         background = new Texture(Gdx.files.internal(backgroundName));
+        //TODO: Pomyslec co ze spriteBatch
+        batch = new SpriteBatch();
     }
 
-    public void drawHouse(float x, float y, float scale, SpriteBatch batch) {
+    public void drawHouse(float x, float y, float scale) {
         batch.begin();
         Sprite houseSprite = new Sprite(house);
         houseSprite.scale(scale);
@@ -29,7 +32,7 @@ public class Village implements Disposable{
         batch.end();
     }
 
-    public void drawAll(SpriteBatch batch) {
+    public void drawAll() {
         batch.begin();
         batch.draw(house, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         batch.draw(background, 0, 0);
