@@ -3,12 +3,13 @@ package com.metaminers.game.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * Created by Tymoteusz on 2015-07-24.
  */
 
-public abstract class GameObject {
+public abstract class GameObject extends Actor{
     protected Texture texture; //TODO: PRZEROBIC NA SIATKE
     protected int posX, posY; //TODO: TUTAJ NIE JEST TO POTRZEBNE, SZCZEGOLNIE DLA ENEMY
     protected SpriteBatch batch = new SpriteBatch(); //TODO: Jest to dobrze?
