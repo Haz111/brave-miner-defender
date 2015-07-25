@@ -14,13 +14,13 @@ public class PlayingInformation {
     //lista budynkow, info o graczu
     private LinkedList<AbstractEnemy> enemies;
     private LinkedList<AbstractBuilding> buildings;
-
+    private int difficulty;
     private AbstractHeroClass hero;
     //TODO: Dodac titaj klase na skille
 
     public PlayingInformation() {
-        enemies = new LinkedList<AbstractEnemy>();
-        buildings = new LinkedList<AbstractBuilding>();
+        enemies = new LinkedList<>();
+        buildings = new LinkedList<>();
     }
 
     public LinkedList<AbstractEnemy> getEnemies() {
