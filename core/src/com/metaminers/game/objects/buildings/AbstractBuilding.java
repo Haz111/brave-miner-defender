@@ -1,5 +1,6 @@
 package com.metaminers.game.objects.buildings;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 
@@ -20,5 +21,5 @@ public abstract class AbstractBuilding extends GameObject {
     public void attack(AbstractEnemy enemy) {
         enemy.takeHp(damage);
     }
-
+    public TextureRegion extractIcon() { return null; }
 }
