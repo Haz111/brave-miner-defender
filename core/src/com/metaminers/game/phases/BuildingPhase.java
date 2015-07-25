@@ -56,21 +56,22 @@ public class BuildingPhase extends Phase {
 
     @Override
     public void render(float delta) {
+//        TODO: w renderze - najpierw odswiezenie, potem render
         batch.begin();
         drawGUI();
         drawEnemiesOnPane();
         setUpBuildings();
         batch.end();
         handleInput();
-        if(pickedBuilding != null) {
-            //pickedBuilding.getSprite().setPosition(Gdx.input.getX(), Gdx.input.getY()); //TODO: SPRAWDZIC CZY TO JEST OK!
-            int x = (int)(Gdx.input.getX() - pickedBuilding.getSprite().getWidth()/2);
-            int y = (int)(Gdx.graphics.getHeight() - Gdx.input.getY() - pickedBuilding.getSprite().getHeight()/2);
-            Pair p = Grid.mapToGrid(x, y);
-            pickedBuilding.getSprite().setPosition(p.x, p.y); //TODO: SPRAWDZIC CZY TO JEST OK!
-            //Wyjasnienie do powyzszego: http://www.gamefromscratch.com/post/2013/10/15/LibGDX-Tutorial-4-Handling-the-mouse-and-keyboard.aspx
-            pickedBuilding.getSprite().draw(batch);
-        }
+//        if(pickedBuilding != null) {
+//            //pickedBuilding.getSprite().setPosition(Gdx.input.getX(), Gdx.input.getY()); //TODO: SPRAWDZIC CZY TO JEST OK!
+//            int x = (int)(Gdx.input.getX() - pickedBuilding.getSprite().getWidth()/2);
+//            int y = (int)(Gdx.graphics.getHeight() - Gdx.input.getY() - pickedBuilding.getSprite().getHeight()/2);
+//            Pair p = Grid.mapToGrid(x, y);
+//            pickedBuilding.getSprite().setPosition(p.x, p.y); //TODO: SPRAWDZIC CZY TO JEST OK!
+//            //Wyjasnienie do powyzszego: http://www.gamefromscratch.com/post/2013/10/15/LibGDX-Tutorial-4-Handling-the-mouse-and-keyboard.aspx
+//            pickedBuilding.getSprite().draw(batch);
+//        }
     }
 
 
@@ -121,16 +122,16 @@ public class BuildingPhase extends Phase {
             return;
         }
 
-        //No, mozna go brac!
-        GameObject [] o = ((HashSet<GameObject>)info.buildingsToBuild.keySet()).toArray();
-
-        for(int i = 0; i < o.length; i++) {
-            if(o[i].getSprite().getBoundingRectangle().contains(x, y))
-            info.buildingsToBuild.replace((AbstractBuilding)o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
-            pickedBuilding = o[i];
-            isPickingBuildingFromInventory = true;
-            break;
-        }
+//        //No, mozna go brac!
+//        GameObject [] o = ((HashSet<GameObject>)info.buildingsToBuild.keySet()).toArray();
+//
+//        for(int i = 0; i < o.length; i++) {
+//            if(o[i].getSprite().getBoundingRectangle().contains(x, y))
+//            info.buildingsToBuild.replace((AbstractBuilding)o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
+//            pickedBuilding = o[i];
+//            isPickingBuildingFromInventory = true;
+//            break;
+//        }
     }
 
 
