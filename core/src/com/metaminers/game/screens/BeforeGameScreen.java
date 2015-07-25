@@ -23,7 +23,7 @@ import com.metaminers.game.phases.PlayingInformation;
 
 
 /**
- * Created by Hubert on 2015-07-24.
+ * Created by Hubert but picked up by Jacques on 2015-07-24.
  */
 public class BeforeGameScreen implements Screen {
     Stage stage;
@@ -76,27 +76,10 @@ public class BeforeGameScreen implements Screen {
 
         prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
 
-//        if (prefs.contains("playerName")){
             playerName = prefs.getString("playerName", "");
-//        } else {
-//            playerName = "";
-//        }
-//        if (prefs.contains("selectedCharacter")){
             selectedCharacter = prefs.getInteger("selectedCharacter", 0);
-//        } else {
-//            selectedCharacter = 0;
-//        }
-//        if (prefs.contains("selectedVillage")){
             selectedVillage = prefs.getInteger("selectedVillage", 0);
-//        } else {
-//            selectedVillage = 0;
-//        }
-//        if (prefs.contains("selectedDifficulty")){
             selectedDifficulty = prefs.getInteger("selectedDifficulty", 1);
-//        } else {
-//            selectedDifficulty = 1;
-//        }
-
 
         playButtonTexture = new Texture(Gdx.files.internal("buttons/exampleButton.png"));
         playButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

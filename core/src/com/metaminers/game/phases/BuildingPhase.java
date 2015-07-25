@@ -90,7 +90,6 @@ public class BuildingPhase extends Phase {
 
     @Override
     protected void handleMovementMap(float x, float y) {
-        System.out.println("Handle")
         //Jak klikniemy na pole puste siatki - jest ok
         //Jak nie - no to sorry
         //TODO: Dorobic do budynkow getGridWidth, getGridHeight - abysmy mogli spokojnie przerabiac to na siatke

@@ -10,14 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.metaminers.game.GameConstants;
-import com.metaminers.game.Grid;
-import com.metaminers.game.Pair;
-import com.metaminers.game.objects.GameObject;
-import com.metaminers.game.objects.buildings.AbstractBuilding;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 
 /**
@@ -112,8 +107,8 @@ public abstract class Phase implements Screen{
     protected abstract void handleMovementInventory(float x, float y);
 
     protected void drawGUI() {
-        batch.draw(pane, 0, 0);
-        batch.draw(pane, GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH, 0);
+//        batch.draw(pane, 0, 0);
+//        batch.draw(pane, GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH, 0);
         batch.draw(background, GameConstants.INTERFACE_PANEL_WIDTH, 0);
     }
 
