@@ -77,4 +77,8 @@ public class Grid {
         }
         return null;
     }
+
+    public void markPixel(int x, int y, int width, int height) {
+        
+    }
 }

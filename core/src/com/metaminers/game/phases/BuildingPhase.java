@@ -5,11 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.metaminers.game.Grid;
 import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
-import com.metaminers.game.objects.enemies.RiverSnake;
 import com.metaminers.game.objects.buildings.TowerBasic;
 import com.metaminers.game.objects.buildings.TowerTank;
+import com.metaminers.game.objects.enemies.RiverSnake;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -128,9 +129,12 @@ public class BuildingPhase extends Phase {
 
         if(isPickingBuildingFromInventory) {
             //Ok, jednak mozna, koles kliknal to niech ma
-            pickedBuilding.setPosX((int)x);
-            pickedBuilding.setPosY((int)(728-y));
+            pickedBuilding.setPosX((int) x);
+            pickedBuilding.setPosY((int) (728 - y));
             info.addBuilding(pickedBuilding);//A FUJ!
+            Grid grid = info.getGrid();
+            grid.markPixel((int)x, (int)(y), (int)pickedBuilding.getWidth(), (int)pickedBuilding.getHeight());
+            info.setGrid(grid);
             pickedBuilding = null; //Chyba ok?
             isPickingBuildingFromInventory = isPickingBuildingFromMap = false;
         }
