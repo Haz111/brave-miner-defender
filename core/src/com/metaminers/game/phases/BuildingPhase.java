@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.metaminers.game.GameConstants;
-import com.metaminers.game.objects.AbstractHeroClass;
+import com.metaminers.game.objects.hero_classes.AbstractHeroClass;
 
 import java.util.HashMap;
 

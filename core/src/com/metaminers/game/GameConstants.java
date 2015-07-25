@@ -11,5 +11,6 @@ public class GameConstants {
     public static int INTERFACE_PANEL_WIDTH = 50;
     public static int WIDTH = 1024;
     public static int HEIGHT = 768;
+    public static int PADDING = 10;
 
 }
