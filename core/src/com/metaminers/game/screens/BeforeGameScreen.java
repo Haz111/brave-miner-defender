@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.metaminers.game.GameConstants;
+import com.metaminers.game.phases.PlayingInformation;
 
 
 /**
@@ -224,7 +225,12 @@ public class BeforeGameScreen implements Screen {
                 BeforeGameScreen.this.prefs.putInteger("selectedVillage", BeforeGameScreen.this.selectedVillage);
                 BeforeGameScreen.this.prefs.putInteger("selectedDifficulty", BeforeGameScreen.this.selectedDifficulty);
                 BeforeGameScreen.this.prefs.flush();
-                BeforeGameScreen.this.game.setScreen(new BeforeGameScreen(game));
+
+                PlayingInformation info = new PlayingInformation();
+                //TODO: ODKOMENTOWAC PONIZSZE I UZUPELNIC GAMECONSTANTS ORAZ ABSTRACTHERO (IMPLEMENTACJA)
+//                info.setHero();
+//                info.setVillage(GameConstants.VILLAGES_HOUSENAMES[BeforeGameScreen.this.selectedVillage], GameConstants.VILLAGES_BACKGROUNDAMES[BeforeGameScreen.this.selectedVillage]);
+                BeforeGameScreen.this.game.setScreen(new LevelScreen(game, info));
             }
         });
 
