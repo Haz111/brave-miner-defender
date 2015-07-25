@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.metaminers.game.GameConstants;
+import com.metaminers.game.Grid;
+import com.metaminers.game.Pair;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
@@ -53,6 +55,7 @@ public class BuildingPhase extends Phase {
         4. Just save and mark ended
          */
         //TODO: Jakis renderer do GUI, cobysmy nie kopiowali kodu
+        //TODO: Implementacja siatki!
     }
 
 
@@ -64,6 +67,13 @@ public class BuildingPhase extends Phase {
         setUpBuildings();
         batch.end();
         handleInput();
+        if(pickedBuilding != null) {
+            //pickedBuilding.getSprite().setPosition(Gdx.input.getX(), Gdx.input.getY()); //TODO: SPRAWDZIC CZY TO JEST OK!
+            pickedBuilding.getSprite().setPosition(Gdx.input.getX() - pickedBuilding.getSprite().getWidth()/2,
+                    Gdx.graphics.getHeight() - Gdx.input.getY() - pickedBuilding.getSprite().getHeight()/2); //TODO: SPRAWDZIC CZY TO JEST OK!
+            //Wyjasnienie do powyzszego: http://www.gamefromscratch.com/post/2013/10/15/LibGDX-Tutorial-4-Handling-the-mouse-and-keyboard.aspx
+            pickedBuilding.getSprite().draw(batch);
+        }
     }
 
     private void handleInput() {
@@ -81,6 +91,34 @@ public class BuildingPhase extends Phase {
     private void handleMovementMap(float x, float y) {
         //Jak klikniemy na pole puste siatki - jest ok
         //Jak nie - no to sorry
+        //TODO: Dorobic do budynkow getGridWidth, getGridHeight - abysmy mogli spokojnie przerabiac to na siatke
+        Pair p = Grid.mapToGrid(x, y, GameConstants.CELL_WIDTH, GameConstants.CELL_HEIGHT);
+        x = p.x;
+        y = p.y;
+        GameObject buildingOnMap = null;
+
+        //TODO: Zrobic to lepiej!
+        //Algos: jedziemy teraz po liscie z budynkow i sprawdzamy czy tam mozemy postawic budynek
+        for(GameObject e : info.getBuildings()) {
+            if(e.getPosX() == x && e.getPosY() == y) {
+                buildingOnMap = e;
+                break;
+            }
+        }
+
+
+        if(isPickingBuildingFromInventory) {
+            //Ok, jednak mozna, koles kliknal to niech ma
+            info.addBuilding((AbstractBuilding) pickedBuilding);//A FUJ!
+            pickedBuilding = null; //Chyba ok?
+            isPickingBuildingFromInventory = isPickingBuildingFromMap = false;
+        }
+        else if(buildingOnMap != null) {
+            pickedBuilding = buildingOnMap;
+            info.getBuildings().remove(buildingOnMap);
+            isPickingBuildingFromMap = true;
+        }
+
     }
 
     private void handleMovementInventory(float x, float y) {

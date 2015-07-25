@@ -15,7 +15,11 @@ public class GameConstants {
     public static int PADDING = 10;
     public static int ENEMIES_COUNT = 8;
     public static int TOWERS_COUNT = 8;
+    public static int CELL_WIDTH = 32;
+    public static int CELL_HEIGHT = 32;
 
     public static String[] DIFFICULTY = {"easy", "medium", "hard"};
+    public static String [] VILLAGES_HOUSENAMES = {}; //TODO: ZROBIC
+    public static String [] VILLAGES_BACKGROUNDNAMES = {}; //TODO: ZROBIC
 
 }

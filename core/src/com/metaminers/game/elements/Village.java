@@ -14,12 +14,10 @@ public class Village implements Disposable{
     private float x, y; //Position of house
     SpriteBatch batch;
 
-    public Village(String houseName, String backgroundName, float x, float y) {
-        this.x = x;
-        this.y = y;
+    public Village(String houseFileName, String backgroundFileName) {
         //TODO: Tekstury house i background!
-        house = new Texture(Gdx.files.internal(houseName));
-        background = new Texture(Gdx.files.internal(backgroundName));
+        house = new Texture(Gdx.files.internal(houseFileName));
+        background = new Texture(Gdx.files.internal(backgroundFileName));
         //TODO: Pomyslec co ze spriteBatch
         batch = new SpriteBatch();
     }

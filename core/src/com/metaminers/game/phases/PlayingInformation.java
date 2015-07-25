@@ -17,6 +17,7 @@ public class PlayingInformation {
     private LinkedList<AbstractEnemy> enemies;
     private LinkedList<AbstractBuilding> buildings;
     private AbstractHeroClass hero;
+    private Village village;
     //TODO: Dodac titaj klase na skille
 
     public PlayingInformation() {
