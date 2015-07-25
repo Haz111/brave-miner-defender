@@ -1,6 +1,5 @@
 package com.metaminers.game.objects.buildings;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 
