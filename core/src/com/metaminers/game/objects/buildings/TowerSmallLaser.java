@@ -10,7 +10,7 @@ public class TowerSmallLaser extends AbstractBuilding {
     private static final int price = 50;
     private static final int damage = 50;
     public TowerSmallLaser(int posX, int posY) {
-        this.hp = 70;
+        this.hp = this.initialHp = 70;
         this.texture = new Texture(Gdx.files.internal("buildings/tower5.png"));
         this.posX = posX;
         this.posY = posY;
