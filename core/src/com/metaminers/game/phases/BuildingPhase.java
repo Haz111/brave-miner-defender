@@ -30,7 +30,14 @@ public class BuildingPhase extends Phase {
     private boolean isPickingBuildingFromMap = false; //Co ja pisze...
     private AbstractBuilding pickedBuilding;
     private Village village;
+<<<<<<< HEAD
     private Grid grid;
+=======
+
+    //!!!!
+    RiverSnake p = new RiverSnake(400,600);
+    //!!!!
+>>>>>>> 1fd737b99942fff3a4df057bac80a07b061b6af4
 
     TextButton saveButton;
 
