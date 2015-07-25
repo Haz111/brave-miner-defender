@@ -25,7 +25,7 @@ public class EnemyFactory {
         LinkedList<AbstractEnemy> enemies = new LinkedList<>();
         for(int i = 0; i < GameConstants.ENEMIES_COUNT; i++) {
             for(int j = 0; j < EnemyFactory.enemies[0][0]; j++)
-                enemies.add(new RiverSnake(0, 1));
+                enemies.add(new RiverSnake());
         }
         return enemies; //TODO: SHUFFLE
     }
