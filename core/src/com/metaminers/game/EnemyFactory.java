@@ -2,8 +2,11 @@ package com.metaminers.game;
 
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 import com.metaminers.game.objects.enemies.RiverSnake;
+import com.metaminers.game.objects.enemies.Scavenger;
+import com.metaminers.game.objects.enemies.Zombie;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * Created by Konrad on 2015-07-25.
@@ -22,10 +25,24 @@ public class EnemyFactory {
     }
     //TODO: Zmienic.
     public static LinkedList<AbstractEnemy> generateEnemies(int lvl) {
+        Random rand = new Random();
         LinkedList<AbstractEnemy> enemies = new LinkedList<>();
         for(int i = 0; i < GameConstants.ENEMIES_COUNT; i++) {
             for(int j = 0; j < EnemyFactory.enemies[0][0]; j++)
-                enemies.add(new RiverSnake(0, 1));
+                switch (rand.nextInt(3)){
+                    case(0):
+                        enemies.add(new RiverSnake(0, 1));
+                        break;
+                    case(1):
+                        enemies.add(new Zombie());
+                        break;
+                    case(2):
+                        enemies.add(new Scavenger());
+                        break;
+                    default:
+                        enemies.add(new Scavenger());
+                        break;
+                }
         }
         return enemies; //TODO: SHUFFLE
     }
