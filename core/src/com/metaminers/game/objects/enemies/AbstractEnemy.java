@@ -1,14 +1,18 @@
 package com.metaminers.game.objects.enemies;
 
-import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.metaminers.game.GameConstants;
-import com.metaminers.game.Pair;
 import com.metaminers.game.objects.GameObject;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
 
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -21,9 +25,29 @@ public abstract class AbstractEnemy extends GameObject {
     public void attack(AbstractBuilding building) { building.takeHp(damage); }
     public void takeHp(int hp) { this.hp -= hp; }
     int[] widthHeightAndDir = randomStartingPlace();
-    int width = widthHeightAndDir[0];
-    int height = widthHeightAndDir[1];
+//    int width = widthHeightAndDir[0];
+//    int height = widthHeightAndDir[1];
     int direction = widthHeightAndDir[2];
+
+    protected String imgDir;
+    protected Animation currAnim;
+    protected Animation[] anims;
+    protected TextureRegion currFrame;
+    protected static final int animLen = 2;
+    protected static final int animLen2 = 8;
+    protected Texture animTex;
+    protected TextureRegion[] frames;
+    protected static final int framesNum = 9;
+    protected static final int DIRECTIONS = 8;
+    protected static final float ANIM_FACTOR = 1/15f;
+    protected Sprite sprite;
+    protected float elapsedTime = 0f;
+
+    protected float posX;
+    protected float posY;
+    protected int destX, destY;
+    //TODO: Moze orzebuesc ten Vector wyzej?
+    protected Vector2 directionVec;
 
     //    it returns array - first element: width, second: heigh, third: direction
     protected int[] randomStartingPlace(){
@@ -88,5 +112,77 @@ public abstract class AbstractEnemy extends GameObject {
         toReturn[1] = height;
         toReturn[2] = direction;
         return (toReturn);
+    }
+
+    protected void setUpDirection() {
+        directionVec.x = this.destX - this.posX;
+        directionVec.y = this.destY - this.posY;
+        System.out.println("destX = " + this.destX + " posX " + this.posX + " destY = " + this.destY + " posY " + this.posY);
+        directionVec.nor(); //Normalizacja
+        System.out.println("x = " + directionVec.x + " y = " + directionVec.y);
+
+        int [][] directions = new int[][]{{7, 0, 6},
+                                          {3, 0, 2},
+                                          {5, 1, 4}};
+
+        int px, py;
+        if(directionVec.x < -0.5)
+            px = -1;
+        else if(directionVec.x >= -0.5 && directionVec.x <= 0.5)
+            px = 0;
+        else
+            px = 1;
+
+        if(directionVec.y < -0.5)
+            py = -1;
+        else if(directionVec.y >= -0.5 && directionVec.y <= 0.5)
+            py = 0;
+        else
+            py = 1;
+
+        direction = directions[py + 1][px + 1];
+        currAnim = anims[direction];
+        currFrame = currAnim.getKeyFrame(0f);
+    }
+
+    protected void setUpAnim(String imgDir) {
+        animTex = new Texture(Gdx.files.internal(imgDir));
+        frames = new TextureRegion[framesNum];
+        TextureRegion[][] tmp = TextureRegion.split(animTex, animTex.getWidth() / animLen, animTex.getHeight() / animLen2);
+        anims = new Animation[DIRECTIONS];
+        for(int i = 0; i < DIRECTIONS; i++)
+            anims[i] = new Animation(ANIM_FACTOR, tmp[i]);
+
+        //animation = new Animation(1 / 15f, frames);
+        currAnim = anims[0];
+        currFrame = currAnim.getKeyFrame(0f);
+        sprite = new Sprite(currFrame);
+        sprite.setPosition(this.posX, this.posY);
+        setBounds(posX, posY, currFrame.getRegionWidth(), currFrame.getRegionHeight());
+    }
+
+    @Override
+    public void draw(Batch batch, float delta) {
+        elapsedTime += delta;
+        posX += directionVec.x;
+        posY += directionVec.y;
+        setUpDirection();
+        currFrame = currAnim.getKeyFrame(elapsedTime, true);
+        sprite.setRegion(currFrame);
+        sprite.setPosition(sprite.getX() + directionVec.x, sprite.getY() + directionVec.y);
+        sprite.draw(batch);
+    }
+
+    @Override
+    public void act(float delta) {
+        for(Iterator<Action> iter = this.getActions().iterator(); iter.hasNext();){
+            iter.next().act(delta);
+        }
+    }
+
+    public void render(float delta) {
+        batch.begin();
+        draw(batch, delta);
+        batch.end();
     }
 }
