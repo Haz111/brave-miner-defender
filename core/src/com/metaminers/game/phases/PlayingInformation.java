@@ -30,6 +30,8 @@ public class PlayingInformation {
     private int lvl = 0;
     private Grid grid;
     private int money = 0;
+
+    private boolean gameOver = false;
     //TODO: Dodac titaj klase na skille (LinkedList czy cos)
 
     public PlayingInformation() {
@@ -122,5 +124,13 @@ public class PlayingInformation {
 
     public void setGrid(Grid g) {
         grid = g;
+    }
+
+    public boolean getGameOver(){
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameState){
+        gameOver = gameState;
     }
 }

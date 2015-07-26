@@ -1,5 +1,8 @@
 package com.metaminers.game;
 
+import com.metaminers.game.phases.PlayingInformation;
+import com.metaminers.game.screens.LevelScreen;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -63,7 +66,7 @@ public class Grid {
         }
         return true;
     }
-    public boolean isFreeForMove(int x, int y) {
+    public boolean isFreeForMove(int x, int y, PlayingInformation info) {
 //        for(int i=0; i<grid.length; i++) {
 //            for (int j = 0; j < grid[i].length; j++)
 //                System.out.print(grid[i][j]);
@@ -74,7 +77,9 @@ public class Grid {
             if (grid[x][y] == FieldStatus.FREE_OUT || grid[x][y] == FieldStatus.FREE_IN) {
                 System.out.println("Grid.isFreeForMove - return true");
                 return true;
-
+            } else if(grid[x][y] == FieldStatus.HOUSE) {
+//                TODO: koniec gry
+                info.setGameOver(true);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();

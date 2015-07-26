@@ -184,7 +184,7 @@ public abstract class AbstractEnemy extends GameObject {
         int y = (int)(sprite.getY() + directionVec.x)/GameConstants.CELL_HEIGHT;
 
 //        System.out.println("info x= "+x+" y= "+y);
-        if(grid.isFreeForMove(x,y)){
+        if(grid.isFreeForMove(x,y, info)){
 //            System.out.println("info ture");
             return true;
         } else{

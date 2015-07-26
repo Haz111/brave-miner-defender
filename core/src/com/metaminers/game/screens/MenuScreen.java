@@ -156,7 +156,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Preferences prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
-                String plazerName = prefs.getString("playerName", "");
+                String playerName = prefs.getString("playerName", "");
                 int selectedCharacter = prefs.getInteger("selectedCharacter", 0);
                 int selectedVillage = prefs.getInteger("selectedVillage", 0);
                 int selectedDifficulty = prefs.getInteger("selectedDifficulty", 1);

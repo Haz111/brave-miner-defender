@@ -36,6 +36,7 @@ public class LevelScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        if (info.getGameOver()) game.setScreen(new AfterGameScreen(game));
         if(currentPhase.isEnded()) {
             info = currentPhase.getResults();
             counter = (counter + 1) % GameConstants.PHASES;
