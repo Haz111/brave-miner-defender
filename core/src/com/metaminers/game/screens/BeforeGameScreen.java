@@ -96,7 +96,7 @@ public class BeforeGameScreen implements Screen {
         parameter.size = 30;
         font = generator.generateFont(parameter); // font size 12 pixels
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
-
+        font.setColor(100f, 100f, 100f, 1f);
 
 
         batch = new SpriteBatch();
@@ -168,12 +168,12 @@ public class BeforeGameScreen implements Screen {
             arrowButtons[i] = new Button(rightArrowStyle);
             stage.addActor(arrowButtons[i]);
         }
-        arrowButtons[0].setBounds(Gdx.graphics.getWidth() / 2 - 400, 480, 86, 40);
-        arrowButtons[1].setBounds(Gdx.graphics.getWidth() / 2 - 400, 290, 86, 40);
-        arrowButtons[2].setBounds(Gdx.graphics.getWidth() / 2 - 400, 150, 86, 40);
-        arrowButtons[3].setBounds(Gdx.graphics.getWidth() / 2 + 300, 480, 86, 40);
-        arrowButtons[4].setBounds(Gdx.graphics.getWidth() / 2 + 300, 290, 86, 40);
-        arrowButtons[5].setBounds(Gdx.graphics.getWidth() / 2 + 300, 150, 86, 40);
+        arrowButtons[0].setBounds(Gdx.graphics.getWidth() / 2 - 400, 490, 86, 40);
+        arrowButtons[1].setBounds(Gdx.graphics.getWidth() / 2 - 400, 300, 86, 40);
+        arrowButtons[2].setBounds(Gdx.graphics.getWidth() / 2 - 400, 140, 86, 40);
+        arrowButtons[3].setBounds(Gdx.graphics.getWidth() / 2 + 300, 490, 86, 40);
+        arrowButtons[4].setBounds(Gdx.graphics.getWidth() / 2 + 300, 300, 86, 40);
+        arrowButtons[5].setBounds(Gdx.graphics.getWidth() / 2 + 300, 140, 86, 40);
 
         labelStyle = new LabelStyle(font, Color.WHITE);
 
@@ -184,8 +184,8 @@ public class BeforeGameScreen implements Screen {
         cursorStyle = new TextButtonStyle();
         cursorStyle.up = new TextureRegionDrawable(cursorTextureRegion);
 
-//        TODO: zrobic ladny kursor
-        nameTextFieldStyle = new TextFieldStyle(font, Color.WHITE, cursorStyle.up, textfieldStyle, textfieldStyle);
+//        TODO: kolor czcionki
+        nameTextFieldStyle = new TextFieldStyle(font,Color.valueOf("b29393"), cursorStyle.up, textfieldStyle, textfieldStyle);
         nameTextField = new TextField(playerName, nameTextFieldStyle);
 
         nameTextField.setBounds(450, 710, 470, 30);

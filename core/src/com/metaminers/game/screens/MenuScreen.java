@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -57,8 +58,10 @@ public class MenuScreen implements Screen {
     TextButton quickButton;
     SpriteBatch batch;
     Sprite sprite;
-
-
+    Music music;
+    static Boolean playing = false;
+    Preferences prefs;
+    float volume;
     public MenuScreen(Game game) {
         this.game = game;
         font = new BitmapFont();
@@ -68,8 +71,15 @@ public class MenuScreen implements Screen {
         background = new Texture(Gdx.files.internal("homescreen/bg3.png"));
         background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
         sprite = new Sprite(background);
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
+        if (playing == false) {
+            music.play();
+            playing = true;
+        }
 
-
+        prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
+        volume = prefs.getFloat("volume",0.5f);
+        music.setVolume(volume);
 
         backgroundRegion = new TextureRegion(background);
 
@@ -152,10 +162,11 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Preferences prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
-                String plazerName = prefs.getString("playerName", "");
+                String playerName = prefs.getString("playerName", "");
                 int selectedCharacter = prefs.getInteger("selectedCharacter", 0);
                 int selectedVillage = prefs.getInteger("selectedVillage", 0);
                 int selectedDifficulty = prefs.getInteger("selectedDifficulty", 1);
+
 
                 PlayingInformation info = new PlayingInformation();
                 //TODO: ODKOMENTOWAC PONIZSZE I UZUPELNIC GAMECONSTANTS ORAZ ABSTRACTHERO (IMPLEMENTACJA) - todo skopiowane z beforeGameScreena
@@ -244,5 +255,7 @@ public class MenuScreen implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
+        music.dispose();
+
     }
 }

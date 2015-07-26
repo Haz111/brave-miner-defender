@@ -35,8 +35,8 @@ public abstract class GameObject extends Actor{
     public void setPosX(int x ) {posX = x;}
     public void setPosY(int y) { posY = y;}
 
-    public float getWidth() {return texture.getWidth();}
-    public float getHeight() { return texture.getHeight();}
+    public float getWidth() {return sprite.getWidth();}
+    public float getHeight() { return sprite.getHeight();}
     public Texture getTexture() { return texture;}
     public Sprite getSprite() { return sprite;}
     public void setSprite(Texture t) {

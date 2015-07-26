@@ -2,7 +2,9 @@ package com.metaminers.game.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -25,23 +27,28 @@ public class OptionsScreen implements Screen {
     TextButton windowedButton;
     Stage stage;
     Game game;
-
+    Preferences prefs;
     Texture buttonTexture;
     TextureRegion buttonTextureRegion;
     TextButtonStyle style;
     Skin skin;
     BitmapFont font;
+    Music music;
+    float volume;
 
 
     public OptionsScreen(Game game) {
         this.game = game;
         font = new BitmapFont();
         skin = new Skin();
-
         buttonTexture = new Texture(Gdx.files.internal("buttons/exampleButton.png"));
         buttonTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
         buttonTextureRegion = new TextureRegion(buttonTexture);
+
+
+        prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
+
 
         style = new TextButtonStyle();
         style.up = new TextureRegionDrawable(buttonTextureRegion);
@@ -49,9 +56,9 @@ public class OptionsScreen implements Screen {
         style.font = font;
         exitButton = new TextButton("Back", style);
         exitButton.setBounds(Gdx.graphics.getWidth()/2 - 50, 50, 100, 40);
-        fullScreenButton = new TextButton("Fullscreen", style);
+        fullScreenButton = new TextButton("Volume -", style);
         fullScreenButton.setBounds(Gdx.graphics.getWidth()/2 - 100,  Gdx.graphics.getHeight()/2, 100, 40);
-        windowedButton = new TextButton("Windowed", style);
+        windowedButton = new TextButton("Volume +", style);
         windowedButton.setBounds(Gdx.graphics.getWidth()/2 + 10,  Gdx.graphics.getHeight()/2, 100, 40);
 
         stage = new Stage();
@@ -72,7 +79,20 @@ public class OptionsScreen implements Screen {
                 OptionsScreen.this.game.setScreen(new MenuScreen(game));
             }
         });
-
+        fullScreenButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (volume < 1) volume += 0.1f;
+                OptionsScreen.this.prefs.flush();
+            }
+        });
+        windowedButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (volume > 0) volume -= 0.1f;
+                OptionsScreen.this.prefs.flush();
+            }
+        });
         Gdx.input.setInputProcessor(stage);
     }
 

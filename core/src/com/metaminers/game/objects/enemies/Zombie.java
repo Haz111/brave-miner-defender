@@ -20,7 +20,7 @@ public class Zombie extends AbstractEnemy {
 
         //TODO: Da sie to zrobic lepiej?
         this.destX = (Gdx.graphics.getWidth() / 2) - 18;
-        this.destY = (Gdx.graphics.getHeight() / 2) - 20;
+        this.destY = (Gdx.graphics.getHeight() / 2) - 10;
         this.batch = new SpriteBatch();
         this.imgDir = "enemies/zombie.png";
         directionVec = new Vector2();

@@ -30,6 +30,8 @@ public class PlayingInformation {
     private int lvl = 0;
     private Grid grid;
     private int money = 0;
+
+    private boolean gameOver = false;
     //TODO: Dodac titaj klase na skille (LinkedList czy cos)
 
     public PlayingInformation() {
@@ -132,5 +134,13 @@ public class PlayingInformation {
     public void addBuyedBuilding(AbstractBuilding chosenBuilding) {
         //TODO: To moze nie dzialac, jak zle to zrobic mape ze stringami jako klucze i
         buildingsToBuild.replace(chosenBuilding, buildingsToBuild.get(chosenBuilding), buildingsToBuild.get(chosenBuilding) + 1);
+    }
+    
+    public boolean getGameOver(){
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameState){
+        gameOver = gameState;
     }
 }
