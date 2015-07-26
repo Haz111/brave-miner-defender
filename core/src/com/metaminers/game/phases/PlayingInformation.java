@@ -9,7 +9,9 @@ import com.metaminers.game.objects.buildings.TowerBasic;
 import com.metaminers.game.objects.buildings.TowerTank;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 import com.metaminers.game.objects.hero_classes.AbstractHeroClass;
+import com.metaminers.game.objects.hero_classes.MageOfTheWaste;
 import com.metaminers.game.objects.hero_classes.Marksman;
+import com.metaminers.game.objects.hero_classes.ScorpionNinja;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -88,8 +90,15 @@ public class PlayingInformation {
             case 0:
                 this.hero = new Marksman();
                 break;
+            case 1:
+                this.hero = new MageOfTheWaste();
+                break;
+            case 2:
+                this.hero = new ScorpionNinja();
+                break;
             default:
                 this.hero = new Marksman();
+                break;
         }
     }
 

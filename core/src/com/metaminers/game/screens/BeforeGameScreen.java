@@ -87,9 +87,12 @@ public class BeforeGameScreen implements Screen {
     TextureRegion backgroundRegion;
     BitmapFont font;
 
-    public BeforeGameScreen(Game game) {
+    AudioManager audioManager;
+
+    public BeforeGameScreen(Game game, AudioManager audioManager) {
         this.game = game;
 
+        this.audioManager = audioManager;
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/myfont.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -261,7 +264,7 @@ public class BeforeGameScreen implements Screen {
                 info.setHero(BeforeGameScreen.this.selectedCharacter);
 //                pierwszy jest do Villages, drugi jest do T³a Village
                 info.setVillage(BeforeGameScreen.this.selectedVillage, BeforeGameScreen.this.selectedVillage);
-                BeforeGameScreen.this.game.setScreen(new LevelScreen(game, info));
+                BeforeGameScreen.this.game.setScreen(new LevelScreen(game, info, audioManager));
             }
         });
 

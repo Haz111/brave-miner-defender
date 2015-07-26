@@ -17,8 +17,9 @@ public class LevelScreen implements Screen {
     Phase [] phases;
     PlayingInformation info;
     private Game game;
+    AudioManager audioManager;
 
-    public LevelScreen(Game game, PlayingInformation info) {
+    public LevelScreen(Game game, PlayingInformation info, AudioManager audioManager) {
         phases = new Phase[GameConstants.PHASES];
         phases[0] = new BuildingPhase();
         phases[1] = new BattlePhase();
@@ -26,6 +27,9 @@ public class LevelScreen implements Screen {
         currentPhase = phases[0];
         this.game = game;
         this.info = info;
+        this.audioManager = audioManager;
+        audioManager.turnOnLevelMusic();
+
 
         currentPhase.start(info);
     }
@@ -36,7 +40,7 @@ public class LevelScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if (info.getGameOver()) game.setScreen(new AfterGameScreen(game));
+        if (info.getGameOver()) game.setScreen(new AfterGameScreen(game, audioManager));
         if(currentPhase.isEnded()) {
             info = currentPhase.getResults();
             counter = (counter + 1) % GameConstants.PHASES;

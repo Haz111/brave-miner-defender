@@ -14,8 +14,8 @@ public class Scavenger extends AbstractEnemy {
         this.damage = 50;
 
         int[] startingPlace = super.randomStartingPlace();
-        this.posX = (float)startingPlace[0];
-        this.posY = (float)startingPlace[1];
+        setPos_X((float)startingPlace[0]);
+        setPos_Y((float)startingPlace[1]);
 
         //TODO: Da sie to zrobic lepiej?
         this.destX = (Gdx.graphics.getWidth() / 2) - 18;
@@ -35,8 +35,8 @@ public class Scavenger extends AbstractEnemy {
         this.hp = initialHp = 300;
         this.damage = 50;
 
-        this.posX = posX;
-        this.posY = posY;
+        setPos_X(posX);
+        setPos_Y(posY);
         //TODO: Da sie to zrobic lepiej?
         this.destX = (Gdx.graphics.getWidth() / 2)-100;
         this.destY = (Gdx.graphics.getHeight() / 2);

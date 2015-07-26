@@ -1,7 +1,6 @@
 package com.metaminers.game;
 
 import com.metaminers.game.phases.PlayingInformation;
-import com.metaminers.game.screens.LevelScreen;
 
 import java.util.ArrayList;
 import java.util.Iterator;

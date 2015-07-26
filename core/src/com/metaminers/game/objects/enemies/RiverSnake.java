@@ -17,8 +17,8 @@ public class RiverSnake extends AbstractEnemy {
         int[] startingPlace = super.randomStartingPlace();
         //this.posX = (float)startingPlace[0];
         //this.posY = (float)startingPlace[1];
-        setPosX(startingPlace[0]);
-        setPosY(startingPlace[1]);
+        setPos_X((float)startingPlace[0]);
+        setPos_Y((float)startingPlace[1]);
 
         //TODO: Da sie to zrobic lepiej?
         this.destX = (Gdx.graphics.getWidth() / 2) - 18;
@@ -41,12 +41,12 @@ public class RiverSnake extends AbstractEnemy {
 
         //this.posX = posX;
         //this.posY = posY;
-        setPosX(posX);
-        setPosY(posY);
+        setPos_X((float)posX);
+        setPos_Y((float)posY);
         this.imgDir = "enemies/wonzrzeczny.png";
         //TODO: Da sie to zrobic lepiej?
-        this.destX = (Gdx.graphics.getWidth() / 2)-100;
-        this.destY = (Gdx.graphics.getHeight() / 2);
+        this.destX = (Gdx.graphics.getWidth() / 2)-18;
+        this.destY = (Gdx.graphics.getHeight() / 2)-10;
         this.batch = new SpriteBatch();
         directionVec = new Vector2();
         this.animLenHorizontal = 2;

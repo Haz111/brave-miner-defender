@@ -27,6 +27,7 @@ import com.metaminers.game.phases.PlayingInformation;
 public class AudioManager {
     public static AudioManager instance = null;
     Music music = Gdx.audio.newMusic(Gdx.files.internal("music/menu.wav"));
+    Music levelMusic = Gdx.audio.newMusic(Gdx.files.internal("music/levelmusic.wav"));
     Boolean update = false;
 
     public static AudioManager getInstance(){
@@ -42,7 +43,23 @@ public class AudioManager {
 
         if (music.isPlaying()== false) {
             music.play();
+            music.setLooping(true);
         }
 
     }
+
+    public void turnOnLevelMusic(){
+        music.stop();
+        levelMusic.stop();
+        levelMusic.play();
+        levelMusic.setLooping(true);
+    }
+
+    public void turnOnMenuMusic(){
+        levelMusic.stop();
+        music.stop();
+        music.play();
+        music.setLooping(true);
+    }
+
 }

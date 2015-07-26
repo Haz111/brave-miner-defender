@@ -36,6 +36,7 @@ public class BattlePhase extends Phase {
         //super.render(delta);
         village.drawAll();
         batch.begin();
+        drawHero();
         drawEnemies(delta);
         drawGUI();
         drawBuildings();
@@ -45,6 +46,10 @@ public class BattlePhase extends Phase {
             BattlePhase.this.markEnded(true);
             System.out.println("Battle Phase Ends");
         }
+    }
+
+    private void drawHero() {
+        info.getHero().draw(batch);
     }
 
     private void drawEnemies(float delta) {

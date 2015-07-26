@@ -174,7 +174,7 @@ public class MenuScreen implements Screen {
                 info.setHero(selectedCharacter);
 //                pierwszy jest do Villages, drugi jest do T³a Village
                 info.setVillage(selectedVillage, selectedVillage);
-                MenuScreen.this.game.setScreen(new LevelScreen(game, info));
+                MenuScreen.this.game.setScreen(new LevelScreen(game, info, audiomanager));
             }
         });
 
@@ -182,7 +182,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 //                super.clicked(event, x, y);
-                MenuScreen.this.game.setScreen(new BeforeGameScreen(game));
+                MenuScreen.this.game.setScreen(new BeforeGameScreen(game, audiomanager));
             }
         });
 
