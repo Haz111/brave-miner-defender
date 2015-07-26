@@ -264,7 +264,7 @@ public class BeforeGameScreen implements Screen {
                 info.setHero(BeforeGameScreen.this.selectedCharacter);
 //                pierwszy jest do Villages, drugi jest do T³a Village
                 info.setVillage(BeforeGameScreen.this.selectedVillage, BeforeGameScreen.this.selectedVillage);
-                BeforeGameScreen.this.game.setScreen(new LevelScreen(game, info, audioManager));
+                BeforeGameScreen.this.game.setScreen(new PlotScreen(game, info, audioManager));
             }
         });
 
