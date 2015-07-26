@@ -46,6 +46,7 @@ public class PlayingInformation {
         buildingsToBuild.put(new TowerBunker(20,20), 10);
         buildingsToBuild.put(new TowerDouble(20,20), 10);
         buildingsToBuild.put(new TowerSmallLaser(20,20), 10);
+        buildingsToBuild.put(new TowerQuadron(20,20), 10);
         grid = new Grid();
         lvl = 1;
         money = 1000;

@@ -44,7 +44,7 @@ public class BuildingPhase extends Phase {
     public void start(PlayingInformation info) {
         super.start(info);
         info.setRandomEnemiesForNextRound();
-        
+
         //batch.begin();
         //saveButton.draw(batch, 1.0f);
         //batch.end();
@@ -216,6 +216,8 @@ public class BuildingPhase extends Phase {
                     pickedBuilding = new TowerDouble((int)x, (int)y);
                 else if(o[i].getPrice() == 50)
                     pickedBuilding = new TowerSmallLaser((int)x, (int)y);
+                else if(o[i].getPrice() == 70)
+                    pickedBuilding = new TowerQuadron((int)x, (int)y);
 //                System.out.println(pickedBuilding.getPrice());
                 isPickingBuildingFromInventory = true;
                 System.out.println("Wieza zaznaczona!");
@@ -238,6 +240,8 @@ public class BuildingPhase extends Phase {
                 b.drawInGui(8, 310, 1.5f);
             else if(b.getPrice() == 50)
                 b.drawInGui(8, 220, 1.5f);
+            else if(b.getPrice() == 70)
+                b.drawInGui(4, 120, 0.9f);
         }
 
 
