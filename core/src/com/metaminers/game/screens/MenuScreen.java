@@ -59,8 +59,9 @@ public class MenuScreen implements Screen {
     SpriteBatch batch;
     Sprite sprite;
     Music music;
-
-
+    static Boolean playing = false;
+    Preferences prefs;
+    float volume;
     public MenuScreen(Game game) {
         this.game = game;
         font = new BitmapFont();
@@ -71,9 +72,14 @@ public class MenuScreen implements Screen {
         background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
         sprite = new Sprite(background);
         music = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
-        music.play();
+        if (playing == false) {
+            music.play();
+            playing = true;
+        }
 
-
+        prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
+        volume = prefs.getFloat("volume",0.5f);
+        music.setVolume(volume);
 
         backgroundRegion = new TextureRegion(background);
 
@@ -160,6 +166,7 @@ public class MenuScreen implements Screen {
                 int selectedCharacter = prefs.getInteger("selectedCharacter", 0);
                 int selectedVillage = prefs.getInteger("selectedVillage", 0);
                 int selectedDifficulty = prefs.getInteger("selectedDifficulty", 1);
+
 
                 PlayingInformation info = new PlayingInformation();
                 //TODO: ODKOMENTOWAC PONIZSZE I UZUPELNIC GAMECONSTANTS ORAZ ABSTRACTHERO (IMPLEMENTACJA) - todo skopiowane z beforeGameScreena
@@ -249,5 +256,6 @@ public class MenuScreen implements Screen {
         batch.dispose();
         background.dispose();
         music.dispose();
+
     }
 }
