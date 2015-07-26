@@ -122,9 +122,9 @@ public abstract class AbstractEnemy extends GameObject {
     protected void setUpDirection() {
         directionVec.x = this.destX - this.posX;
         directionVec.y = this.destY - this.posY;
-        System.out.println("destX = " + this.destX + " posX " + this.posX + " destY = " + this.destY + " posY " + this.posY);
+//        System.out.println("destX = " + this.destX + " posX " + this.posX + " destY = " + this.destY + " posY " + this.posY);
         directionVec.nor(); //Normalizacja
-        System.out.println("x = " + directionVec.x + " y = " + directionVec.y);
+//        System.out.println("x = " + directionVec.x + " y = " + directionVec.y);
 
         int [][] directions = new int[][]{{5, 1, 4},
                                           {3, 0, 2},
@@ -183,12 +183,12 @@ public abstract class AbstractEnemy extends GameObject {
         int x = (int)(sprite.getX() + directionVec.x)/GameConstants.CELL_WIDTH;
         int y = (int)(sprite.getY() + directionVec.x)/GameConstants.CELL_HEIGHT;
 
-        System.out.println("info x= "+x+" y= "+y);
+//        System.out.println("info x= "+x+" y= "+y);
         if(grid.isFreeForMove(x,y)){
-            System.out.println("info ture");
+//            System.out.println("info ture");
             return true;
         } else{
-            System.out.println("info false");
+//            System.out.println("info false");
             return false;
         }
     }

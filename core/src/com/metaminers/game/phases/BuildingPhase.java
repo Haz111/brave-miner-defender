@@ -2,6 +2,7 @@ package com.metaminers.game.phases;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -26,7 +27,7 @@ public class BuildingPhase extends Phase {
     private final String warnString = "You cannot place building here";
     private Texture pane, background;
     private boolean isPickingBuildingFromInventory = false;
-    private boolean isPickingBuildingFromMap = false; //Co ja pisze...
+//    private boolean isPickingBuildingFromMap = false; //Co ja pisze...
     private AbstractBuilding pickedBuilding;
     private Village village;
     long start, stop;
@@ -87,78 +88,83 @@ public class BuildingPhase extends Phase {
         stop = System.currentTimeMillis();
         if(stop - start > GameConstants.BUILDING_TIME) {
             BuildingPhase.this.markEnded(true);
-            System.out.println("Buidling Phase Ends");
+//            System.out.println("Buidling Phase Ends");
         }
-
-//        if(pickedBuilding != null) {
-//            //pickedBuilding.getSprite().setPosition(Gdx.input.getX(), Gdx.input.getY()); //TODO: SPRAWDZIC CZY TO JEST OK!
-//            int x = (int)(Gdx.input.getX() - pickedBuilding.getSprite().getWidth()/2);
-//            int y = (int)(Gdx.graphics.getHeight() - Gdx.input.getY() - pickedBuilding.getSprite().getHeight()/2);
-//            Pair p = Grid.mapToGrid(x, y);
-//            pickedBuilding.getSprite().setPosition(p.x, p.y); //TODO: SPRAWDZIC CZY TO JEST OK!
-//            //Wyjasnienie do powyzszego: http://www.gamefromscratch.com/post/2013/10/15/LibGDX-Tutorial-4-Handling-the-mouse-and-keyboard.aspx
-//            pickedBuilding.getSprite().draw(batch);
-//        }
     }
 
 
 
     @Override
     protected void handleMovementMap(float x, float y) {
+        System.out.println("BuildingPhase.handleMovementMap - poczatek");
         //Jak klikniemy na pole puste siatki - jest ok
         //Jak nie - no to sorry
         //TODO: Dorobic do budynkow getGridWidth, getGridHeight - abysmy mogli spokojnie przerabiac to na siatke
         if(pickedBuilding == null)
             return;
+//        System.out.println("BuildingPhase.handleMovementMap - po pickedBuilding==null");
 
-        AbstractBuilding buildingOnMap = null;
+//        AbstractBuilding buildingOnMap = null;
 
-        //TODO: Zrobic to lepiej!
-        //Algos: jedziemy teraz po liscie z budynkow i sprawdzamy czy tam mozemy postawic budynek
-        for(AbstractBuilding e : info.getBuildings()) {
-            if(e != null && e.getPosX() == x && e.getPosY() == y) {
-                buildingOnMap = e;
-                break;
-            }
-        }
+//        //TODO: Zrobic to lepiej!
+//        //Algos: jedziemy teraz po liscie z budynkow i sprawdzamy czy tam mozemy postawic budynek
+//        for(AbstractBuilding e : info.getBuildings()) {
+//            if(e != null && e.getPosX() == x && e.getPosY() == y) {
+//                buildingOnMap = e;
+//                break;
+//            }
+//        }
 
-
+//        System.out.println("BuildingPhase.handleMovementMap - przed logowanie gx, gy , gwidth, ghight");
         if(isPickingBuildingFromInventory) {
             //Ok, jednak mozna, koles kliknal to niech ma
             pickedBuilding.setPosX((int) x);
             pickedBuilding.setPosY((int) (728 - y));
             Grid grid = info.getGrid();
-            if(!grid.isFreeForBuild((int)x / GameConstants.CELL_WIDTH, (int)y / GameConstants.CELL_HEIGHT,
-                    (int) pickedBuilding.getWidth()/ GameConstants.CELL_WIDTH,
-                    (int) pickedBuilding.getHeight()/GameConstants.CELL_HEIGHT))
+
+            int gX = (int)(x / GameConstants.CELL_WIDTH);
+//            System.out.println("gX = " + gX);
+            int gY = (int)(y / GameConstants.CELL_HEIGHT);
+//            System.out.println("gY = " + gY);
+            int gWidth = (int) (pickedBuilding.getWidth()/ GameConstants.CELL_WIDTH);
+//            System.out.println("gWidth = " + gWidth);
+            int gHeight = (int) (pickedBuilding.getHeight()/GameConstants.CELL_HEIGHT);
+//            System.out.println("gHeight = " + gHeight);
+            if(!grid.isFreeForBuild(gX, gY, gWidth, gHeight)){
                 return;
+            };
             grid.markPixel((int) x, (int) (y), (int) pickedBuilding.getWidth(), (int) pickedBuilding.getHeight(), FieldStatus.TOWER);
             info.setGrid(grid);
             info.addBuilding(pickedBuilding);//A FUJ!
             pickedBuilding = null; //Chyba ok?
-            isPickingBuildingFromInventory = isPickingBuildingFromMap = false;
+            isPickingBuildingFromInventory = false; // isPickingBuildingFromMap = false;
         }
-        else if(buildingOnMap != null) {
-            pickedBuilding = buildingOnMap;
-            info.getBuildings().remove(buildingOnMap); //ok?
-            isPickingBuildingFromMap = true;
-        }
+//        else if(buildingOnMap != null) {
+//            pickedBuilding = buildingOnMap;
+//            info.getBuildings().remove(buildingOnMap); //ok?
+//            isPickingBuildingFromMap = true;
+//        }
 
     }
 
     @Override
     protected void handleMovementInventory(float x, float y) {
+        System.out.println("BuildingPhase.handleMovementInventory - poczatek");
         //TODO: Obsluga pieniedzy
         //Cale zyccie da sie rozwiazac na ifach
 
         //Wzielismy budynek z mapy (albo sie rozmyslilismy), wiec trzeba go oddac, przykro mi
-        if(isPickingBuildingFromMap || isPickingBuildingFromInventory) {
+//        if(isPickingBuildingFromMap || isPickingBuildingFromInventory) {
+        if(isPickingBuildingFromInventory){
+            System.out.println("BuildingPhase.handleMovementInventory - oddaje budynek");
             if(this.info.buildingsToBuild.get(pickedBuilding) != null)
                 this.info.buildingsToBuild.put(pickedBuilding, this.info.buildingsToBuild.get(pickedBuilding) + 1);
             pickedBuilding = null;
             return;
         }
+//        System.out.println("BuildingPhase.handleMovementInventory - sprawdza czy moze wziac budynek");
 
+//        Pobieram liste budynkow i tworze z nich tablice
         List<AbstractBuilding> lg = new LinkedList<>();
         for(AbstractBuilding o : info.buildingsToBuild.keySet()) {
             lg.add(o);
@@ -170,15 +176,22 @@ public class BuildingPhase extends Phase {
         //No, mozna go brac!
 
         for(int i = 0; i < o.length; i++) {
-            if(o[i].getSprite() != null && o[i].getSprite().getBoundingRectangle().contains(x, 728-y)) {
-                if(info.buildingsToBuild.get(o[i]) < 1)
+//            System.out.println("BuildingPhase.handleMovementInventory");
+            Rectangle r = o[i].getSprite().getBoundingRectangle();
+//            System.out.println("x ="+r.x+" y= "+r.y+" width: "+r.width+" height: "+ r.height);
+//            System.out.println("x: "+x+"768-x =" +(768-y));
+            if(o[i].getSprite() != null && o[i].getSprite().getBoundingRectangle().contains(x, GameConstants.HEIGHT - y)) {
+                if(info.buildingsToBuild.get(o[i]) < 1){
+//                    System.out.println("BuildingPhase.handleMovementInventory -> budynek niedotepny");
                     continue;
+                }
+//                System.out.println("BuildingPhase.handleMovementInventory -> budynek dostepny " + o[i]);
                 info.buildingsToBuild.replace(o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
                 if(o[i].getPrice() == 10)
                     pickedBuilding = new TowerBasic((int)x, (int)y);
                 else if(o[i].getPrice() == 20)
                     pickedBuilding = new TowerTank((int)x, (int)y);
-                System.out.println(pickedBuilding.getPrice());
+//                System.out.println(pickedBuilding.getPrice());
                 isPickingBuildingFromInventory = true;
                 break;
             }

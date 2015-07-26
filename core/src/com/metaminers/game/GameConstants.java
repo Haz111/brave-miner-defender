@@ -21,7 +21,9 @@ public class GameConstants {
     public static final int BUILDING_TIME = 10000; //ms
     public static final int GRID_WIDTH = WIDTH / CELL_WIDTH;
     public static final int GRID_HEIGHT = HEIGHT / CELL_HEIGHT;
-    public static final int BASE_RADIUS = 64 / CELL_WIDTH;
+    public static final int BASE_RADIUS = 128 / CELL_WIDTH;
+    public static final int MID_HOUSE_X = 510;
+    public static final int MID_HOUSE_Y = 384;
 
     public static final String[] DIFFICULTY = {"easy", "medium", "hard"};
     public static final String [] VILLAGES_HOUSENAMES = {"villages/villageMinature1.png", "villages/villageMinature1.png", "villages/villageMinature1.png"}; //TODO: ZROBIC

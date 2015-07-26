@@ -105,10 +105,14 @@ public abstract class Phase implements Screen{
         if(Gdx.input.justTouched()) {
             touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             //We could peek a tower
-            if(touchPoint.x <= GameConstants.INTERFACE_PANEL_WIDTH || touchPoint.x >= GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH)
+            if(touchPoint.x <= GameConstants.INTERFACE_PANEL_WIDTH || touchPoint.x >= GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH){
+//                System.out.println("Phase.handleInput ====> handleMovementInventory");
                 handleMovementInventory(touchPoint.x, touchPoint.y);
-            else
+            }
+            else{
+//                System.out.println("Phase.handleInput ====> handleMovementMap");
                 handleMovementMap(touchPoint.x, touchPoint.y);
+            }
         }
     }
 

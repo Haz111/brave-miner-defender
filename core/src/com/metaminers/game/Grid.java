@@ -23,31 +23,37 @@ public class Grid {
 
     private void initGrid() {
         for(int i = 0; i < GameConstants.GRID_WIDTH; i++)
-            for(int j = 0; j < GameConstants.GRID_HEIGHT; j++)
+            for(int j = 0; j < GameConstants.GRID_HEIGHT; j++){
                 grid[i][j] = FieldStatus.FREE_OUT;
+//                System.out.println("grid["+i+"]["+j+"] is free_out + "+grid[i][j]);
+            }
 
-        for(int i = GameConstants.GRID_WIDTH/2 - GameConstants.BASE_RADIUS; i < GameConstants.GRID_WIDTH/2 + GameConstants.BASE_RADIUS; i++) {
-            for (int j = GameConstants.GRID_HEIGHT/2 - GameConstants.BASE_RADIUS; j < GameConstants.GRID_HEIGHT/2 + GameConstants.BASE_RADIUS; j++) {
+        int gridX = GameConstants.MID_HOUSE_X / GameConstants.CELL_WIDTH;
+        int gridY = GameConstants.MID_HOUSE_Y / GameConstants.CELL_HEIGHT;
+        for(int i = gridX - GameConstants.BASE_RADIUS; i < gridX + GameConstants.BASE_RADIUS; i++) {
+            for (int j = gridY - GameConstants.BASE_RADIUS; j < gridY + GameConstants.BASE_RADIUS; j++) {
                 grid[i][j] = FieldStatus.FREE_IN;
+//                System.out.println("grid["+i+"]["+j+"] is free_in + "+grid[i][j]);
             }
         }
     }
 
     public boolean isFreeForBuild(int x, int y, int width, int height) {
+//        System.out.println("Grid.isFreeForBuild. I got x= "+x+" y= "+y+" width: "+ width+" height: "+ height);
         try {
             for (int i = x; i < x + width; i++) {
                 for (int j = y; j < y + height; j++) {
                     if (grid[i][j] == FieldStatus.TOWER || grid[i][j] == FieldStatus.HOUSE ||
-                            grid[i][j] == FieldStatus.FREE_OUT)
+                            grid[i][j] == FieldStatus.FREE_OUT){
+//                        System.out.println("grid[" + i+"]["+j+"]"+" = "+ grid[i][j]);
                         return false;
+                    }
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-
             e.printStackTrace();
             return false;
         }
-
         return true;
     }
     public boolean isFreeForMove(int x, int y) {

@@ -33,7 +33,7 @@ public class EnemyFactory {
         for(int i=0; i < 4*lvl+2; i++) {
             switch (rand.nextInt(3)) {
                 case (0):
-                    enemies.add(new RiverSnake(0, 1));
+                    enemies.add(new RiverSnake());
                     break;
                 case (1):
                     enemies.add(new Zombie());
