@@ -40,8 +40,8 @@ public class Grid {
 //                System.out.println("grid["+i+"]["+j+"] is free_in + "+grid[i][j]);
             }
         }
-        for(int i = gridX - 2; i < gridX + 3; i++){
-            for (int j = gridY - 2; j < gridY + 3; j++) {
+        for(int i = gridX - 3; i < gridX + 3; i++){
+            for (int j = gridY - 3; j < gridY + 3; j++) {
                 grid[i][j] = FieldStatus.HOUSE;
 //                System.out.println("grid["+i+"]["+j+"] is house + "+grid[i][j]);
             }

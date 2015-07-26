@@ -9,7 +9,7 @@ public class GameConstants {
     public static final int PHASES = 3;
     public static final int HEROES = 3;
     public static final int VILLAGES = 3;
-    public static final int INTERFACE_PANEL_WIDTH = 50;
+    public static final int INTERFACE_PANEL_WIDTH = 64;
     public static final int WIDTH = 1024;
     public static final int HEIGHT = 768;
     public static final int PADDING = 10;

@@ -45,7 +45,7 @@ public class AfterGameScreen implements Screen {
         skin = new Skin();
 
         batch = new SpriteBatch();
-        background = new Texture(Gdx.files.internal("homescreen/aftergame.png"));
+        background = new Texture(Gdx.files.internal("homescreen/deadscene.png"));
         background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sprite = new Sprite(background);
         backgroundRegion = new TextureRegion(background);
