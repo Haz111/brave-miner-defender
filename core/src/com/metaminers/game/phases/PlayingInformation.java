@@ -42,7 +42,7 @@ public class PlayingInformation {
         buildingsToBuild = new HashMap<>();
 
         buildingsToBuild.put(new TowerBasic(10,10), 2);
-        buildingsToBuild.put(new TowerTank(20,20), 1);
+        buildingsToBuild.put(new TowerTank(20,20), 10);
         grid = new Grid();
         lvl = 1;
         money = 1000;

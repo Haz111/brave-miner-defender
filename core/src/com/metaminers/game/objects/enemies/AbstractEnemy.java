@@ -48,8 +48,8 @@ public abstract class AbstractEnemy extends GameObject {
     protected Sprite sprite;
     protected float elapsedTime = 0f;
 
-    protected float posX;
-    protected float posY;
+    protected float posX = 0;
+    protected float posY = 0;
     protected int destX, destY;
     //TODO: Moze orzebuesc ten Vector wyzej?
     protected Vector2 directionVec;
@@ -120,8 +120,8 @@ public abstract class AbstractEnemy extends GameObject {
     }
 
     protected void setUpDirection() {
-        directionVec.x = this.destX - this.posX;
-        directionVec.y = this.destY - this.posY;
+        directionVec.x = this.destX - getPosX();
+        directionVec.y = this.destY - getPosY();
 //        System.out.println("destX = " + this.destX + " posX " + this.posX + " destY = " + this.destY + " posY " + this.posY);
         directionVec.nor(); //Normalizacja
 //        System.out.println("x = " + directionVec.x + " y = " + directionVec.y);
@@ -162,19 +162,33 @@ public abstract class AbstractEnemy extends GameObject {
         currAnim = anims[0];
         currFrame = currAnim.getKeyFrame(0f);
         sprite = new Sprite(currFrame);
-        sprite.setPosition(this.posX, this.posY);
-        setBounds(posX, posY, currFrame.getRegionWidth(), currFrame.getRegionHeight());
+        sprite.setPosition(getPosX(), getPosY());
+        setBounds(getPosX(), getPosY(), currFrame.getRegionWidth(), currFrame.getRegionHeight());
     }
 
     @Override
     public void draw(Batch batch, float delta) {
         elapsedTime += delta;
-        posX += directionVec.x;
-        posY += directionVec.y;
+        //posX += directionVec.x;
+        //posY += directionVec.y;
+        setPosX((int)(getPosX() + directionVec.x));
+        setPosY((int)(getPosY() + directionVec.y));
         setUpDirection();
         currFrame = currAnim.getKeyFrame(elapsedTime, true);
         sprite.setRegion(currFrame);
-        sprite.setPosition(sprite.getX() + directionVec.x, sprite.getY() + directionVec.y);
+        //sprite.setPosition(sprite.getX() + directionVec.x, sprite.getY() + directionVec.y);
+        sprite.setPosition(getPosX(), getPosY());
+        sprite.draw(batch);
+    }
+
+    public void drawInPlace(Batch batch, float delta) {
+        elapsedTime += delta;
+        //posX += directionVec.x;
+        //posY += directionVec.y;
+        currFrame = currAnim.getKeyFrame(elapsedTime, true);
+        sprite.setRegion(currFrame);
+        //sprite.setPosition(sprite.getX() + directionVec.x, sprite.getY() + directionVec.y);
+        //sprite.setPosition(getPosX(), getPosY());
         sprite.draw(batch);
     }
 

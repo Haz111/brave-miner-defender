@@ -15,8 +15,10 @@ public class RiverSnake extends AbstractEnemy {
         this.damage = 50;
 
         int[] startingPlace = super.randomStartingPlace();
-        this.posX = (float)startingPlace[0];
-        this.posY = (float)startingPlace[1];
+        //this.posX = (float)startingPlace[0];
+        //this.posY = (float)startingPlace[1];
+        setPosX(startingPlace[0]);
+        setPosY(startingPlace[1]);
 
         //TODO: Da sie to zrobic lepiej?
         this.destX = (Gdx.graphics.getWidth() / 2) - 18;
@@ -37,8 +39,10 @@ public class RiverSnake extends AbstractEnemy {
         this.hp = 300;
         this.damage = 50;
 
-        this.posX = posX;
-        this.posY = posY;
+        //this.posX = posX;
+        //this.posY = posY;
+        setPosX(posX);
+        setPosY(posY);
         this.imgDir = "enemies/wonzrzeczny.png";
         //TODO: Da sie to zrobic lepiej?
         this.destX = (Gdx.graphics.getWidth() / 2)-100;

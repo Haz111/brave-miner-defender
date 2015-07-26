@@ -18,7 +18,7 @@ public class GameConstants {
     public static final int CELL_WIDTH = 8;
     public static final int CELL_HEIGHT = 8;
     public static final int LEVELS = 10;
-    public static final int BUILDING_TIME = 10000; //ms
+    public static final int BUILDING_TIME = 100000; //ms
     public static final int GRID_WIDTH = WIDTH / CELL_WIDTH;
     public static final int GRID_HEIGHT = HEIGHT / CELL_HEIGHT;
     public static final int BASE_RADIUS = 128 / CELL_WIDTH;

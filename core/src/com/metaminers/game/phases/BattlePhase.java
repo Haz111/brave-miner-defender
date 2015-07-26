@@ -4,7 +4,7 @@ import com.metaminers.game.EnemyFactory;
 import com.metaminers.game.GameConstants;
 import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.buildings.AbstractBuilding;
-import com.metaminers.game.objects.enemies.AbstractEnemy;
+import com.metaminers.game.objects.enemies.RiverSnake;
 
 import static java.lang.Math.abs;
 
@@ -16,6 +16,7 @@ public class BattlePhase extends Phase {
     //TODO: Wrogowie!
     //TODO: Wyjscie z gry przez escape
     private Village village;
+    RiverSnake riverSnake = new RiverSnake();
 
     private String escString = "Press ESC to exit from this game.";
     @Override
@@ -48,17 +49,30 @@ public class BattlePhase extends Phase {
     }
 
     private void drawEnemies(float delta) {
-        for(AbstractEnemy enemy : info.getEnemiesObjects()) {
-           if(enemy.canGo(info))
-               enemy.draw(batch, delta);
+        if(riverSnake.canGo(info))
+               riverSnake.draw(batch, delta);
             else {
                for(AbstractBuilding b : info.getBuildings()) {
-                   if(abs(b.getPosX() - enemy.getPosX()) < 2 && abs(b.getPosY() - enemy.getPosY()) < 2) {
-                       enemy.attack(b);
+                   int normX = (b.getPosX() - riverSnake.getPosX()) / GameConstants.CELL_WIDTH;
+                   int normY = (b.getPosY() - riverSnake.getPosY()) / GameConstants.CELL_HEIGHT;
+                   if(abs(normX) < 6 && abs(normY) < 6) {
+                       riverSnake.attack(b);
                    }
                }
+                riverSnake.drawInPlace(batch, delta);
            }
-        }
+//
+//        for(AbstractEnemy enemy : info.getEnemiesObjects()) {
+//           if(enemy.canGo(info))
+//               enemy.draw(batch, delta);
+//            else {
+//               for(AbstractBuilding b : info.getBuildings()) {
+//                   if(abs(b.getPosX() - enemy.getPosX()) < 2 && abs(b.getPosY() - enemy.getPosY()) < 2) {
+//                       enemy.attack(b);
+//                   }
+//               }
+//           }
+//        }
     }
 
 //    protected void drawBuildings() {
