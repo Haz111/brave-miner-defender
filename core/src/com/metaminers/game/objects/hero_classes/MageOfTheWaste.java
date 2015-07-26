@@ -29,6 +29,6 @@ public class MageOfTheWaste extends AbstractHeroClass {
         this.wallSkillList.add( new PoolOfAcid());
         this.wallSkillList.add( new WallOfFire());
         this.wallSkillList.add( new WallOfWind());
-        this.texture = new Texture(Gdx.files.internal("characters/gornik3.png"));
+        this.texture = new Texture(Gdx.files.internal("characters/gornik2.png"));
     }
 }

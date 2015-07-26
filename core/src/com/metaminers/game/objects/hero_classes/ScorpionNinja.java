@@ -29,6 +29,6 @@ public class ScorpionNinja extends AbstractHeroClass {
         this.wallSkillList.add( new ShadowWall());
         this.wallSkillList.add( new Quicksand());
         this.wallSkillList.add( new ScorpionSwarm());
-        this.texture = new Texture(Gdx.files.internal("characters/gornik2.png"));
+        this.texture = new Texture(Gdx.files.internal("characters/gornik3.png"));
     }
 }
