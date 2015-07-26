@@ -123,4 +123,14 @@ public class PlayingInformation {
     public void setGrid(Grid g) {
         grid = g;
     }
+
+    public void reduceMoney(int cash) {
+        //
+        money -= cash;
+    }
+
+    public void addBuyedBuilding(AbstractBuilding chosenBuilding) {
+        //TODO: To moze nie dzialac, jak zle to zrobic mape ze stringami jako klucze i
+        buildingsToBuild.replace(chosenBuilding, buildingsToBuild.get(chosenBuilding), buildingsToBuild.get(chosenBuilding) + 1);
+    }
 }
