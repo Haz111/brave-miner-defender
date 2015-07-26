@@ -30,10 +30,17 @@ public class Grid {
 
         int gridX = GameConstants.MID_HOUSE_X / GameConstants.CELL_WIDTH;
         int gridY = GameConstants.MID_HOUSE_Y / GameConstants.CELL_HEIGHT;
+
         for(int i = gridX - GameConstants.BASE_RADIUS; i < gridX + GameConstants.BASE_RADIUS; i++) {
             for (int j = gridY - GameConstants.BASE_RADIUS; j < gridY + GameConstants.BASE_RADIUS; j++) {
                 grid[i][j] = FieldStatus.FREE_IN;
 //                System.out.println("grid["+i+"]["+j+"] is free_in + "+grid[i][j]);
+            }
+        }
+        for(int i = gridX - 2; i < gridX + 3; i++){
+            for (int j = gridY - 2; j < gridY + 3; j++) {
+                grid[i][j] = FieldStatus.HOUSE;
+//                System.out.println("grid["+i+"]["+j+"] is house + "+grid[i][j]);
             }
         }
     }
