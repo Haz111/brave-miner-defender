@@ -42,7 +42,7 @@ public class AboutScreen implements Screen {
         skin = new Skin();
 
         batch = new SpriteBatch();
-        background = new Texture(Gdx.files.internal("homescreen/creddits.png"));
+        background = new Texture(Gdx.files.internal("homescreen/credits.png"));
         background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sprite = new Sprite(background);
         backgroundRegion = new TextureRegion(background);
