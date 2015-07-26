@@ -1,11 +1,14 @@
 package com.metaminers.game.objects.hero_classes;
 
-import com.metaminers.game.objects.skills.damagingSkills.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.metaminers.game.objects.skills.damagingSkills.AcidSpray;
+import com.metaminers.game.objects.skills.damagingSkills.Geyser;
+import com.metaminers.game.objects.skills.damagingSkills.SchorchingSun;
+import com.metaminers.game.objects.skills.damagingSkills.WindBlade;
 import com.metaminers.game.objects.skills.repairSkills.MagicRepair;
 import com.metaminers.game.objects.skills.repairSkills.Revitalization;
 import com.metaminers.game.objects.skills.repairSkills.SummonBob;
-import com.metaminers.game.objects.skills.wallSkills.BarbedWire;
-import com.metaminers.game.objects.skills.repairSkills.CanWeFixIt;
 import com.metaminers.game.objects.skills.wallSkills.PoolOfAcid;
 import com.metaminers.game.objects.skills.wallSkills.WallOfFire;
 import com.metaminers.game.objects.skills.wallSkills.WallOfWind;
@@ -26,5 +29,6 @@ public class MageOfTheWaste extends AbstractHeroClass {
         this.wallSkillList.add( new PoolOfAcid());
         this.wallSkillList.add( new WallOfFire());
         this.wallSkillList.add( new WallOfWind());
+        this.texture = new Texture(Gdx.files.internal("characters/gornik3.png"));
     }
 }

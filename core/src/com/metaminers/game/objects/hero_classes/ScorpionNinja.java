@@ -1,5 +1,7 @@
 package com.metaminers.game.objects.hero_classes;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.metaminers.game.objects.skills.damagingSkills.ScorpionStrike;
 import com.metaminers.game.objects.skills.damagingSkills.ScorpionTail;
 import com.metaminers.game.objects.skills.damagingSkills.Shuriken;
@@ -27,5 +29,6 @@ public class ScorpionNinja extends AbstractHeroClass {
         this.wallSkillList.add( new ShadowWall());
         this.wallSkillList.add( new Quicksand());
         this.wallSkillList.add( new ScorpionSwarm());
+        this.texture = new Texture(Gdx.files.internal("characters/gornik2.png"));
     }
 }
