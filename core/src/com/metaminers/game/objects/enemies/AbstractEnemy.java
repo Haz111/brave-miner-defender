@@ -220,6 +220,8 @@ public abstract class AbstractEnemy extends GameObject {
         batch.end();
     }
 
-
+    public int getHp() {
+        return hp;
+    }
 
 }
