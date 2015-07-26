@@ -48,7 +48,7 @@ public abstract class AbstractHeroClass extends GameObject {
     public void draw(SpriteBatch batch) {
 //        batch.draw(new TextureRegion(this.texture, 0, 0, 32, 32), getWidth() / 2, getHeight() / 2, 32, 32);
         setSprite(new TextureRegion(this.texture, 0, 0, 24, 24));
-        sprite.setBounds(GameConstants.WIDTH/2-15, GameConstants.HEIGHT/2, getWidth()*2, getHeight()*2);
+        sprite.setBounds(GameConstants.WIDTH/2-15 , GameConstants.HEIGHT/2, getWidth()*2, getHeight()*2);
         sprite.draw(batch);
     }
 }

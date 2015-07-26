@@ -136,6 +136,7 @@ public class BuildingPhase extends Phase {
             grid.markPixel((int) x, (int) (y), (int) pickedBuilding.getWidth(), (int) pickedBuilding.getHeight(), FieldStatus.TOWER);
             info.setGrid(grid);
             info.addBuilding(pickedBuilding);//A FUJ!
+            System.out.println("Wieza postawiona");
             pickedBuilding = null; //Chyba ok?
             isPickingBuildingFromInventory = false; // isPickingBuildingFromMap = false;
         }
@@ -160,6 +161,7 @@ public class BuildingPhase extends Phase {
             if(this.info.buildingsToBuild.get(pickedBuilding) != null)
                 this.info.buildingsToBuild.put(pickedBuilding, this.info.buildingsToBuild.get(pickedBuilding) + 1);
             pickedBuilding = null;
+            isPickingBuildingFromInventory = false;
             return;
         }
 //        System.out.println("BuildingPhase.handleMovementInventory - sprawdza czy moze wziac budynek");
@@ -180,19 +182,21 @@ public class BuildingPhase extends Phase {
             Rectangle r = o[i].getSprite().getBoundingRectangle();
 //            System.out.println("x ="+r.x+" y= "+r.y+" width: "+r.width+" height: "+ r.height);
 //            System.out.println("x: "+x+"768-x =" +(768-y));
-            if(o[i].getSprite() != null && o[i].getSprite().getBoundingRectangle().contains(x, GameConstants.HEIGHT - y)) {
+            if(o[i].getSprite() != null && o[i].getSprite().getBoundingRectangle().contains(x, 728 - y)) {
                 if(info.buildingsToBuild.get(o[i]) < 1){
 //                    System.out.println("BuildingPhase.handleMovementInventory -> budynek niedotepny");
                     continue;
                 }
 //                System.out.println("BuildingPhase.handleMovementInventory -> budynek dostepny " + o[i]);
                 info.buildingsToBuild.replace(o[i], info.buildingsToBuild.get(o[i]), info.buildingsToBuild.get(o[i]) - 1); //TODO: Co jak <= 0?
+                System.out.println(o[i].getPrice());
                 if(o[i].getPrice() == 10)
                     pickedBuilding = new TowerBasic((int)x, (int)y);
                 else if(o[i].getPrice() == 20)
                     pickedBuilding = new TowerTank((int)x, (int)y);
 //                System.out.println(pickedBuilding.getPrice());
                 isPickingBuildingFromInventory = true;
+                System.out.println("Wieza zaznaczona!");
                 break;
             }
         }
