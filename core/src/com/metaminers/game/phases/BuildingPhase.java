@@ -2,18 +2,19 @@ package com.metaminers.game.phases;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.metaminers.game.FieldStatus;
 import com.metaminers.game.GameConstants;
 import com.metaminers.game.Grid;
 import com.metaminers.game.elements.Village;
-import com.metaminers.game.objects.buildings.AbstractBuilding;
-import com.metaminers.game.objects.buildings.TowerBasic;
-import com.metaminers.game.objects.buildings.TowerTank;
+import com.metaminers.game.objects.buildings.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,15 +33,28 @@ public class BuildingPhase extends Phase {
     private Village village;
     long start, stop;
 
-    TextButton saveButton;
+    TextButton readyButton;
     private Stage s;
 
+    Texture buttonTexture;
+    TextureRegion buttonTextureRegion;
+    TextButton.TextButtonStyle style;
 
     @Override
     public void start(PlayingInformation info) {
         super.start(info);
         info.setRandomEnemiesForNextRound();
-        saveButton = super.makeTextButton("Save", Gdx.graphics.getWidth()/2 - 50, 50, 100, 40);
+
+        buttonTexture = new Texture(Gdx.files.internal("buttons/ready.png"));
+        buttonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        buttonTextureRegion = new TextureRegion(buttonTexture);
+        style = new TextButton.TextButtonStyle();
+        style.up = new TextureRegionDrawable(buttonTextureRegion);
+        style.down = new TextureRegionDrawable(buttonTextureRegion);
+        style.font = new BitmapFont();
+
+        readyButton = new TextButton("", style);
+        readyButton.setBounds(Gdx.graphics.getWidth()/2 - 104, 50, 208, 76);
         //batch.begin();
         //saveButton.draw(batch, 1.0f);
         //batch.end();
@@ -49,7 +63,7 @@ public class BuildingPhase extends Phase {
 
         s = new Stage();
         Gdx.input.setInputProcessor(s);
-        s.addActor(saveButton);
+        s.addActor(readyButton);
     }
 
     @Override
@@ -62,7 +76,7 @@ public class BuildingPhase extends Phase {
          */
         //TODO: Jakis renderer do GUI, cobysmy nie kopiowali kodu
         //TODO: Implementacja siatki!
-        saveButton.addListener(new ClickListener() {
+        readyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 BuildingPhase.this.markEnded(true);
@@ -194,6 +208,12 @@ public class BuildingPhase extends Phase {
                     pickedBuilding = new TowerBasic((int)x, (int)y);
                 else if(o[i].getPrice() == 20)
                     pickedBuilding = new TowerTank((int)x, (int)y);
+                else if(o[i].getPrice() == 30)
+                    pickedBuilding = new TowerBunker((int)x, (int)y);
+                else if(o[i].getPrice() == 40)
+                    pickedBuilding = new TowerDouble((int)x, (int)y);
+                else if(o[i].getPrice() == 50)
+                    pickedBuilding = new TowerSmallLaser((int)x, (int)y);
 //                System.out.println(pickedBuilding.getPrice());
                 isPickingBuildingFromInventory = true;
                 System.out.println("Wieza zaznaczona!");
@@ -210,6 +230,12 @@ public class BuildingPhase extends Phase {
                 b.drawInGui(0, 610, 3);
             else if(b.getPrice() == 20)
                 b.drawInGui(8, 500, 1.5f);
+            else if(b.getPrice() == 30)
+                b.drawInGui(8, 420, 1.5f);
+            else if(b.getPrice() == 40)
+                b.drawInGui(8, 310, 1.5f);
+            else if(b.getPrice() == 50)
+                b.drawInGui(8, 220, 1.5f);
         }
 
 

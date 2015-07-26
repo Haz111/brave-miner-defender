@@ -4,9 +4,7 @@ import com.metaminers.game.GameConstants;
 import com.metaminers.game.Grid;
 import com.metaminers.game.elements.Village;
 import com.metaminers.game.objects.GameObject;
-import com.metaminers.game.objects.buildings.AbstractBuilding;
-import com.metaminers.game.objects.buildings.TowerBasic;
-import com.metaminers.game.objects.buildings.TowerTank;
+import com.metaminers.game.objects.buildings.*;
 import com.metaminers.game.objects.enemies.AbstractEnemy;
 import com.metaminers.game.objects.hero_classes.AbstractHeroClass;
 import com.metaminers.game.objects.hero_classes.MageOfTheWaste;
@@ -43,8 +41,11 @@ public class PlayingInformation {
         //buildings.add(new TowerBasic(100,100));
         buildingsToBuild = new HashMap<>();
 
-        buildingsToBuild.put(new TowerBasic(10,10), 2);
+        buildingsToBuild.put(new TowerBasic(10,10), 10);
         buildingsToBuild.put(new TowerTank(20,20), 10);
+        buildingsToBuild.put(new TowerBunker(20,20), 10);
+        buildingsToBuild.put(new TowerDouble(20,20), 10);
+        buildingsToBuild.put(new TowerSmallLaser(20,20), 10);
         grid = new Grid();
         lvl = 1;
         money = 1000;
