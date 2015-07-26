@@ -39,8 +39,8 @@ public class Zombie extends AbstractEnemy {
         this.posX = posX;
         this.posY = posY;
         //TODO: Da sie to zrobic lepiej?
-        this.destX = (Gdx.graphics.getWidth() / 2)-100;
-        this.destY = (Gdx.graphics.getHeight() / 2);
+        this.destX = (Gdx.graphics.getWidth() / 2)-18;
+        this.destY = (Gdx.graphics.getHeight() / 2)-10;
         this.batch = new SpriteBatch();
         directionVec = new Vector2();
         this.animLenHorizontal = 4;
