@@ -44,6 +44,10 @@ public class BuildingPhase extends Phase {
     public void start(PlayingInformation info) {
         super.start(info);
         info.setRandomEnemiesForNextRound();
+        
+        //batch.begin();
+        //saveButton.draw(batch, 1.0f);
+        //batch.end();
 
         buttonTexture = new Texture(Gdx.files.internal("buttons/ready.png"));
         buttonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -55,9 +59,7 @@ public class BuildingPhase extends Phase {
 
         readyButton = new TextButton("", style);
         readyButton.setBounds(Gdx.graphics.getWidth()/2 - 104, 50, 208, 76);
-        //batch.begin();
-        //saveButton.draw(batch, 1.0f);
-        //batch.end();
+
         this.village = info.getVillage();
         start = System.currentTimeMillis();
 
