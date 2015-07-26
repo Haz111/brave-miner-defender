@@ -51,18 +51,25 @@ public class MenuScreen implements Screen {
     BitmapFont font;
 
     TextButton playButton;
-//    TextButton level;
+    //    TextButton level;
     TextButton optionsButton;
     TextButton aboutAuthorsButton;
     TextButton exitButton;
     TextButton quickButton;
     SpriteBatch batch;
     Sprite sprite;
-    Music music;
-    static Boolean playing = false;
+    AudioManager audiomanager;
+
+    Boolean update;
+
     Preferences prefs;
-    float volume;
+    Float volume;
     public MenuScreen(Game game) {
+        update = false;
+        audiomanager = AudioManager.getInstance();
+        prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
+
+
         this.game = game;
         font = new BitmapFont();
         skin = new Skin();
@@ -71,15 +78,9 @@ public class MenuScreen implements Screen {
         background = new Texture(Gdx.files.internal("homescreen/bg3.png"));
         background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
         sprite = new Sprite(background);
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
-        if (playing == false) {
-            music.play();
-            playing = true;
-        }
 
-        prefs = Gdx.app.getPreferences("com.meataminers.brave-miner-defender.settings");
-        volume = prefs.getFloat("volume",0.5f);
-        music.setVolume(volume);
+
+
 
         backgroundRegion = new TextureRegion(background);
 
@@ -189,7 +190,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 //                super.clicked(event, x, y);
-                MenuScreen.this.game.setScreen(new OptionsScreen(game));
+                MenuScreen.this.game.setScreen(new OptionsScreen(game,audiomanager));
             }
         });
 
@@ -229,6 +230,13 @@ public class MenuScreen implements Screen {
         batch.end();
         stage.act();
         stage.draw();
+    /*
+        System.out.println("mam byc ");
+        System.out.print(volume);
+        System.out.println("a jest ");
+        System.out.print(music.getVolume());
+        System.out.println();
+        */
     }
 
     @Override
@@ -255,7 +263,7 @@ public class MenuScreen implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
-        music.dispose();
+
 
     }
 }
