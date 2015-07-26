@@ -42,6 +42,7 @@ public class AudioManager {
 
         if (music.isPlaying()== false) {
             music.play();
+            music.setLooping(true);
         }
 
     }

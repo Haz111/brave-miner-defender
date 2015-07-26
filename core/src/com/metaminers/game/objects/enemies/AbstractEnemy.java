@@ -48,8 +48,8 @@ public abstract class AbstractEnemy extends GameObject {
     protected Sprite sprite;
     protected float elapsedTime = 0f;
 
-    protected float posX = 0;
-    protected float posY = 0;
+    protected float pos_X = 0;
+    protected float pos_Y = 0;
     protected int destX, destY;
     //TODO: Moze orzebuesc ten Vector wyzej?
     protected Vector2 directionVec;
@@ -120,8 +120,8 @@ public abstract class AbstractEnemy extends GameObject {
     }
 
     protected void setUpDirection() {
-        directionVec.x = this.destX - getPosX();
-        directionVec.y = this.destY - getPosY();
+        directionVec.x = this.destX - getPos_X();
+        directionVec.y = this.destY - getPos_Y();
 //        System.out.println("destX = " + this.destX + " posX " + this.posX + " destY = " + this.destY + " posY " + this.posY);
         directionVec.nor(); //Normalizacja
 //        System.out.println("x = " + directionVec.x + " y = " + directionVec.y);
@@ -162,8 +162,8 @@ public abstract class AbstractEnemy extends GameObject {
         currAnim = anims[0];
         currFrame = currAnim.getKeyFrame(0f);
         sprite = new Sprite(currFrame);
-        sprite.setPosition(getPosX(), getPosY());
-        setBounds(getPosX(), getPosY(), currFrame.getRegionWidth(), currFrame.getRegionHeight());
+        sprite.setPosition(getPos_X(), getPos_Y());
+        setBounds(getPos_X(), getPos_Y(), currFrame.getRegionWidth(), currFrame.getRegionHeight());
     }
 
     @Override
@@ -171,13 +171,13 @@ public abstract class AbstractEnemy extends GameObject {
         elapsedTime += delta;
         //posX += directionVec.x;
         //posY += directionVec.y;
-        setPosX((int)(getPosX() + directionVec.x));
-        setPosY((int)(getPosY() + directionVec.y));
+        setPos_X((getPos_X() + directionVec.x));
+        setPos_Y((getPos_Y() + directionVec.y));
         setUpDirection();
         currFrame = currAnim.getKeyFrame(elapsedTime, true);
         sprite.setRegion(currFrame);
         //sprite.setPosition(sprite.getX() + directionVec.x, sprite.getY() + directionVec.y);
-        sprite.setPosition(getPosX(), getPosY());
+        sprite.setPosition(getPos_X(), getPos_Y());
         sprite.draw(batch);
     }
 
@@ -220,6 +220,21 @@ public abstract class AbstractEnemy extends GameObject {
         batch.end();
     }
 
+    public void setPos_X(float pos_X){
+        this.pos_X = pos_X;
+    }
+
+    public void setPos_Y(float pos_Y){
+        this.pos_Y = pos_Y;
+    }
+
+    public float getPos_X() {
+        return pos_X;
+    }
+
+    public float getPos_Y() {
+        return pos_Y;
+    }
 
 
 }
