@@ -27,7 +27,7 @@ public class PlayingInformation {
     public HashMap<AbstractBuilding, Integer> buildingsToBuild; //TODO: FIX ME
     private AbstractHeroClass hero;
     private Village village;
-    private int lvl = 0;
+    private int lvl = 1;
     private Grid grid;
     private int money = 0;
 
