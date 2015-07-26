@@ -70,12 +70,18 @@ public class Grid {
 //            System.out.println();
 //        }
         try {
-            if (grid[x][y] == FieldStatus.FREE_OUT || grid[x][y] == FieldStatus.FREE_IN)
+            System.out.println("grid["+x+"]["+y+"]="+grid[x][y]);
+            if (grid[x][y] == FieldStatus.FREE_OUT || grid[x][y] == FieldStatus.FREE_IN) {
+                System.out.println("Grid.isFreeForMove - return true");
                 return true;
+
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
+            System.out.println("Grid.isFreeForMove - return false");
             return false;
         }
+        System.out.println("Grid.isFreeForMove - return false");
         return false;
     }
 

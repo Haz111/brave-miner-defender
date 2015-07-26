@@ -47,10 +47,12 @@ public abstract class Phase implements Screen{
         markEnded(false);
         this.info = info;
         pane = new Texture(Gdx.files.internal("gui/pane.png"));
-        background = new Texture(Gdx.files.internal("gui/background.png"));
+//        background = new Texture(Gdx.files.internal("gui/background.png"));
+        background = new Texture(Gdx.files.internal(info.getVillage().getBackground()));
         batch = new SpriteBatch();
         c = new OrthographicCamera(GameConstants.WIDTH, GameConstants.HEIGHT);
         touchPoint = new Vector3();
+
 
     }
 
@@ -89,7 +91,7 @@ public abstract class Phase implements Screen{
     public void render(float delta) {
         batch.begin();
         drawGUI();
-        // drawEnemiesOnPane();
+//         drawEnemiesOnPane();
         batch.end();
         handleInput();
     }
@@ -122,7 +124,7 @@ public abstract class Phase implements Screen{
     protected void drawGUI() {
 //        batch.draw(pane, 0, 0);
 //        batch.draw(pane, GameConstants.WIDTH - GameConstants.INTERFACE_PANEL_WIDTH, 0);
-        batch.draw(background, GameConstants.INTERFACE_PANEL_WIDTH, 0);
+        batch.draw(background, 0, 0);
     }
 
     protected void drawEnemiesOnPane() {
