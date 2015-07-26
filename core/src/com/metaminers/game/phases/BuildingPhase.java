@@ -2,11 +2,14 @@ package com.metaminers.game.phases;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.metaminers.game.FieldStatus;
 import com.metaminers.game.GameConstants;
 import com.metaminers.game.Grid;
@@ -32,24 +35,39 @@ public class BuildingPhase extends Phase {
     private Village village;
     long start, stop;
 
-    TextButton saveButton;
+    TextButton readyButton;
     private Stage s;
 
+    Texture buttonTexture;
+    TextureRegion buttonTextureRegion;
+    TextButton.TextButtonStyle style;
 
     @Override
     public void start(PlayingInformation info) {
         super.start(info);
         info.setRandomEnemiesForNextRound();
-        saveButton = super.makeTextButton("Save", Gdx.graphics.getWidth()/2 - 50, 50, 100, 40);
+
         //batch.begin();
         //saveButton.draw(batch, 1.0f);
         //batch.end();
+
+        buttonTexture = new Texture(Gdx.files.internal("buttons/ready.png"));
+        buttonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        buttonTextureRegion = new TextureRegion(buttonTexture);
+        style = new TextButton.TextButtonStyle();
+        style.up = new TextureRegionDrawable(buttonTextureRegion);
+        style.down = new TextureRegionDrawable(buttonTextureRegion);
+        style.font = new BitmapFont();
+
+        readyButton = new TextButton("", style);
+        readyButton.setBounds(Gdx.graphics.getWidth()/2 - 104, 50, 208, 76);
+
         this.village = info.getVillage();
         start = System.currentTimeMillis();
 
         s = new Stage();
         Gdx.input.setInputProcessor(s);
-        s.addActor(saveButton);
+        s.addActor(readyButton);
     }
 
     @Override
@@ -62,7 +80,7 @@ public class BuildingPhase extends Phase {
          */
         //TODO: Jakis renderer do GUI, cobysmy nie kopiowali kodu
         //TODO: Implementacja siatki!
-        saveButton.addListener(new ClickListener() {
+        readyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 BuildingPhase.this.markEnded(true);
