@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.metaminers.game.phases.PlayingInformation;
-import sun.font.TextLabel;
 
 /**
  * Created by Hubert on 2015-07-26.
@@ -31,6 +30,9 @@ public class AfterGameScreen implements Screen {
     Texture buttonTexture;
     TextureRegion buttonTextureRegion;
     TextButton.TextButtonStyle style;
+    Texture buttonTexturePlay;
+    TextureRegion buttonTextureRegionPlay;
+    TextButton.TextButtonStyle stylePlay;
     Skin skin;
     BitmapFont font;
     SpriteBatch batch;
@@ -52,18 +54,29 @@ public class AfterGameScreen implements Screen {
         sprite = new Sprite(background);
         backgroundRegion = new TextureRegion(background);
 
-        buttonTexture = new Texture(Gdx.files.internal("buttons/exampleButton.png"));
+        buttonTexture = new Texture(Gdx.files.internal("buttons/backmenu.png"));
         buttonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         buttonTextureRegion = new TextureRegion(buttonTexture);
+
+        buttonTexturePlay = new Texture(Gdx.files.internal("buttons/playagain.png"));
+        buttonTexturePlay.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        buttonTextureRegionPlay = new TextureRegion(buttonTexturePlay);
 
         style = new TextButton.TextButtonStyle();
         style.up = new TextureRegionDrawable(buttonTextureRegion);
         style.down = new TextureRegionDrawable(buttonTextureRegion);
         style.font = font;
-        exitButton = new TextButton("BACK TO MAIN MENU", style);
+
+        stylePlay = new TextButton.TextButtonStyle();
+        stylePlay.up = new TextureRegionDrawable(buttonTextureRegionPlay);
+        stylePlay.down = new TextureRegionDrawable(buttonTextureRegionPlay);
+        stylePlay.font = font;
+
+        exitButton = new TextButton("", style);
         exitButton.setBounds(Gdx.graphics.getWidth() / 2 - 154, 30, 144, 96);
-        playButton = new TextButton("PLAY AGAIN", style);
+        playButton = new TextButton("", stylePlay);
         playButton.setBounds(Gdx.graphics.getWidth() / 2 + 10, 30, 144, 96);
 
 
