@@ -37,12 +37,14 @@ public class AfterGameScreen implements Screen {
     Texture background;
     Sprite sprite;
     TextureRegion backgroundRegion;
+    AudioManager audioManager;
 
 
-    public AfterGameScreen(Game game) {
+    public AfterGameScreen(Game game, AudioManager audioManager) {
         this.game = game;
         font = new BitmapFont();
         skin = new Skin();
+        this.audioManager = audioManager;
 
         batch = new SpriteBatch();
         background = new Texture(Gdx.files.internal("homescreen/deadscene.png"));
@@ -97,7 +99,7 @@ public class AfterGameScreen implements Screen {
                 info.setHero(selectedCharacter);
 //                pierwszy jest do Villages, drugi jest do T³a Village
                 info.setVillage(selectedVillage, selectedVillage);
-                AfterGameScreen.this.game.setScreen(new LevelScreen(game, info));
+                AfterGameScreen.this.game.setScreen(new LevelScreen(game, info, audioManager));
             }
         });
 

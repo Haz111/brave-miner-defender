@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,17 +28,26 @@ public class AboutScreen implements Screen {
 
     Texture buttonTexture;
     TextureRegion buttonTextureRegion;
-    TextButtonStyle style;
+    TextButton.TextButtonStyle style;
     Skin skin;
     BitmapFont font;
-
+    SpriteBatch batch;
+    Texture background;
+    Sprite sprite;
+    TextureRegion backgroundRegion;
 
     public AboutScreen(Game game) {
         this.game = game;
         font = new BitmapFont();
         skin = new Skin();
 
-        buttonTexture = new Texture(Gdx.files.internal("buttons/exampleButton.png"));
+        batch = new SpriteBatch();
+        background = new Texture(Gdx.files.internal("homescreen/creddits.png"));
+        background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        sprite = new Sprite(background);
+        backgroundRegion = new TextureRegion(background);
+
+        buttonTexture = new Texture(Gdx.files.internal("buttons/back.png"));
         buttonTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
         buttonTextureRegion = new TextureRegion(buttonTexture);
@@ -45,16 +56,14 @@ public class AboutScreen implements Screen {
         style.up = new TextureRegionDrawable(buttonTextureRegion);
         style.down = new TextureRegionDrawable(buttonTextureRegion);
         style.font = font;
-        exitButton = new TextButton("Back", style);
-        exitButton.setBounds(Gdx.graphics.getWidth()/2 - 50, 50, 100, 40);
+        exitButton = new TextButton("", style);
+        exitButton.setBounds(Gdx.graphics.getWidth()/2 - 50, 50, 144, 96);
 
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(exitButton);
-
-
     }
 
     @Override
@@ -73,6 +82,9 @@ public class AboutScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        sprite.draw(batch);
+        batch.end();
         stage.act();
         stage.draw();
     }
